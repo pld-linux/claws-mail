@@ -1,5 +1,5 @@
 # Conditional build:
-# _with_jconv           - adds much more codesets to choice from
+# _without_jconv           - without jconv support
 
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
