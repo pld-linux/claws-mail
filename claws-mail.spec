@@ -25,8 +25,9 @@ Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/%{name}/%{_sname}-%{version}claws.tar.bz2
 # Source0-md5:	66d72383222e4deb47300889d24f1044
 Source1:	%{name}.desktop
-Source2:	http://dl.sourceforge.net/sourceforge/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
+Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
 # Source2-md5:	7da918c0ebe89cd6c9f8b65bc3e18377
+URL:		http://sylpheed-claws.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{!?_without_clamav:BuildRequires:	clamav-devel}
@@ -44,7 +45,6 @@ BuildRequires:	aspell-devel >= 0.50
 %{!?_without_jconv:BuildRequires:	libjconv-devel}
 %{!?_without_faces:Requires:	faces}
 Obsoletes:	sylpheed
-URL:		http://sylpheed-claws.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,10 +58,10 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 ¶wietne i u¿yteczne.
 
 %package plugins
-Summary:        Special plugins for Sylpheed-Claws
-Summary(pl):    Dodatkowe pluginy dla Sylpheed-Claws
-Group:          X11/Applications/Networking
-Requires:       %{name} = %{version}
+Summary:	Special plugins for Sylpheed-Claws
+Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}
 %{!?_without_dillo:Requires:	dillo}
 
 %description plugins
@@ -164,7 +164,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(es) %{_datadir}/%{_sname}/faq/es
 %lang(fr) %{_datadir}/%{_sname}/faq/fr
 %lang(it) %{_datadir}/%{_sname}/faq/it
-%{_datadir}/%{_sname}/themes
 %{_applnkdir}/Network/Mail/%{name}.desktop
 %{_pixmapsdir}/%{_sname}.png
 
@@ -172,19 +171,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{_sname}
 %dir %{_libdir}/%{_sname}/plugins
-%{_libdir}/%{_sname}/plugins/*so
+%attr(755,root,root) %{_libdir}/%{_sname}/plugins/*so
 
 %files devel
 %defattr(644,root,root,755)
-%dir %{_includedir}/
-%dir %{_includedir}/%{_sname}/common
-%dir %{_includedir}/%{_sname}/gtk
-%{_includedir}/%{_sname}/*.h
-%{_includedir}/%{_sname}/gtk/*.h
-%{_includedir}/%{_sname}/common/*.h
+%{_includedir}/%{_sname}
 
 %files themes
 %defattr(644,root,root,755)
-%dir %{_datadir}/
-%dir %{_datadir}/%{_sname}/themes
-%{_datadir}/%{_sname}/themes/*
+%{_datadir}/%{_sname}/themes
