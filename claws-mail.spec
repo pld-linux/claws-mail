@@ -4,8 +4,8 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
 Name:		sylpheed-claws
-Version:	0.7.4
-Release:	0.1
+Version:	0.7.5
+Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
@@ -22,6 +22,7 @@ BuildRequires:	gtkhtml-devel >= 0.10.1
 BuildRequires:	libtool
 BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
+BuildRequires:	gpgme-devel
 %{?_with_jconv:BuildRequires:   libjconv-devel}
 Requires:	faces
 Obsoletes:	sylpheed
@@ -60,7 +61,8 @@ automake --add-missing --foreign --copy
 	--enable-threads \
 	--enable-ssl \
  	--enable-ipv6 \
-	--enable-ldap
+	--enable-ldap \
+	--enable-gpgme
 
 %{__make}
 
@@ -78,7 +80,7 @@ gzip -9nf AUTHORS ChangeLog NEWS README TODO
 %find_lang sylpheed
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+#rm -rf $RPM_BUILD_ROOT
 
 %files -f sylpheed.lang
 %defattr(644,root,root,755)
@@ -87,6 +89,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/sylpheed
 %dir %{_datadir}/sylpheed/manual
 %{_datadir}/sylpheed/manual/en
+%lang(de) %{_datadir}/sylpheed/manual/de
+%lang(es) %{_datadir}/sylpheed/manual/es
+%lang(fr) %{_datadir}/sylpheed/manual/fr
 %lang(ja) %{_datadir}/sylpheed/manual/ja
+%dir %{_datadir}/sylpheed/faq
+%{_datadir}/sylpheed/faq/en
+%lang(de) %{_datadir}/sylpheed/faq/de
+%lang(es) %{_datadir}/sylpheed/faq/es
+%lang(fr) %{_datadir}/sylpheed/faq/fr
+%lang(it) %{_datadir}/sylpheed/faq/it
 %{_applnkdir}/Network/Mail/*
 %{_pixmapsdir}/sylpheed.png
