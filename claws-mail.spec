@@ -43,7 +43,6 @@ BuildRequires:	libtool
 BuildRequires:	aspell-devel >= 0.50
 %{!?_without_jconv:BuildRequires:	libjconv-devel}
 %{!?_without_faces:Requires:	faces}
-%{!?_without_dillo:Requires:	dillo}
 Obsoletes:	sylpheed
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -63,6 +62,7 @@ Summary:        Special plugins for Sylpheed-Claws
 Summary(pl):    Dodatkowe pluginy dla Sylpheed-Claws
 Group:          X11/Applications/Networking
 Requires:       %{name} = %{version}
+%{!?_without_dillo:Requires:	dillo}
 
 %description plugins
 This is collection of some usefull plugins for Sylpheed-claws.
