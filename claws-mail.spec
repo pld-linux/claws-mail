@@ -52,7 +52,7 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 Summary:        Special plugins for Sylpheed-Claws
 Summary(pl):    Dodatkowe pluginy dla Sylpheed-Claws
 Group:          X11/Applications/Networking
-Requires:       %{name}= %{version}
+Requires:       %{name} = %{version}
 
 %description plugins
 This is collection of some usefull plugins for Sylpheed-claws.
