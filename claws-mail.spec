@@ -12,19 +12,19 @@
 %bcond_with	mathml		# build with mathml plugin
 #
 %define		_sname	sylpheed
-%define		_iconver	20040206
+%define		_iconver	20040525
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		%{_sname}-claws
-Version:	0.9.11
-Release:	2
+Version:	0.9.12
+Release:	0.1
 License:	GPL v2
 Group:		X11/Applications/Networking
-Source0:	http://dl.sourceforge.net/%{name}/%{_sname}-%{version}claws.tar.bz2
-# Source0-md5:  d64647fdbcb49bfa4447989bffb9d0b8
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
+# Source0-md5:	798f25bb5dae7fd4959fbcb38868bef0
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
-# Source2-md5:	478128ccf00914990f73383692b5cd30
+# Source2-md5:	a2aa029cdee6cc22a0305774b70a5a70
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRequires:	aspell-devel >= 0.50
 BuildRequires:	autoconf
@@ -100,7 +100,7 @@ Sylpheed-Claws themes package.
 Motywy dla programu Sylpheed-Claws.
 
 %prep
-%setup -q -n %{_sname}-%{version}claws -a1 -a2
+%setup -q -n %{name}-%{version} -a1 -a2
 mv %{_sname}-iconset-* themes
 mv -f themes/README README.themes
 
@@ -141,47 +141,47 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{_sname}
+cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 install %{_sname}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
-%find_lang %{_sname}
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f %{_sname}.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %{_mandir}/man1/%{_sname}.1*
 %attr(755,root,root) %{_bindir}/*
-%dir %{_datadir}/%{_sname}
-%dir %{_datadir}/%{_sname}/manual
-%{_datadir}/%{_sname}/manual/en
-%lang(de) %{_datadir}/%{_sname}/manual/de
-%lang(es) %{_datadir}/%{_sname}/manual/es
-%lang(fr) %{_datadir}/%{_sname}/manual/fr
-%lang(ja) %{_datadir}/%{_sname}/manual/ja
-%dir %{_datadir}/%{_sname}/faq
-%{_datadir}/%{_sname}/faq/en
-%lang(de) %{_datadir}/%{_sname}/faq/de
-%lang(es) %{_datadir}/%{_sname}/faq/es
-%lang(fr) %{_datadir}/%{_sname}/faq/fr
-%lang(it) %{_datadir}/%{_sname}/faq/it
+%dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/manual
+%{_datadir}/%{name}/manual/en
+%lang(de) %{_datadir}/%{name}/manual/de
+%lang(es) %{_datadir}/%{name}/manual/es
+%lang(fr) %{_datadir}/%{name}/manual/fr
+%lang(ja) %{_datadir}/%{name}/manual/ja
+%dir %{_datadir}/%{name}/faq
+%{_datadir}/%{name}/faq/en
+%lang(de) %{_datadir}/%{name}/faq/de
+%lang(es) %{_datadir}/%{name}/faq/es
+%lang(fr) %{_datadir}/%{name}/faq/fr
+%lang(it) %{_datadir}/%{name}/faq/it
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{_sname}.png
 
 %files plugins
 %defattr(644,root,root,755)
-%dir %{_libdir}/%{_sname}
-%dir %{_libdir}/%{_sname}/plugins
-%attr(755,root,root) %{_libdir}/%{_sname}/plugins/*so
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/plugins
+%attr(755,root,root) %{_libdir}/%{name}/plugins/*so
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/%{_sname}
+%{_includedir}/%{name}
 %{_pkgconfigdir}/*.pc
 
 %files themes
 %defattr(644,root,root,755)
-%{_datadir}/%{_sname}/themes
+%{_datadir}/%{name}/themes
