@@ -1,15 +1,14 @@
 #
 # Conditional build:
-%bcond_without	jconv		# build without jconv support
-%bcond_without	gpg		# build without gpg support
-%bcond_without	ssl		# build without ssl support
-%bcond_without	ipv6		# build without ipv6 support
-%bcond_without	ldap		# build without ldap support
+%bcond_without	gpg		# build without GPG support
+%bcond_without	ssl		# build without SSL support
+%bcond_without	ipv6		# build without IPv6 support
+%bcond_without	ldap		# build without LDAP support
 %bcond_without	faces		# build without compfaces support
 %bcond_without	dillo		# build without dillo plugin (html browser)
 %bcond_without	clamav		# build without clamav plugin
 %bcond_without	spamassassin	# build without spamassassin plugin
-%bcond_without	trayicon	# buildwithout trayicon plugin
+%bcond_without	trayicon	# build without trayicon plugin
 %bcond_with	mathml		# build with mathml plugin
 #
 %define		_sname	sylpheed
@@ -36,12 +35,15 @@ BuildRequires:	bzip2-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
+%{?with_gpg:BuildRequires:	gpgme-devel >= 0.3.10}
 %{?with_gpg:BuildRequires:	gpgme-devel < 0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
-%{?with_jconv:BuildRequires:	libjconv-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
+# TODO: package gtkmathview: http://helm.cs.unibo.it/mml-widget/ (0.4.3 for gtk1, 0.6.0 for gtk2)
+%{?with_mathml:BuildRequires:	gtkmathview >= 0.4.2}
+%{?with_mathml:BuildRequires:	gtkmathview < 0.5}
 %{?with_ldap:BuildRequires:	openldap-devel}
 %{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7c}
 BuildRequires:	pkgconfig
@@ -63,7 +65,7 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 Summary:	Special plugins for Sylpheed-Claws
 Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws
 Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 %{?with_dillo:Requires:	dillo}
 
 %description plugins
@@ -76,7 +78,7 @@ Jest to zbiór kilku dodatkowych pluginów powiêkszaj±cych mo¿liwo¶ci Sylpheeda.
 Summary:	Headers from Sylpheed-Claws
 Summary(pl):	Pliki nag³ówkowe programu Sylpheed-Claws
 Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Sylpheed-Claws development package.
@@ -88,7 +90,7 @@ Pliki nag³ówkowe programu Sylpheed-Claws.
 Summary:	Themes for Sylpheed-Claws
 Summary(pl):	Motywy dla programu Sylpheed-Claws
 Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description themes
 Sylpheed-Claws themes package.
@@ -110,12 +112,11 @@ rm -f missing
 %{__autoheader}
 %{__automake}
 %configure \
-	%{?with_jconv:--enable-jconv} %{!?with_jconv:--disable-jconv} \
 	%{?with_gpg:--enable-gpgme} %{!?with_gpg:--disable-gpgme} \
 	%{?with_ldap:--enable-ldap} \
 	%{?with_ssl:--enable-openssl} \
 	%{?with_ipv6:--enable-ipv6 } \
-	%{!?with_faces:--disable-compfaces } \
+	%{!?with_faces:--disable-compface} \
 	%{?with_dillo:--enable-dillo-viewer-plugin } \
 	%{!?with_dillo:--disable-dillo-viewer-plugin } \
 	%{?with_clamav:--enable-clamav-plugin } \
