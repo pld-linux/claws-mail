@@ -45,7 +45,7 @@ BuildRequires:	libtool
 %{?with_mathml:BuildRequires:	gtkmathview >= 0.4.2}
 %{?with_mathml:BuildRequires:	gtkmathview < 0.5}
 %{?with_ldap:BuildRequires:	openldap-devel}
-%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7c}
+%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7d}
 BuildRequires:	pkgconfig
 %{?with_faces:Requires:	faces}
 Obsoletes:	sylpheed
