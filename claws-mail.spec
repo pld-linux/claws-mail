@@ -19,7 +19,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		%{_sname}-claws
 Version:	0.9.9
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/%{name}/%{_sname}-%{version}claws.tar.bz2
@@ -28,23 +28,24 @@ Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
 # Source2-md5:	478128ccf00914990f73383692b5cd30
 URL:		http://sylpheed-claws.sourceforge.net/
+BuildRequires:	aspell-devel >= 0.50
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bzip2-devel
 %{?with_clamav:BuildRequires:	clamav-devel}
 %{?with_faces:BuildRequires:	faces-devel}
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
-BuildRequires:	bzip2-devel
 %{?with_gpg:BuildRequires:	gpgme-devel < 0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
+%{?with_jconv:BuildRequires:	libjconv-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 %{?with_ldap:BuildRequires:	openldap-devel}
 %{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7c}
-BuildRequires:	aspell-devel >= 0.50
-%{?with_jconv:BuildRequires:	libjconv-devel}
+BuildRequires:	pkgconfig
 %{?with_faces:Requires:	faces}
 Obsoletes:	sylpheed
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
