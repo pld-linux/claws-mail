@@ -6,12 +6,13 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
 Version:	0.8.8
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://telia.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
 Source1:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-0.8.7claws-iconset.tar.gz
 Source2:	%{name}.desktop
+Patch0:		%{name}-bg.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	faces-devel
@@ -44,6 +45,7 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 
 %prep
 %setup -q -n sylpheed-%{version}claws -a1
+%patch0 -p1
 mv sylpheed*claws-iconset themes
 mv -f themes/README README.themes
 
