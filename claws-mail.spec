@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	gpg		# build without GPG support
+%bcond_with	gpg		# build with GPG support (still needs obsolete version of gpgme)
 %bcond_without	ssl		# build without SSL support
 %bcond_without	ipv6		# build without IPv6 support
 %bcond_without	ldap		# build without LDAP support
