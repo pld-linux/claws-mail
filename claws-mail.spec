@@ -1,51 +1,51 @@
 #
 # Conditional build:
-# _without_jconv        - without jconv support
-# _without_gpg          - without gpg support
-# _without_ssl          - without ssl support
-# _without_ipv6         - without ipv6 support
-# _without_ldap         - without ldap support
-# _without_faces        - without compfaces support
-# _without_dillo	- without dillo plugin (html browser)
-# _without_clamav	- without clamav plugin
-# _with_mathml		- with mathml plugin
-# _without_trayicon	- without trayicon plugin
-# _without_spamassassin - without spamassassin plugin
+%bcond_without jconv	# build without jconv support
+%bcond_without gpg	# build without gpg support
+%bcond_without ssl	# build without ssl support
+%bcond_without ipv6	# build without ipv6 support
+%bcond_without ldap	# build without ldap support
+%bcond_without faces	# build without compfaces support
+%bcond_without dillo	# build without dillo plugin (html browser)
+%bcond_without clamav	# build without clamav plugin
+%bcond_with mathml	# build with mathml plugin
+%bcond_without trayicon	# buildwithout trayicon plugin
+%bcond_without spamassassin	# build without spamassassin plugin
 #
 
 %define		_sname	sylpheed
-%define		_iconver	20031130
+%define		_iconver	20040206
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		%{_sname}-claws
-Version:	0.9.8
+Version:	0.9.9
 Release:	1
-License:	GPL
+License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/%{name}/%{_sname}-%{version}claws.tar.bz2
-# Source0-md5:	e0ed997b1facb067061876df20472e8e
+# Source0-md5:	9068192f009fb8240be6e9222ff27999
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
-# Source2-md5:	7dd2785cc0fb1cdfa2f953a9e4e298ca
+# Source2-md5:	478128ccf00914990f73383692b5cd30
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{!?_without_clamav:BuildRequires:	clamav-devel}
-%{!?_without_faces:BuildRequires:	faces-devel}
+%{?with_clamav:BuildRequires:	clamav-devel}
+%{?with_faces:BuildRequires:	faces-devel}
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
 BuildRequires:	bzip2-devel
-%{!?_without_gpg:BuildRequires:	gpgme-devel < 0.4}
+%{?with_gpg:BuildRequires:	gpgme-devel < 0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
-%{!?_without_ldap:BuildRequires:	openldap-devel}
-%{!?_without_ssl:BuildRequires:	openssl-devel >= 0.9.7c}
+%{?with_ldap:BuildRequires:	openldap-devel}
+%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7c}
 BuildRequires:	aspell-devel >= 0.50
-%{!?_without_jconv:BuildRequires:	libjconv-devel}
-%{!?_without_faces:Requires:	faces}
+%{?with_jconv:BuildRequires:	libjconv-devel}
+%{?with_faces:Requires:	faces}
 Obsoletes:	sylpheed
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -64,7 +64,7 @@ Summary:	Special plugins for Sylpheed-Claws
 Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}
-%{!?_without_dillo:Requires:	dillo}
+%{?with_dillo:Requires:	dillo}
 
 %description plugins
 This is collection of some usefull plugins for Sylpheed-claws.
@@ -110,21 +110,21 @@ rm -f missing
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?_without_jconv:--enable-jconv} %{?_without_jconv:--disable-jconv} \
-	%{!?_without_gpg:--enable-gpgme} %{?_without_gpg:--disable-gpgme} \
-	%{!?_without_ldap:--enable-ldap} \
-	%{!?_without_ssl:--enable-openssl} \
-	%{!?_without_ipv6:--enable-ipv6 } \
-	%{?_without_faces:--disable-compfaces } \
-	%{!?_without_dillo:--enable-dillo-viewer-plugin } \
-	%{?_without_dillo:--disable-dillo-viewer-plugin } \
-	%{!?_without_clamav:--enable-clamav-plugin } \
-	%{?_without_clamav:--disable-clamav-plugin } \
-	%{?_with_mathml:--enable-mathml-viewer-plugin } \
-	%{!?_with_mathml:--disable-mathml-viewer-plugin } \
-	%{!?_without_trayicon:--enable-trayicon-plugin } \
-	%{?_without_trayicon:--disable-trayicon-plugin } \
-	%{!?_without_spamassassin:--enable-spamassassin-plugin } \
+	%{?with_jconv:--enable-jconv} %{?without_jconv:--disable-jconv} \
+	%{?with_gpg:--enable-gpgme} %{?without_gpg:--disable-gpgme} \
+	%{?with_ldap:--enable-ldap} \
+	%{?with_ssl:--enable-openssl} \
+	%{?with_ipv6:--enable-ipv6 } \
+	%{?without_faces:--disable-compfaces } \
+	%{?with_dillo:--enable-dillo-viewer-plugin } \
+	%{?without_dillo:--disable-dillo-viewer-plugin } \
+	%{?with_clamav:--enable-clamav-plugin } \
+	%{?without_clamav:--disable-clamav-plugin } \
+	%{?with_mathml:--enable-mathml-viewer-plugin } \
+	%{?without_mathml:--disable-mathml-viewer-plugin } \
+	%{?with_trayicon:--enable-trayicon-plugin } \
+	%{?without_trayicon:--disable-trayicon-plugin } \
+	%{?with_spamassassin:--enable-spamassassin-plugin } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
 	--enable-threads
@@ -133,12 +133,12 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Mail,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{_sname}
 
 install %{_sname}.png $RPM_BUILD_ROOT%{_pixmapsdir}
@@ -166,7 +166,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(es) %{_datadir}/%{_sname}/faq/es
 %lang(fr) %{_datadir}/%{_sname}/faq/fr
 %lang(it) %{_datadir}/%{_sname}/faq/it
-%{_applnkdir}/Network/Mail/%{name}.desktop
+%{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{_sname}.png
 
 %files plugins
