@@ -1,6 +1,7 @@
 #
 # Conditional build:
 # _without_jconv           - without jconv support
+# _without_gpg           - without gpg support
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
@@ -18,7 +19,7 @@ BuildRequires:	automake
 BuildRequires:	faces-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
-BuildRequires:	gpgme-devel
+%{!?_without_gpg:uildRequires: gpgme-devel}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
@@ -58,7 +59,7 @@ rm -f missing
 %{__automake}
 %configure \
 	%{!?_without_jconv:--enable-jconv} \
-	--enable-gpgme \
+	%{!?_without_gpg:--enable-gpgme} \
 	--enable-ldap \
 	--enable-openssl \
 	--enable-ipv6 \
