@@ -4,11 +4,11 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
 Name:		sylpheed-claws
-Version:	0.7.2
-Release:	2
+Version:	0.7.4
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.gz
+Source0:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
 Source1:	%{name}.desktop
 Source2:	sylpheed.png
 BuildRequires:	autoconf
