@@ -14,19 +14,19 @@
 #
 
 %define		_sname	sylpheed
-%define		_iconver	20030712
+%define		_iconver	20031130
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		%{_sname}-claws
-Version:	0.9.6
+Version:	0.9.7
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/%{name}/%{_sname}-%{version}claws.tar.bz2
-# Source0-md5:	a4a7e7c9a6c1b17f688a782e8c06ae4b
+# Source0-md5:	a46fdb6abb3faec84660e58ccf96e869
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
-# Source2-md5:	7da918c0ebe89cd6c9f8b65bc3e18377
+# Source2-md5:	7dd2785cc0fb1cdfa2f953a9e4e298ca
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -34,6 +34,7 @@ BuildRequires:	automake
 %{!?_without_faces:BuildRequires:	faces-devel}
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
+BuildRequires:	gmp-devel
 %{!?_without_gpg:BuildRequires:	gpgme-devel < 0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
