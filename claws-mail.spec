@@ -5,12 +5,13 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
 Name:		sylpheed-claws
 Version:	0.7.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
-Source1:	%{name}.desktop
-Source2:	sylpheed.png
+Source1:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-theme-pak2.tar.bz2 
+Source2:	%{name}.desktop
+Source3:	sylpheed.png
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	imlib-devel
@@ -23,6 +24,7 @@ BuildRequires:	libtool
 BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
 BuildRequires:	gpgme-devel
+BuildRequires:	pspell-devel >= 12.2-5
 %{?_with_jconv:BuildRequires:   libjconv-devel}
 Requires:	faces
 Obsoletes:	sylpheed
@@ -44,6 +46,11 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 
 %prep
 %setup -q -n sylpheed-%{version}claws
+mkdir themes
+cd themes
+tar -jxf %{SOURCE1}
+mv -f README ../README.themes
+cd ..
 
 %build
 rm -f missing
@@ -73,9 +80,11 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Mail,%{_pixmapsdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
-install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
-gzip -9nf AUTHORS ChangeLog NEWS README TODO
+install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
+install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -a themes $RPM_BUILD_ROOT%{_datadir}/sylpheed
+
+gzip -9nf AUTHORS ChangeLog NEWS README* TODO
 
 %find_lang sylpheed
 
@@ -99,5 +108,6 @@ gzip -9nf AUTHORS ChangeLog NEWS README TODO
 %lang(es) %{_datadir}/sylpheed/faq/es
 %lang(fr) %{_datadir}/sylpheed/faq/fr
 %lang(it) %{_datadir}/sylpheed/faq/it
+%{_datadir}/sylpheed/themes
 %{_applnkdir}/Network/Mail/*
 %{_pixmapsdir}/sylpheed.png
