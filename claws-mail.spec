@@ -11,7 +11,6 @@ Group:		X11/Applications/Networking
 Source0:	http://telia.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-%{version}claws.tar.gz
 Source1:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-theme-pak2.tar.bz2 
 Source2:	%{name}.desktop
-Source3:	sylpheed.png
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	faces-devel
