@@ -4,7 +4,7 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
 Name:		sylpheed-claws
-Version:	0.8.0
+Version:	0.8.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
@@ -93,6 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f sylpheed.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
+%{_mandir}/man1/sylpheed.1.gz
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/sylpheed
 %dir %{_datadir}/sylpheed/manual
@@ -108,5 +109,5 @@ rm -rf $RPM_BUILD_ROOT
 %lang(fr) %{_datadir}/sylpheed/faq/fr
 %lang(it) %{_datadir}/sylpheed/faq/it
 %{_datadir}/sylpheed/themes
-%{_applnkdir}/Network/Mail/*
+%{_applnkdir}/Network/Mail/%{name}.desktop
 %{_pixmapsdir}/sylpheed.png
