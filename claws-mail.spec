@@ -54,16 +54,28 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 ¶wietne i u¿yteczne.
 
 %package plugins
-Summary:	Special plugins for Sylpheed-Claws
-Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws
-Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}
+Summary:        Special plugins for Sylpheed-Claws
+Summary(pl):    Dodatkowe pluginy dla Sylpheed-Claws
+Group:          X11/Applications/Networking
+Requires:       %{name} = %{version}
 
 %description plugins
 This is collection of some usefull plugins for Sylpheed-claws.
 
 %description plugins -l pl
 Jest to zbiór kilku dodatkowych pluginów powiêkszaj±cych mo¿liwo¶ci Sylpheeda.
+
+%package devel
+Summary:	Headers from Sylpheed-Claws
+Summary(pl):	Pliki nag³ówkowe programu Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}
+
+%description devel
+Sylpheed-Claws development package.
+
+%description devel -l pl
+Pliki nag³ówkowe programu Sylpheed-Claws.
 
 %prep
 %setup -q -n sylpheed-%{version}claws -a1
@@ -144,3 +156,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/sylpheed
 %dir %{_libdir}/sylpheed/plugins
 %{_libdir}/sylpheed/plugins/*so
+
+%files devel
+%defattr(644,root,root,755)
+%dir %{_includedir}/sylpheed
+%dir %{_includedir}/sylpheed/common
+%dir %{_includedir}/sylpheed/gtk
+%{_includedir}/sylpheed/*
