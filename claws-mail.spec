@@ -55,7 +55,7 @@ cd ..
 %build
 rm -f missing
 %{__libtoolize}
-gettextize --copy --force
+%{__gettextize}
 aclocal -I ac
 %{__autoconf}
 autoheader
