@@ -100,7 +100,7 @@ Sylpheed-Claws themes package.
 Motywy dla programu Sylpheed-Claws.
 
 %prep
-%setup -q -n %{name}-%{version} -a1 -a2
+%setup -q -a2
 mv %{_sname}-iconset-* themes
 mv -f themes/README README.themes
 
