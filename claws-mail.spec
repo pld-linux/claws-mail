@@ -26,7 +26,8 @@ Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
 # Source2-md5:	478128ccf00914990f73383692b5cd30
 URL:		http://sylpheed-claws.sourceforge.net/
-BuildRequires:	aspell-devel >= 0.50
+#BuildRequires:	aspell-devel >= 0.50
+BuildRequires:	aspell-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
@@ -45,12 +46,16 @@ BuildRequires:	libtool
 %{?with_mathml:BuildRequires:	gtkmathview >= 0.4.2}
 %{?with_mathml:BuildRequires:	gtkmathview < 0.5}
 %{?with_ldap:BuildRequires:	openldap-devel}
-%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7d}
+%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.6m}
 BuildRequires:	pkgconfig
 %{?with_faces:Requires:	faces}
 Obsoletes:	sylpheed
 Obsoletes:	sylpheed-gtk2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
+%define		_desktopdir	%{_applnkdir}/Network/Mail
 
 %description
 This program is an X based fast e-mail client which has features same
@@ -105,13 +110,13 @@ mv %{_sname}-iconset-* themes
 mv -f themes/README README.themes
 
 %build
-rm -f missing
-%{__libtoolize}
-%{__gettextize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
+#rm -f missing
+#%%{__libtoolize}
+#%%{__gettextize}
+#%%{__aclocal} -I m4
+#%%{__autoconf}
+#%%{__autoheader}
+#%%{__automake}
 %configure \
 	%{?with_gpg:--enable-gpgme} %{!?with_gpg:--disable-gpgme} \
 	%{?with_ldap:--enable-ldap} \
@@ -180,7 +185,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/%{_sname}
-%{_pkgconfigdir}/*.pc
 
 %files themes
 %defattr(644,root,root,755)
