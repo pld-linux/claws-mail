@@ -3,8 +3,8 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami.
 Name:		sylpheed-claws
-Version:	0.7.1
-Release:	3
+Version:	0.7.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Group(cs):	X11/Aplikace/Sí»ové
@@ -12,13 +12,16 @@ Group(da):	X11/Programmer/Netværks
 Group(de):	X11/Applikationen/Netzwerkwesen
 Group(es):	X11/Aplicaciones/Red
 Group(fr):	X11/Applications/Réseau
+Group(is):	X11/Forrit/Net
 Group(it):	X11/Applicazioni/Rete
 Group(no):	X11/Applikasjoner/Nettverks
 Group(pl):	X11/Aplikacje/Sieciowe
 Group(pt_BR):	X11/Aplicações/Rede
 Group(pt):	X11/Aplicações/Rede
-Group(ru):	X11/ðÒÉÌÏÖÅÎÉÑ/óÅÔÅ×ÙÅ
+Group(ru):	X11/ðÒÉÌÏÖÅÎÉÑ/óÅÔØ
+Group(sl):	X11/Programi/Omre¾ni
 Group(sv):	X11/Tillämpningar/Nätverk
+Group(uk):	X11/ðÒÉËÌÁÄÎ¦ ðÒÏÇÒÁÍÉ/íÅÒÅÖÁ
 Source0:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.gz
 Source1:	%{name}.desktop
 Source2:	sylpheed.png
@@ -29,7 +32,7 @@ BuildRequires:	faces-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gtk+-devel >= 1.2.6
-BuildRequires:	gtkhtml-devel >= 0.10.1 
+BuildRequires:	gtkhtml-devel >= 0.10.1
 #BuildRequires:	libjconv-devel - this exist ?
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
@@ -42,22 +45,22 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_mandir		%{_prefix}/man
 
 %description
-This program is an X based fast e-mail client which has features 
-same as orginal Sylpheed but with new/improved features.
-Some of new stuff is really cool and useable.
+This program is an X based fast e-mail client which has features same
+as orginal Sylpheed but with new/improved features. Some of new stuff
+is really cool and useable.
 
 %description -l pl
-Szybki klient poczty o mo¿liwo¶ciach takich jak
-oryginalny Sylpheed ale z nowymi/poprawionymi funkcjami.
-Niektóre dodatki s± na prawdê ¶wietne i u¿yteczne.
+Szybki klient poczty o mo¿liwo¶ciach takich jak oryginalny Sylpheed
+ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± na prawdê
+¶wietne i u¿yteczne.
 
 %prep
-%setup -q -n sylpheed-0.7.1claws
+%setup -q -n sylpheed-%{version}claws
 
 %build
 rm -f missing
 libtoolize --copy --force
-gettextize --copy --force 
+gettextize --copy --force
 aclocal -I ac
 autoconf
 autoheader
@@ -69,7 +72,8 @@ automake --add-missing --foreign --copy
 	--enable-gdk-pixbuf \
 	--enable-threads \
 	--enable-ssl \
- 	--enable-ipv6
+ 	--enable-ipv6 \
+	--enable-ldap
 
 %{__make}
 
