@@ -16,7 +16,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
 Version:	0.9.4
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
@@ -79,16 +79,20 @@ rm -f missing
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?_without_jconv:--enable-jconv} \
-	%{!?_without_gpg:--enable-gpgme} \
+	%{!?_without_jconv:--enable-jconv} %{?_without_jconv:--disable-jconv} \
+	%{!?_without_gpg:--enable-gpgme} %{?_without_gpg:--disable-gpgme} \
 	%{!?_without_ldap: --enable-ldap} \
 	%{!?_without_ssl: --enable-openssl} \
 	%{!?_without_ipv6: --enable-ipv6 } \
 	%{?_without_faces: --disable-compfaces } \
 	%{!?_without_dillo:--enable-dillo-viewer-plugin } \
+	%{?_without_dillo:--disable-dillo-viewer-plugin } \
 	%{!?_without_clamav:--enable-clamav-plugin } \
+	%{?_without_clamav:--disable-clamav-plugin } \
 	%{?_with_mathml:--enable-mathml-viewer-plugin } \
+	%{!?_with_mathml:--disable-mathml-viewer-plugin } \
 	%{!?_without_trayicon:--enable-trayicon-plugin } \
+	%{?_without_trayicon:--disable-trayicon-plugin } \
 	%{!?_without_spamassassin:--enable-spamassassin-plugin } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
