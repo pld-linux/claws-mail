@@ -11,19 +11,18 @@
 %bcond_without	trayicon	# build without trayicon plugin
 %bcond_with	mathml		# build with mathml plugin
 #
-%define		_sname	sylpheed
 %define		_iconver	20040929
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
-Name:		%{_sname}-claws
-Version:	1.0.1
+Name:		sylpheed-claws
+Version:	1.0.4
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	c297d397f99d97234df787dca61aa48e
+# Source0-md5:	ac473de7189a4a9baecf16b72c34dff4
 Source1:	%{name}.desktop
-Source2:	http://dl.sourceforge.net/sylpheed-claws/%{_sname}-iconset-%{_iconver}.tar.gz
+Source2:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-iconset-%{_iconver}.tar.gz
 # Source2-md5:	d72cf03bf3d13cf9e2785eaca3807707
 Patch0:		%{name}-locale-names.patch
 URL:		http://sylpheed-claws.sourceforge.net/
@@ -104,7 +103,7 @@ Motywy dla programu Sylpheed-Claws.
 %prep
 %setup -q -a2
 %patch0 -p1
-mv %{_sname}-iconset-* themes
+mv sylpheed-iconset-* themes
 mv -f themes/README README.themes
 
 mv -f po/{zh_TW.Big5,zh_TW}.po
@@ -149,7 +148,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{name}
 
-install %{_sname}.png $RPM_BUILD_ROOT%{_pixmapsdir}
+install sylpheed.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.la
 
@@ -161,7 +160,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
-%{_mandir}/man1/%{_sname}.1*
+%{_mandir}/man1/sylpheed.1*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/manual
@@ -177,7 +176,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(fr) %{_datadir}/%{name}/faq/fr
 %lang(it) %{_datadir}/%{name}/faq/it
 %{_desktopdir}/%{name}.desktop
-%{_pixmapsdir}/%{_sname}.png
+%{_pixmapsdir}/sylpheed.png
 
 %files plugins
 %defattr(644,root,root,755)
