@@ -17,16 +17,17 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		%{_sname}-claws
 Version:	0.9.12
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
 # Source0-md5:	798f25bb5dae7fd4959fbcb38868bef0
 Source1:	%{name}.desktop
-Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
+Source2:	http://dl.sourceforge.net/sylpheed-claws/%{_sname}-iconset-%{_iconver}.tar.gz
 # Source2-md5:	a2aa029cdee6cc22a0305774b70a5a70
+Patch0:		%{name}-locale-names.patch
 URL:		http://sylpheed-claws.sourceforge.net/
-BuildRequires:	aspell-devel >= 0.50
+BuildRequires:	aspell-devel >= 2:0.50
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
@@ -101,11 +102,14 @@ Motywy dla programu Sylpheed-Claws.
 
 %prep
 %setup -q -a2
+%patch0 -p1
 mv %{_sname}-iconset-* themes
 mv -f themes/README README.themes
 
+mv -f po/{zh_TW.Big5,zh_TW}.po
+rm -f po/stamp-po
+
 %build
-rm -f missing
 %{__libtoolize}
 %{__gettextize}
 %{__aclocal} -I m4
@@ -129,7 +133,8 @@ rm -f missing
 	%{?with_spamassassin:--enable-spamassassin-plugin } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
-	--enable-threads
+	--enable-threads \
+	--disable-static
 
 %{__make}
 
@@ -144,6 +149,8 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 install %{_sname}.png $RPM_BUILD_ROOT%{_pixmapsdir}
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.la
 
 %find_lang %{name}
 
@@ -175,7 +182,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
-%attr(755,root,root) %{_libdir}/%{name}/plugins/*so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
 
 %files devel
 %defattr(644,root,root,755)
