@@ -9,8 +9,8 @@ Version:	0.8.9
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://telia.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
-Source1:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-0.8.7claws-iconset.tar.gz
+Source0:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
+Source1:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-0.8.7claws-iconset.tar.gz
 Source2:	%{name}.desktop
 Patch0:		%{name}-po.patch
 BuildRequires:	autoconf
@@ -31,7 +31,6 @@ Requires:	faces
 Obsoletes:	sylpheed
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 This program is an X based fast e-mail client which has features same
