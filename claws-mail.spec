@@ -2,10 +2,10 @@
 # _without_jconv           - without jconv support
 
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
-Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
+Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
 Version:	0.8.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://telia.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-%{version}claws.tar.gz
@@ -18,13 +18,12 @@ BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gpgme-devel
 BuildRequires:	gtk+-devel >= 1.2.6
-BuildRequires:	gtkhtml-devel >= 0.10.1
 BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
-BuildRequires:	pspell-devel >= 12.2-5
+BuildRequires:	aspell-devel >= 0.50
 %{!?_without_jconv:BuildRequires:   libjconv-devel}
 Requires:	faces
 Obsoletes:	sylpheed
@@ -58,18 +57,17 @@ rm -f missing
 %{__gettextize}
 %{__aclocal} -I ac
 %{__autoconf}
-autoheader
-automake --add-missing --foreign --copy
+%{__autoheader}
+%{__automake}
 %configure \
 	%{!?_without_jconv:--enable-jconv} \
-	--enable-pspell \
-	--enable-impib \
-	--enable-gdk-pixbuf \
-	--enable-threads \
-	--enable-ssl \
- 	--enable-ipv6 \
+	--enable-gpgme \
 	--enable-ldap \
-	--enable-gpgme
+	--enable-ssl \
+	--enable-ipv6 \
+	--enable-aspell \
+	--enable-gdk-pixbuf \
+	--enable-threads
 
 %{__make}
 
