@@ -28,7 +28,7 @@ BuildRequires:	automake
 %{!?_without_faces:BuildRequires:	faces-devel}
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
-%{!?_without_gpg:BuildRequires: gpgme-devel < 0.4}
+%{!?_without_gpg:BuildRequires:	gpgme-devel < 0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
@@ -36,7 +36,7 @@ BuildRequires:	libtool
 %{!?_without_ldap:BuildRequires:	openldap-devel}
 %{!?_without_ssl:BuildRequires:	openssl-devel >= 0.9.7}
 BuildRequires:	aspell-devel >= 0.50
-%{!?_without_jconv:BuildRequires:   libjconv-devel}
+%{!?_without_jconv:BuildRequires:	libjconv-devel}
 %{!?_without_faces:Requires:	faces}
 %{!?_without_dillo:Requires:	dillo}
 Obsoletes:	sylpheed
@@ -54,10 +54,10 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 ¶wietne i u¿yteczne.
 
 %package plugins
-Summary:        Special plugins for Sylpheed-Claws
-Summary(pl):    Dodatkowe pluginy dla Sylpheed-Claws
-Group:          X11/Applications/Networking
-Requires:       %{name} = %{version}
+Summary:	Special plugins for Sylpheed-Claws
+Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}
 
 %description plugins
 This is collection of some usefull plugins for Sylpheed-claws.
@@ -81,10 +81,10 @@ rm -f missing
 %configure \
 	%{!?_without_jconv:--enable-jconv} %{?_without_jconv:--disable-jconv} \
 	%{!?_without_gpg:--enable-gpgme} %{?_without_gpg:--disable-gpgme} \
-	%{!?_without_ldap: --enable-ldap} \
-	%{!?_without_ssl: --enable-openssl} \
-	%{!?_without_ipv6: --enable-ipv6 } \
-	%{?_without_faces: --disable-compfaces } \
+	%{!?_without_ldap:--enable-ldap} \
+	%{!?_without_ssl:--enable-openssl} \
+	%{!?_without_ipv6:--enable-ipv6 } \
+	%{?_without_faces:--disable-compfaces } \
 	%{!?_without_dillo:--enable-dillo-viewer-plugin } \
 	%{?_without_dillo:--disable-dillo-viewer-plugin } \
 	%{!?_without_clamav:--enable-clamav-plugin } \
