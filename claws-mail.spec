@@ -12,16 +12,21 @@
 # _without_trayicon	- without trayicon plugin
 # _without_spamassassin - without spamassassin plugin
 #
+
+%define		_sname	sylpheed
+%define		_iconver	20030712
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
-Name:		sylpheed-claws
+Name:		%{_sname}-claws
 Version:	0.9.5
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
+Source0:	http://dl.sourceforge.net/%{name}/%{_sname}-%{version}claws.tar.bz2
 # Source0-md5:	66d72383222e4deb47300889d24f1044
 Source1:	%{name}.desktop
+Source2:	http://dl.sourceforge.net/sourceforge/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
+# Source2-md5:	7da918c0ebe89cd6c9f8b65bc3e18377
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{!?_without_clamav:BuildRequires:	clamav-devel}
@@ -77,10 +82,22 @@ Sylpheed-Claws development package.
 %description devel -l pl
 Pliki nag³ówkowe programu Sylpheed-Claws.
 
+%package themes
+Summary:	Themes for Sylpheed-Claws
+Summary(pl):	Motywy dla programu Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}
+
+%description themes
+Sylpheed-Claws themes package.
+
+%description themes -l pl
+Motywy dla programu Sylpheed-Claws.
+
 %prep
-%setup -q -n sylpheed-%{version}claws -a1
-#mv sylpheed*claws-iconset themes
-#mv -f themes/README README.themes
+%setup -q -n %{_sname}-%{version}claws -a1 -a2
+mv %{_sname}-iconset-* themes
+mv -f themes/README README.themes
 
 %build
 rm -f missing
@@ -120,46 +137,54 @@ install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Mail,%{_pixmapsdir}}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
-#cp -a themes $RPM_BUILD_ROOT%{_datadir}/sylpheed
+cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{_sname}
 
-install sylpheed.png $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{_sname}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
-%find_lang sylpheed
+%find_lang %{_sname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f sylpheed.lang
+%files -f %{_sname}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
-%{_mandir}/man1/sylpheed.1*
+%{_mandir}/man1/%{_sname}.1*
 %attr(755,root,root) %{_bindir}/*
-%dir %{_datadir}/sylpheed
-%dir %{_datadir}/sylpheed/manual
-%{_datadir}/sylpheed/manual/en
-%lang(de) %{_datadir}/sylpheed/manual/de
-%lang(es) %{_datadir}/sylpheed/manual/es
-%lang(fr) %{_datadir}/sylpheed/manual/fr
-%lang(ja) %{_datadir}/sylpheed/manual/ja
-%dir %{_datadir}/sylpheed/faq
-%{_datadir}/sylpheed/faq/en
-%lang(de) %{_datadir}/sylpheed/faq/de
-%lang(es) %{_datadir}/sylpheed/faq/es
-%lang(fr) %{_datadir}/sylpheed/faq/fr
-%lang(it) %{_datadir}/sylpheed/faq/it
-#%{_datadir}/sylpheed/themes
+%dir %{_datadir}/%{_sname}
+%dir %{_datadir}/%{_sname}/manual
+%{_datadir}/%{_sname}/manual/en
+%lang(de) %{_datadir}/%{_sname}/manual/de
+%lang(es) %{_datadir}/%{_sname}/manual/es
+%lang(fr) %{_datadir}/%{_sname}/manual/fr
+%lang(ja) %{_datadir}/%{_sname}/manual/ja
+%dir %{_datadir}/%{_sname}/faq
+%{_datadir}/%{_sname}/faq/en
+%lang(de) %{_datadir}/%{_sname}/faq/de
+%lang(es) %{_datadir}/%{_sname}/faq/es
+%lang(fr) %{_datadir}/%{_sname}/faq/fr
+%lang(it) %{_datadir}/%{_sname}/faq/it
+%{_datadir}/%{_sname}/themes
 %{_applnkdir}/Network/Mail/%{name}.desktop
-%{_pixmapsdir}/sylpheed.png
+%{_pixmapsdir}/%{_sname}.png
 
 %files plugins
 %defattr(644,root,root,755)
-%dir %{_libdir}/sylpheed
-%dir %{_libdir}/sylpheed/plugins
-%{_libdir}/sylpheed/plugins/*so
+%dir %{_libdir}/%{_sname}
+%dir %{_libdir}/%{_sname}/plugins
+%{_libdir}/%{_sname}/plugins/*so
 
 %files devel
 %defattr(644,root,root,755)
-%dir %{_includedir}/sylpheed
-%dir %{_includedir}/sylpheed/common
-%dir %{_includedir}/sylpheed/gtk
-%{_includedir}/sylpheed/*
+%dir %{_includedir}/
+%dir %{_includedir}/%{_sname}/common
+%dir %{_includedir}/%{_sname}/gtk
+%{_includedir}/%{_sname}/*.h
+%{_includedir}/%{_sname}/gtk/*.h
+%{_includedir}/%{_sname}/common/*.h
+
+%files themes
+%defattr(644,root,root,755)
+%dir %{_datadir}/
+%dir %{_datadir}/%{_sname}/themes
+%{_datadir}/%{_sname}/themes/*
