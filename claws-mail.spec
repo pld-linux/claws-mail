@@ -20,6 +20,7 @@ Release:	0.1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
+# Source0-md5:	b44d9136604802c5d34f91f92514c989
 Source1:	%{name}.desktop
 BuildRequires:	autoconf
 BuildRequires:	automake
