@@ -1,6 +1,7 @@
+#
 # Conditional build:
 # _without_jconv           - without jconv support
-
+#
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
@@ -88,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f sylpheed.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
-%{_mandir}/man1/sylpheed.1.gz
+%{_mandir}/man1/sylpheed.1*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/sylpheed
 %dir %{_datadir}/sylpheed/manual
