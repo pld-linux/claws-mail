@@ -4,8 +4,8 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
 Name:		sylpheed-claws
-Version:	0.7.8
-Release:	2
+Version:	0.8.0
+Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://telia.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
@@ -85,16 +85,14 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/sylpheed
 
-gzip -9nf AUTHORS ChangeLog NEWS README* TODO
-
 %find_lang sylpheed
 
 %clean
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %files -f sylpheed.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/sylpheed
 %dir %{_datadir}/sylpheed/manual
