@@ -1,7 +1,7 @@
 #
 # Conditional build:
-# _without_jconv           - without jconv support
-# _without_gpg           - without gpg support
+# _without_jconv        - without jconv support
+# _without_gpg          - without gpg support
 # _without_ssl          - without ssl support
 # _without_ipv6         - without ipv6 support
 # _without_ldap         - without ldap support
@@ -22,7 +22,7 @@ BuildRequires:	automake
 BuildRequires:	faces-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
-%{!?_without_gpg:BuildRequires: gpgme-devel}
+%{!?_without_gpg:BuildRequires: gpgme-devel < 0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
