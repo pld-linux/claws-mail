@@ -1,0 +1,4 @@
+- added --disable options
+ 	"All plugins are now built automatically where the dependencies
+	are satisfied"
+- rel. 1
