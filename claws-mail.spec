@@ -12,19 +12,19 @@
 %bcond_with	mathml		# build with mathml plugin
 #
 %define		_sname	sylpheed
-%define		_iconver	20040525
+%define		_iconver	20040929
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		%{_sname}-claws
-Version:	0.9.12a
+Version:	0.9.12b
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	382caecd2b21cbcd9b8d07816025a87c
+# Source0-md5:	f986e1226ce02c5791bd677a42765d41
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/sylpheed-claws/%{_sname}-iconset-%{_iconver}.tar.gz
-# Source2-md5:	a2aa029cdee6cc22a0305774b70a5a70
+# Source2-md5:	d72cf03bf3d13cf9e2785eaca3807707
 Patch0:		%{name}-locale-names.patch
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRequires:	aspell-devel >= 2:0.50
