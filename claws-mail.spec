@@ -4,7 +4,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami.
 Name:		sylpheed-claws
 Version:	0.7.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Networking
 Group(cs):	X11/Aplikace/SÌªovÈ
@@ -21,6 +21,7 @@ Group(ru):	X11/“…Ãœ÷≈Œ…—/Û≈‘≈◊Ÿ≈
 Group(sv):	X11/Till‰mpningar/N‰tverk
 Source0:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.gz
 Source1:	%{name}.desktop
+Source2:	sylpheed.png
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	imlib-devel
@@ -74,13 +75,13 @@ automake --add-missing --foreign --copy
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d  $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Mail,%{__pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
-
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
 %find_lang sylpheed
@@ -97,3 +98,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/sylpheed/manual/en
 %lang(ja) %{_datadir}/sylpheed/manual/ja
 %{_applnkdir}/Network/Mail/*
+%{_pixmapsdir}/sylpheed.png
