@@ -17,7 +17,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		%{_sname}-claws
 Version:	0.9.9
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/%{name}/%{_sname}-%{version}claws.tar.bz2
@@ -26,7 +26,8 @@ Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
 # Source2-md5:	478128ccf00914990f73383692b5cd30
 URL:		http://sylpheed-claws.sourceforge.net/
-BuildRequires:	aspell-devel >= 0.50
+#BuildRequires:	aspell-devel >= 0.50
+BuildRequires:	aspell-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
@@ -45,11 +46,15 @@ BuildRequires:	libtool
 %{?with_mathml:BuildRequires:	gtkmathview >= 0.4.2}
 %{?with_mathml:BuildRequires:	gtkmathview < 0.5}
 %{?with_ldap:BuildRequires:	openldap-devel}
-%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7d}
+%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.6m}
 BuildRequires:	pkgconfig
 %{?with_faces:Requires:	faces}
 Obsoletes:	sylpheed
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
+%define		_desktopdir	%{_applnkdir}/Network/Mail
 
 %description
 This program is an X based fast e-mail client which has features same
@@ -104,13 +109,14 @@ mv %{_sname}-iconset-* themes
 mv -f themes/README README.themes
 
 %build
-rm -f missing
-%{__libtoolize}
-%{__gettextize}
-%{__aclocal} -I ac
-%{__autoconf}
-%{__autoheader}
-%{__automake}
+#rm -f missing
+#%%{__libtoolize}
+#%%{__gettextize}
+#%%{__autoconf}
+#%%{__aclocal} -I ac
+#%%{__aclocal}
+#%%{__autoheader}
+#%%{__automake}
 %configure \
 	%{?with_gpg:--enable-gpgme} %{!?with_gpg:--disable-gpgme} \
 	%{?with_ldap:--enable-ldap} \
@@ -134,7 +140,7 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_pkgconfigdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -143,6 +149,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{_sname}
 
 install %{_sname}.png $RPM_BUILD_ROOT%{_pixmapsdir}
+mv $RPM_BUILD_ROOT%{_libdir}/pkgconfig/*.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
 
 %find_lang %{_sname}
 
