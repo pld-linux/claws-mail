@@ -35,6 +35,7 @@ BuildRequires:	automake
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
+BuildRequires:	bzip2-devel
 %{!?_without_gpg:BuildRequires:	gpgme-devel < 0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
