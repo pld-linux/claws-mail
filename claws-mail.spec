@@ -27,7 +27,7 @@ Source2:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-iconset-%{_iconver}.t
 Patch0:		%{name}-locale-names.patch
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRequires:	aspell-devel >= 2:0.50
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
 %{?with_clamav:BuildRequires:	clamav-devel}
@@ -38,7 +38,7 @@ BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.3.10}
 %{?with_gpg:BuildRequires:	gpgme-devel < 1:0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
-BuildRequires:	imlib-devel
+BuildRequires:	imlib-devel >= 1.9
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 # TODO: package gtkmathview: http://helm.cs.unibo.it/mml-widget/ (0.4.3 for gtk1, 0.6.0 for gtk2)
@@ -117,10 +117,10 @@ rm -f po/stamp-po
 %{__autoheader}
 %{__automake}
 %configure \
-	%{?with_gpg:--enable-gpgme} %{!?with_gpg:--disable-gpgme} \
+	%{!?with_gpg:--disable-pgpmime-plugin} \
 	%{?with_ldap:--enable-ldap} \
 	%{?with_ssl:--enable-openssl} \
-	%{?with_ipv6:--enable-ipv6 } \
+	%{?with_ipv6:--enable-ipv6} \
 	%{!?with_faces:--disable-compface} \
 	%{?with_dillo:--enable-dillo-viewer-plugin } \
 	%{!?with_dillo:--disable-dillo-viewer-plugin } \
