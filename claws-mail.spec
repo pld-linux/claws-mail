@@ -24,7 +24,7 @@ BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 BuildRequires:	openldap-devel
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:	aspell-devel >= 0.50
 %{!?_without_jconv:BuildRequires:   libjconv-devel}
 Requires:	faces
