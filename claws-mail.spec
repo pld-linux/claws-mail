@@ -12,7 +12,7 @@ Group:		X11/Applications/Networking
 Source0:	http://telia.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
 Source1:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-0.8.7claws-iconset.tar.gz
 Source2:	%{name}.desktop
-Patch0:		%{name}-bg.patch
+Patch0:		%{name}-po.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	faces-devel
