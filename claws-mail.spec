@@ -6,7 +6,11 @@
 # _without_ipv6         - without ipv6 support
 # _without_ldap         - without ldap support
 # _without_faces        - without compfaces support
-# _with_dillo		- with dillo plugin (html browser)
+# _without_dillo	- without dillo plugin (html browser)
+# _without_clamav	- without clamav plugin
+# _with_mathml		- with mathml plugin
+# _without_trayicon	- without trayicon plugin
+# _without_spamassassin - without spamassassin plugin
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
@@ -33,7 +37,8 @@ BuildRequires:	libtool
 BuildRequires:	aspell-devel >= 0.50
 %{!?_without_jconv:BuildRequires:   libjconv-devel}
 %{!?_without_faces:Requires:	faces}
-%{?_with_dillo:Requires:	dillo}
+%{!?_without_dillo:Requires:	dillo}
+%{!?_without_clamav:Requires:    clamav-devel}
 Obsoletes:	sylpheed
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -80,7 +85,11 @@ rm -f missing
 	%{!?_without_ssl: --enable-openssl} \
 	%{!?_without_ipv6: --enable-ipv6 } \
 	%{?_without_faces: --disable-compfaces } \
-	%{?_with_dillo:--enable-dillo-viewer-plugin } \
+	%{!?_without_dillo:--enable-dillo-viewer-plugin } \
+	%{!?_without_clamav:--enable-clamav-plugin } \
+	%{?_with_mathml:--enable-mathml-viewer-plugin } \
+	%{!?_without_trayicon:--enable-trayicon-plugin } \
+	%{!?_without_spamassassin:--enable-spamassassin-plugin } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
 	--enable-threads
@@ -128,4 +137,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugins
 %defattr(644,root,root,755)
-%{_libdir}/sylpheed/plugins/*
+%dir %{_libdir}/sylpheed
+%dir %{_libdir}/sylpheed/plugins
+%{_libdir}/sylpheed/plugins/*so
