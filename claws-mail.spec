@@ -9,7 +9,7 @@ Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://telia.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-%{version}claws.tar.gz
-Source1:	http://prdownloads.sourceforge.net/sylpheed-claws/sylpheed-theme-pak2.tar.bz2 
+Source1:	http://unc.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-iconset-%{version}claws.tar.gz
 Source2:	%{name}.desktop
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -44,12 +44,9 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 ¶wietne i u¿yteczne.
 
 %prep
-%setup -q -n sylpheed-%{version}claws
-mkdir themes
-cd themes
-tar -jxf %{SOURCE1}
-mv -f README ../README.themes
-cd ..
+%setup -q -n sylpheed-%{version}claws -a1
+mv sylpheed-iconset* themes
+mv -f themes/README README.themes
 
 %build
 rm -f missing
