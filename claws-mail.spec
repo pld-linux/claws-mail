@@ -14,18 +14,18 @@ Source2:	%{name}.desktop
 Source3:	sylpheed.png
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	imlib-devel
 BuildRequires:	faces-devel
-BuildRequires:	gettext-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
+BuildRequires:	gettext-devel
+BuildRequires:	gpgme-devel
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	gtkhtml-devel >= 0.10.1
+BuildRequires:	imlib-devel
+BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
-BuildRequires:	gpgme-devel
 BuildRequires:	pspell-devel >= 12.2-5
-BuildRequires:	libltdl-static
 %{!?_without_jconv:BuildRequires:   libjconv-devel}
 Requires:	faces
 Obsoletes:	sylpheed
@@ -57,7 +57,7 @@ cd ..
 rm -f missing
 %{__libtoolize}
 %{__gettextize}
-aclocal -I ac
+%{__aclocal} -I ac
 %{__autoconf}
 autoheader
 automake --add-missing --foreign --copy
@@ -76,13 +76,12 @@ automake --add-missing --foreign --copy
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Mail,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
-install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/sylpheed
 
 %find_lang sylpheed
