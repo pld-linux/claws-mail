@@ -81,6 +81,8 @@ install -d $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
 install %{SOURCE2} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/sylpheed
 
+install %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
+
 %find_lang sylpheed
 
 %clean
