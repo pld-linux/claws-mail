@@ -2,12 +2,15 @@
 # Conditional build:
 # _without_jconv           - without jconv support
 # _without_gpg           - without gpg support
+# _without_ssl          - without ssl support
+# _without_ipv6         - without ipv6 support
+# _without_ldap         - without ldap support
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
 Version:	0.8.11
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
@@ -24,8 +27,8 @@ BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
-BuildRequires:	openldap-devel
-BuildRequires:	openssl-devel >= 0.9.7
+%{!?_without_ldap:BuildRequires:	openldap-devel}
+%{!?_without_ssl:BuildRequires:	openssl-devel >= 0.9.7}
 BuildRequires:	aspell-devel >= 0.50
 %{!?_without_jconv:BuildRequires:   libjconv-devel}
 Requires:	faces
@@ -60,9 +63,9 @@ rm -f missing
 %configure \
 	%{!?_without_jconv:--enable-jconv} \
 	%{!?_without_gpg:--enable-gpgme} \
-	--enable-ldap \
-	--enable-openssl \
-	--enable-ipv6 \
+	%{!?_without_ldap: --enable-ldap} \
+	%{!?_without_ssl: --enable-openssl} \
+	%{!?_without_ipv6: --enable-ipv6 } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
 	--enable-threads
