@@ -1,18 +1,17 @@
 #
 # Conditional build:
-%bcond_without jconv	# build without jconv support
-%bcond_without gpg	# build without gpg support
-%bcond_without ssl	# build without ssl support
-%bcond_without ipv6	# build without ipv6 support
-%bcond_without ldap	# build without ldap support
-%bcond_without faces	# build without compfaces support
-%bcond_without dillo	# build without dillo plugin (html browser)
-%bcond_without clamav	# build without clamav plugin
-%bcond_with mathml	# build with mathml plugin
-%bcond_without trayicon	# buildwithout trayicon plugin
-%bcond_without spamassassin	# build without spamassassin plugin
+%bcond_without	jconv		# build without jconv support
+%bcond_without	gpg		# build without gpg support
+%bcond_without	ssl		# build without ssl support
+%bcond_without	ipv6		# build without ipv6 support
+%bcond_without	ldap		# build without ldap support
+%bcond_without	faces		# build without compfaces support
+%bcond_without	dillo		# build without dillo plugin (html browser)
+%bcond_without	clamav		# build without clamav plugin
+%bcond_without	spamassassin	# build without spamassassin plugin
+%bcond_without	trayicon	# buildwithout trayicon plugin
+%bcond_with	mathml		# build with mathml plugin
 #
-
 %define		_sname	sylpheed
 %define		_iconver	20040206
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
@@ -111,20 +110,20 @@ rm -f missing
 %{__autoheader}
 %{__automake}
 %configure \
-	%{?with_jconv:--enable-jconv} %{?without_jconv:--disable-jconv} \
-	%{?with_gpg:--enable-gpgme} %{?without_gpg:--disable-gpgme} \
+	%{?with_jconv:--enable-jconv} %{!?with_jconv:--disable-jconv} \
+	%{?with_gpg:--enable-gpgme} %{!?with_gpg:--disable-gpgme} \
 	%{?with_ldap:--enable-ldap} \
 	%{?with_ssl:--enable-openssl} \
 	%{?with_ipv6:--enable-ipv6 } \
-	%{?without_faces:--disable-compfaces } \
+	%{!?with_faces:--disable-compfaces } \
 	%{?with_dillo:--enable-dillo-viewer-plugin } \
-	%{?without_dillo:--disable-dillo-viewer-plugin } \
+	%{!?with_dillo:--disable-dillo-viewer-plugin } \
 	%{?with_clamav:--enable-clamav-plugin } \
-	%{?without_clamav:--disable-clamav-plugin } \
+	%{!?with_clamav:--disable-clamav-plugin } \
 	%{?with_mathml:--enable-mathml-viewer-plugin } \
-	%{?without_mathml:--disable-mathml-viewer-plugin } \
+	%{!?with_mathml:--disable-mathml-viewer-plugin } \
 	%{?with_trayicon:--enable-trayicon-plugin } \
-	%{?without_trayicon:--disable-trayicon-plugin } \
+	%{!?with_trayicon:--disable-trayicon-plugin } \
 	%{?with_spamassassin:--enable-spamassassin-plugin } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
