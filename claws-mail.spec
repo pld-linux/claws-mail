@@ -5,7 +5,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
 Name:		sylpheed-claws
 Version:	0.7.8
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://telia.dl.sourceforge.net/sourceforge/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
@@ -25,6 +25,7 @@ BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
 BuildRequires:	gpgme-devel
 BuildRequires:	pspell-devel >= 12.2-5
+BuildRequires:	libltdl-static
 %{?_with_jconv:BuildRequires:   libjconv-devel}
 Requires:	faces
 Obsoletes:	sylpheed
