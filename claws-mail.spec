@@ -57,7 +57,7 @@ rm -f missing
 libtoolize --copy --force
 gettextize --copy --force
 aclocal -I ac
-autoconf
+%{__autoconf}
 autoheader
 automake --add-missing --foreign --copy
 %configure \
