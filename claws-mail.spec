@@ -31,8 +31,6 @@ Obsoletes:	sylpheed
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 This program is an X based fast e-mail client which has features same
