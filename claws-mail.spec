@@ -49,6 +49,7 @@ BuildRequires:	libtool
 BuildRequires:	pkgconfig
 %{?with_faces:Requires:	faces}
 Obsoletes:	sylpheed
+Obsoletes:	sylpheed-gtk2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
