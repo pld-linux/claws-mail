@@ -6,6 +6,7 @@
 # _without_ipv6         - without ipv6 support
 # _without_ldap         - without ldap support
 # _without_faces        - without compfaces support
+# _with_dillo		- with dillo plugin (html browser)
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
@@ -17,7 +18,6 @@ Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-%{version}claws.tar.bz2
 # Source0-md5:  e547783629300e5a1a06fb5f20b9f7fd
 Source1:	%{name}.desktop
-#Patch0:		%{name}-po.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{!?_without_faces:BuildRequires:	faces-devel}
@@ -33,6 +33,7 @@ BuildRequires:	libtool
 BuildRequires:	aspell-devel >= 0.50
 %{!?_without_jconv:BuildRequires:   libjconv-devel}
 %{!?_without_faces:Requires:	faces}
+%{?_with_dillo:Requires:	dillo}
 Obsoletes:	sylpheed
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -47,9 +48,20 @@ Szybki klient poczty o mo¿liwo¶ciach takich jak oryginalny Sylpheed
 ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 ¶wietne i u¿yteczne.
 
+%package plugins
+Summary:        Special plugins for Sylpheed-Claws
+Summary(pl):    Dodatkowe pluginy dla Sylpheed-Claws
+Group:          X11/Applications/Networking
+Requires:       %{name}= %{version}
+
+%description plugins
+This is collection of some usefull plugins for Sylpheed-claws.
+
+%description plugins -l pl
+Jest to zbiór kilku dodatkowych pluginów powiêkszaj±cych mo¿liwo¶ci Sylpheeda.
+
 %prep
 %setup -q -n sylpheed-%{version}claws -a1
-#%patch0 -p1
 #mv sylpheed*claws-iconset themes
 #mv -f themes/README README.themes
 
@@ -68,6 +80,7 @@ rm -f missing
 	%{!?_without_ssl: --enable-openssl} \
 	%{!?_without_ipv6: --enable-ipv6 } \
 	%{?_without_faces: --disable-compfaces } \
+	%{?_with_dillo:--enable-dillo-viewer-plugin } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
 	--enable-threads
@@ -112,3 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 #%{_datadir}/sylpheed/themes
 %{_applnkdir}/Network/Mail/%{name}.desktop
 %{_pixmapsdir}/sylpheed.png
+
+%files plugins
+%defattr(644,root,root,755)
+%{_libdir}/sylpheed/plugins/*
