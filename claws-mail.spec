@@ -1,53 +1,60 @@
 #
 # Conditional build:
-# _without_jconv        - without jconv support
-# _without_gpg          - without gpg support
-# _without_ssl          - without ssl support
-# _without_ipv6         - without ipv6 support
-# _without_ldap         - without ldap support
-# _without_faces        - without compfaces support
-# _without_dillo	- without dillo plugin (html browser)
-# _without_clamav	- without clamav plugin
-# _with_mathml		- with mathml plugin
-# _without_trayicon	- without trayicon plugin
-# _without_spamassassin - without spamassassin plugin
+%bcond_without	gpg		# build without GPG support
+%bcond_without	ssl		# build without SSL support
+%bcond_without	ipv6		# build without IPv6 support
+%bcond_without	ldap		# build without LDAP support
+%bcond_without	faces		# build without compfaces support
+%bcond_without	dillo		# build without dillo plugin (html browser)
+%bcond_without	clamav		# build without clamav plugin
+%bcond_without	spamassassin	# build without spamassassin plugin
+%bcond_without	trayicon	# build without trayicon plugin
+%bcond_with	mathml		# build with mathml plugin
 #
-
 %define		_sname	sylpheed
-%define		_iconver	20031130
+%define		_iconver	20040206
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		%{_sname}-claws
-Version:	0.9.8
-Release:	1
-License:	GPL
+Version:	0.9.9
+Release:	3
+License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/%{name}/%{_sname}-%{version}claws.tar.bz2
-# Source0-md5:	e0ed997b1facb067061876df20472e8e
+# Source0-md5:	9068192f009fb8240be6e9222ff27999
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/%{name}/%{_sname}-iconset-%{_iconver}.tar.gz
-# Source2-md5:	7dd2785cc0fb1cdfa2f953a9e4e298ca
+# Source2-md5:	478128ccf00914990f73383692b5cd30
 URL:		http://sylpheed-claws.sourceforge.net/
+#BuildRequires:	aspell-devel >= 0.50
+BuildRequires:	aspell-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{!?_without_clamav:BuildRequires:	clamav-devel}
-%{!?_without_faces:BuildRequires:	faces-devel}
+BuildRequires:	bzip2-devel
+%{?with_clamav:BuildRequires:	clamav-devel}
+%{?with_faces:BuildRequires:	faces-devel}
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
-BuildRequires:	bzip2-devel
-%{!?_without_gpg:BuildRequires:	gpgme-devel < 0.4}
+%{?with_gpg:BuildRequires:	gpgme-devel >= 0.3.10}
+%{?with_gpg:BuildRequires:	gpgme-devel < 0.4}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
-%{!?_without_ldap:BuildRequires:	openldap-devel}
-%{!?_without_ssl:BuildRequires:	openssl-devel >= 0.9.7c}
-BuildRequires:	aspell-devel >= 0.50
-%{!?_without_jconv:BuildRequires:	libjconv-devel}
-%{!?_without_faces:Requires:	faces}
+# TODO: package gtkmathview: http://helm.cs.unibo.it/mml-widget/ (0.4.3 for gtk1, 0.6.0 for gtk2)
+%{?with_mathml:BuildRequires:	gtkmathview >= 0.4.2}
+%{?with_mathml:BuildRequires:	gtkmathview < 0.5}
+%{?with_ldap:BuildRequires:	openldap-devel}
+%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.6m}
+BuildRequires:	pkgconfig
+%{?with_faces:Requires:	faces}
 Obsoletes:	sylpheed
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
+%define		_desktopdir	%{_applnkdir}/Network/Mail
 
 %description
 This program is an X based fast e-mail client which has features same
@@ -63,8 +70,8 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 Summary:	Special plugins for Sylpheed-Claws
 Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws
 Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}
-%{!?_without_dillo:Requires:	dillo}
+Requires:	%{name} = %{version}-%{release}
+%{?with_dillo:Requires:	dillo}
 
 %description plugins
 This is collection of some usefull plugins for Sylpheed-claws.
@@ -76,7 +83,7 @@ Jest to zbiór kilku dodatkowych pluginów powiêkszaj±cych mo¿liwo¶ci Sylpheeda.
 Summary:	Headers from Sylpheed-Claws
 Summary(pl):	Pliki nag³ówkowe programu Sylpheed-Claws
 Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Sylpheed-Claws development package.
@@ -88,7 +95,7 @@ Pliki nag³ówkowe programu Sylpheed-Claws.
 Summary:	Themes for Sylpheed-Claws
 Summary(pl):	Motywy dla programu Sylpheed-Claws
 Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description themes
 Sylpheed-Claws themes package.
@@ -102,29 +109,29 @@ mv %{_sname}-iconset-* themes
 mv -f themes/README README.themes
 
 %build
-rm -f missing
-%{__libtoolize}
-%{__gettextize}
-%{__aclocal} -I ac
-%{__autoconf}
-%{__autoheader}
-%{__automake}
+#rm -f missing
+#%%{__libtoolize}
+#%%{__gettextize}
+#%%{__autoconf}
+#%%{__aclocal} -I ac
+#%%{__aclocal}
+#%%{__autoheader}
+#%%{__automake}
 %configure \
-	%{!?_without_jconv:--enable-jconv} %{?_without_jconv:--disable-jconv} \
-	%{!?_without_gpg:--enable-gpgme} %{?_without_gpg:--disable-gpgme} \
-	%{!?_without_ldap:--enable-ldap} \
-	%{!?_without_ssl:--enable-openssl} \
-	%{!?_without_ipv6:--enable-ipv6 } \
-	%{?_without_faces:--disable-compfaces } \
-	%{!?_without_dillo:--enable-dillo-viewer-plugin } \
-	%{?_without_dillo:--disable-dillo-viewer-plugin } \
-	%{!?_without_clamav:--enable-clamav-plugin } \
-	%{?_without_clamav:--disable-clamav-plugin } \
-	%{?_with_mathml:--enable-mathml-viewer-plugin } \
-	%{!?_with_mathml:--disable-mathml-viewer-plugin } \
-	%{!?_without_trayicon:--enable-trayicon-plugin } \
-	%{?_without_trayicon:--disable-trayicon-plugin } \
-	%{!?_without_spamassassin:--enable-spamassassin-plugin } \
+	%{?with_gpg:--enable-gpgme} %{!?with_gpg:--disable-gpgme} \
+	%{?with_ldap:--enable-ldap} \
+	%{?with_ssl:--enable-openssl} \
+	%{?with_ipv6:--enable-ipv6 } \
+	%{!?with_faces:--disable-compface} \
+	%{?with_dillo:--enable-dillo-viewer-plugin } \
+	%{!?with_dillo:--disable-dillo-viewer-plugin } \
+	%{?with_clamav:--enable-clamav-plugin } \
+	%{!?with_clamav:--disable-clamav-plugin } \
+	%{?with_mathml:--enable-mathml-viewer-plugin } \
+	%{!?with_mathml:--disable-mathml-viewer-plugin } \
+	%{?with_trayicon:--enable-trayicon-plugin } \
+	%{!?with_trayicon:--disable-trayicon-plugin } \
+	%{?with_spamassassin:--enable-spamassassin-plugin } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
 	--enable-threads
@@ -133,15 +140,16 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Mail,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_pkgconfigdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Network/Mail
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{_sname}
 
 install %{_sname}.png $RPM_BUILD_ROOT%{_pixmapsdir}
+mv $RPM_BUILD_ROOT%{_libdir}/pkgconfig/*.pc $RPM_BUILD_ROOT%{_pkgconfigdir}
 
 %find_lang %{_sname}
 
@@ -166,7 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(es) %{_datadir}/%{_sname}/faq/es
 %lang(fr) %{_datadir}/%{_sname}/faq/fr
 %lang(it) %{_datadir}/%{_sname}/faq/it
-%{_applnkdir}/Network/Mail/%{name}.desktop
+%{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{_sname}.png
 
 %files plugins
