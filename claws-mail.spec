@@ -1,7 +1,7 @@
 # Conditional build:
 
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
-Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami.
+Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
 Name:		sylpheed-claws
 Version:	0.7.2
 Release:	1
@@ -33,8 +33,9 @@ BuildRequires:	gettext-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	gtkhtml-devel >= 0.10.1
-#BuildRequires:	libjconv-devel - this exist ?
+BuildRequires:	libjconv-devel
 BuildRequires:	libtool
+BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
 Requires:	faces
 Conflicts:	sylpheed
@@ -51,7 +52,7 @@ is really cool and useable.
 
 %description -l pl
 Szybki klient poczty o mo¿liwo¶ciach takich jak oryginalny Sylpheed
-ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± na prawdê
+ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 ¶wietne i u¿yteczne.
 
 %prep
