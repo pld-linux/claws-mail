@@ -1,10 +1,11 @@
 # Conditional build:
+# _with_jconv           - adds much more codesets to choice from
 
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Osobno rozwijana wersja Sylpheed z paroma zmianami/ulepszeniami
 Name:		sylpheed-claws
 Version:	0.7.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Group(cs):	X11/Aplikace/Sí»ové
@@ -37,8 +38,9 @@ BuildRequires:	libjconv-devel
 BuildRequires:	libtool
 BuildRequires:	openldap-devel
 BuildRequires:	openssl-devel
+%{?_with_jconv:BuildRequires:   libjconv-devel}
 Requires:	faces
-Conflicts:	sylpheed
+Obsoletes:	sylpheed
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -67,7 +69,7 @@ autoconf
 autoheader
 automake --add-missing --foreign --copy
 %configure \
-	--enable-jconv \
+	%{!?_with_jconv:--disable-jconv} \
 	--enable-pspell \
 	--enable-impib \
 	--enable-gdk-pixbuf \
