@@ -19,7 +19,7 @@ BuildRequires:	automake
 BuildRequires:	faces-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
-%{!?_without_gpg:uildRequires: gpgme-devel}
+%{!?_without_gpg:BuildRequires: gpgme-devel}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel
 BuildRequires:	libltdl-devel
