@@ -106,7 +106,8 @@ Motywy dla programu Sylpheed-Claws.
 mv sylpheed-iconset-* themes
 mv -f themes/README README.themes
 
-#mv -f po/{zh_TW.Big5,zh_TW}.po
+mv -f po/{zh_TW.Big5,zh_TW}.po
+mv -f po/{zh_TW.Big5,zh_TW}.gmo
 rm -f po/stamp-po
 
 %build
