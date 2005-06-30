@@ -15,12 +15,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
-Version:	1.0.4
+Version:	1.9.12
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	ac473de7189a4a9baecf16b72c34dff4
+# Source0-md5:	c7cdfe6ac9afacd680cb8fe58eb9da79
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-iconset-%{_iconver}.tar.gz
 # Source2-md5:	d72cf03bf3d13cf9e2785eaca3807707
@@ -106,20 +106,20 @@ Motywy dla programu Sylpheed-Claws.
 mv sylpheed-iconset-* themes
 mv -f themes/README README.themes
 
-mv -f po/{zh_TW.Big5,zh_TW}.po
+#mv -f po/{zh_TW.Big5,zh_TW}.po
 rm -f po/stamp-po
 
 %build
-%{__libtoolize}
-%{__gettextize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
+#%%{__libtoolize}
+#%%{__gettextize}
+#%%{__aclocal} -I m4
+#%%{__autoconf}
+#%%{__autoheader}
+#%%{__automake}
 %configure \
 	%{!?with_gpg:--disable-pgpmime-plugin} \
 	%{?with_ldap:--enable-ldap} \
-	%{?with_ssl:--enable-openssl} \
+	%{?with_ssl:--enable-ssl} \
 	%{?with_ipv6:--enable-ipv6} \
 	%{!?with_faces:--disable-compface} \
 	%{?with_dillo:--enable-dillo-viewer-plugin } \

@@ -1,11 +1,11 @@
---- sylpheed-claws-0.9.12/configure.ac.orig	Mon Jun 28 18:04:41 2004
-+++ sylpheed-claws-0.9.12/configure.ac	Tue Jul 20 16:33:06 2004
-@@ -90,7 +90,7 @@
- AM_ICONV
+--- sylpheed-claws-1.9.9/configure.ac.fix	2005-05-16 12:02:15.936782448 +0200
++++ sylpheed-claws-1.9.9/configure.ac	2005-05-16 12:02:58.093373672 +0200
+@@ -140,7 +140,7 @@
+ LIBS=$syl_save_LIBS
  
  dnl for gettext
--ALL_LINGUAS="bg cs de el en_GB es fr hr hu it ja ko nl pl pt_BR ru sk sr sv zh_CN zh_TW.Big5"
-+ALL_LINGUAS="bg cs de el en_GB es fr hr hu it ja ko nl pl pt_BR ru sk sr sv zh_CN zh_TW"
- AM_GNU_GETTEXT([use-libtool])
- AM_GNU_GETTEXT_VERSION(0.12.1)
- dnl AC_CHECK_FUNC(gettext, AC_CHECK_LIB(intl, gettext))
+-ALL_LINGUAS="bg ca cs de el en_GB es fi fr hr hu it ja ko nl pl pt_BR ru sk sr sv zh_CN zh_TW.Big5"
++ALL_LINGUAS="bg ca cs de el en_GB es fi fr hr hu it ja ko nl pl pt_BR ru sk sr sv zh_CN zh_TW"
+ GETTEXT_PACKAGE=sylpheed-claws
+ AC_SUBST(GETTEXT_PACKAGE)
+ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Define text domain.])
