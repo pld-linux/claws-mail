@@ -135,7 +135,8 @@ rm -f po/stamp-po
 	--enable-aspell \
 	--enable-gdk-pixbuf \
 	--enable-threads \
-	--disable-static
+	--disable-static \
+	--with-config-dir=.sylpheed
 
 %{__make}
 
