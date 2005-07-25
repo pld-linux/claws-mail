@@ -2,9 +2,9 @@
 Encoding=UTF-8
 Name=Sylpheed-Claws
 Comment=GTK+ based e-mail client
-Comment[pl]=Oparty na GTK+ program pocztowy
+Comment[pl]=Oparty na GTK2 program pocztowy
 Exec=sylpheed
-Icon=sylpheed.png
+Icon=sylpheed-claws.png
 Terminal=false
 Type=Application
 Categories=Network;Email;
