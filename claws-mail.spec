@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	gpg		# build with GPG support (still needs obsolete version of gpgme)
+%bcond_without	gpg		# build with GPG support (still needs obsolete version of gpgme)
 %bcond_without	ssl		# build without SSL support
 %bcond_without	ipv6		# build without IPv6 support
 %bcond_without	ldap		# build without LDAP support
@@ -12,15 +12,15 @@
 %bcond_with	mathml		# build with mathml plugin
 #
 %define		_iconver	20040929
-Summary:	A bleeding edge branch of Sylpheed, a GTK+ based, lightweight, and fast e-mail client
+Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
-Version:	1.9.12
+Version:	1.9.13
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	c7cdfe6ac9afacd680cb8fe58eb9da79
+# Source0-md5:	afd3b82ca210520f0ad241b77c5e673a
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-iconset-%{_iconver}.tar.gz
 # Source2-md5:	d72cf03bf3d13cf9e2785eaca3807707
@@ -35,10 +35,10 @@ BuildRequires:	bzip2-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
-%{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.3.10}
-%{?with_gpg:BuildRequires:	gpgme-devel < 1:0.4}
+%{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel >= 1.9
+BuildRequires:	libetpan-devel >= 0.38
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 # TODO: package gtkmathview: http://helm.cs.unibo.it/mml-widget/ (0.4.3 for gtk1, 0.6.0 for gtk2)
@@ -150,7 +150,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{name}
 
-install sylpheed.png $RPM_BUILD_ROOT%{_pixmapsdir}
+install %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.la
 
@@ -178,7 +178,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(fr) %{_datadir}/%{name}/faq/fr
 %lang(it) %{_datadir}/%{name}/faq/it
 %{_desktopdir}/%{name}.desktop
-%{_pixmapsdir}/sylpheed.png
+%{_pixmapsdir}/%{name}.png
 
 %files plugins
 %defattr(644,root,root,755)
