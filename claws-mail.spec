@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	gpg		# build with GPG support (still needs obsolete version of gpgme)
+%bcond_without	gpg		# build without GPG support
 %bcond_without	ssl		# build without SSL support
 %bcond_without	ipv6		# build without IPv6 support
 %bcond_without	ldap		# build without LDAP support
@@ -119,8 +119,10 @@ rm -f po/stamp-po
 #%%{__automake}
 %configure \
 	%{!?with_gpg:--disable-pgpmime-plugin} \
+	%{?with_gpg:--enable-pgpmime-plugin} \
 	%{?with_ldap:--enable-ldap} \
-	%{?with_ssl:--enable-ssl} \
+	%{?with_ssl:--enable-openssl} \
+	%{!?with_ssl:--disable-openssl} \
 	%{?with_ipv6:--enable-ipv6} \
 	%{!?with_faces:--disable-compface} \
 	%{?with_dillo:--enable-dillo-viewer-plugin } \
@@ -134,8 +136,10 @@ rm -f po/stamp-po
 	%{?with_spamassassin:--enable-spamassassin-plugin } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
-	--enable-threads \
+	--enable-pthread \
 	--disable-static \
+	--enable-gnomeprint \
+	--enable-libetpan \
 	--with-config-dir=.sylpheed
 
 %{__make}
