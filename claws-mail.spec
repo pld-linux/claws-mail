@@ -24,7 +24,6 @@ Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-iconset-%{_iconver}.tar.gz
 # Source2-md5:	d72cf03bf3d13cf9e2785eaca3807707
-Patch0:		%{name}-locale-names.patch
 URL:		http://sylpheed-claws.sourceforge.net/
 BuildRequires:	aspell-devel >= 2:0.50
 BuildRequires:	autoconf >= 2.50
@@ -102,12 +101,9 @@ Motywy dla programu Sylpheed-Claws.
 
 %prep
 %setup -q -a2
-%patch0 -p1
 mv sylpheed-iconset-* themes
 mv -f themes/README README.themes
 
-mv -f po/{zh_TW.Big5,zh_TW}.po
-mv -f po/{zh_TW.Big5,zh_TW}.gmo
 rm -f po/stamp-po
 
 %build
@@ -120,7 +116,7 @@ rm -f po/stamp-po
 %configure \
 	%{!?with_gpg:--disable-pgpmime-plugin} \
 	%{?with_gpg:--enable-pgpmime-plugin} \
-	%{?with_ldap:--enable-ldap} \
+	%{!?with_ldap:--disable-ldap} \
 	%{?with_ssl:--enable-openssl} \
 	%{!?with_ssl:--disable-openssl} \
 	%{?with_ipv6:--enable-ipv6} \
