@@ -15,12 +15,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
-Version:	1.9.15
+Version:	1.9.100
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	0d187526e0eca23b87ffa4981f7e1765
+# Source0-md5:	863c314557f90f17c2f6d6a0ab57e6c2
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-iconset-%{_iconver}.tar.gz
 # Source2-md5:	d72cf03bf3d13cf9e2785eaca3807707
@@ -37,7 +37,7 @@ BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+-devel >= 1.2.6
 BuildRequires:	imlib-devel >= 1.9
-BuildRequires:	libetpan-devel >= 0.38
+BuildRequires:	libetpan-devel >= 0.40
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 # TODO: package gtkmathview: http://helm.cs.unibo.it/mml-widget/ (0.4.3 for gtk1, 0.6.0 for gtk2)
@@ -162,7 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
-%{_mandir}/man1/sylpheed.1*
+%{_mandir}/man1/%{name}.1*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/manual
