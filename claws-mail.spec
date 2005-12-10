@@ -35,7 +35,7 @@ BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
-BuildRequires:	gtk+-devel >= 1.2.6
+BuildRequires:	gtk+2-devel >= 2.4.0
 BuildRequires:	imlib-devel >= 1.9
 BuildRequires:	libetpan-devel >= 0.40
 BuildRequires:	libltdl-devel
