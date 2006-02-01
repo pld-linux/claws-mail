@@ -167,16 +167,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/manual
 %{_datadir}/%{name}/manual/en
-%lang(de) %{_datadir}/%{name}/manual/de
-%lang(es) %{_datadir}/%{name}/manual/es
-%lang(fr) %{_datadir}/%{name}/manual/fr
-%lang(ja) %{_datadir}/%{name}/manual/ja
-%dir %{_datadir}/%{name}/faq
-%{_datadir}/%{name}/faq/en
-%lang(de) %{_datadir}/%{name}/faq/de
-%lang(es) %{_datadir}/%{name}/faq/es
-%lang(fr) %{_datadir}/%{name}/faq/fr
-%lang(it) %{_datadir}/%{name}/faq/it
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
 
