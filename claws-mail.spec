@@ -9,6 +9,7 @@
 %bcond_without	clamav		# build without clamav plugin
 %bcond_without	spamassassin	# build without spamassassin plugin
 %bcond_without	trayicon	# build without trayicon plugin
+%bcond_without	gnomeprint	# build without gnomeprint support
 %bcond_with	mathml		# build with mathml plugin
 #
 %define		_iconver	20040929
@@ -34,6 +35,7 @@ BuildRequires:	bzip2-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
+%{?with_gnomeprint:BuildRequires:	libgnomeprintui-devel}
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+2-devel >= 2.4.0
 BuildRequires:	imlib-devel >= 1.9
@@ -130,11 +132,11 @@ rm -f po/stamp-po
 	%{?with_trayicon:--enable-trayicon-plugin } \
 	%{!?with_trayicon:--disable-trayicon-plugin } \
 	%{?with_spamassassin:--enable-spamassassin-plugin } \
+	%{?with_gnomeprint:--enable-gnomeprint } \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
 	--enable-pthread \
 	--disable-static \
-	--enable-gnomeprint \
 	--enable-libetpan \
 	--with-config-dir=.sylpheed
 
