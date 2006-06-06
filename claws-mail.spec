@@ -169,8 +169,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/manual
 %{_datadir}/%{name}/manual/en
-%{_datadir}/%{name}/manual/fr
-%{_datadir}/%{name}/manual/pl
+%lang(fr) %{_datadir}/%{name}/manual/fr
+%lang(pl) %{_datadir}/%{name}/manual/pl
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
 
