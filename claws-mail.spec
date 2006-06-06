@@ -16,12 +16,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
-Version:	2.0.0
+Version:	2.2.1
 Release:	0.1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	6e26f8e36772b71361d0c463b9a6c7a1
+# Source0-md5:	b23e9b4bf53cb5cd83df61ab86a9f157
 Source1:	%{name}.desktop
 Source2:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-iconset-%{_iconver}.tar.gz
 # Source2-md5:	d72cf03bf3d13cf9e2785eaca3807707
@@ -39,7 +39,7 @@ BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+2-devel >= 2.4.0
 BuildRequires:	imlib-devel >= 1.9
-BuildRequires:	libetpan-devel >= 0.41
+BuildRequires:	libetpan-devel >= 0.45
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 # TODO: package gtkmathview: http://helm.cs.unibo.it/mml-widget/ (0.4.3 for gtk1, 0.6.0 for gtk2)
@@ -169,6 +169,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/manual
 %{_datadir}/%{name}/manual/en
+%{_datadir}/%{name}/manual/fr
+%{_datadir}/%{name}/manual/pl
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
 
