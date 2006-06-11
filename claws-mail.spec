@@ -1,16 +1,16 @@
 #
 # Conditional build:
+%bcond_without  clamav          # build without clamav plugin
+%bcond_without  compface        # build without compface support
+%bcond_without  dillo           # build without dillo plugin (html browser)
+%bcond_without  gnomeprint      # build without gnomeprint support
 %bcond_without	gpg		# build without GPG support
-%bcond_without	ssl		# build without SSL support
-%bcond_without	ipv6		# build without IPv6 support
-%bcond_without	ldap		# build without LDAP support
-%bcond_without	faces		# build without compfaces support
-%bcond_without	dillo		# build without dillo plugin (html browser)
-%bcond_without	clamav		# build without clamav plugin
+%bcond_without  ipv6            # build without IPv6 support
+%bcond_without  ldap            # build without LDAP support
+%bcond_with     mathml          # build with mathml plugin
 %bcond_without	spamassassin	# build without spamassassin plugin
+%bcond_without  ssl             # build without SSL support
 %bcond_without	trayicon	# build without trayicon plugin
-%bcond_without	gnomeprint	# build without gnomeprint support
-%bcond_with	mathml		# build with mathml plugin
 #
 %define		_iconver	20040929
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
@@ -31,7 +31,7 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
 %{?with_clamav:BuildRequires:	clamav-devel}
-%{?with_faces:BuildRequires:	faces-devel}
+%{?with_compface:BuildRequires:	compface-devel}
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
@@ -116,23 +116,17 @@ rm -f po/stamp-po
 #%%{__autoheader}
 #%%{__automake}
 %configure \
-	%{!?with_gpg:--disable-pgpmime-plugin} \
-	%{?with_gpg:--enable-pgpmime-plugin} \
-	%{!?with_ldap:--disable-ldap} \
-	%{?with_ssl:--enable-openssl} \
-	%{!?with_ssl:--disable-openssl} \
-	%{?with_ipv6:--enable-ipv6} \
-	%{!?with_faces:--disable-compface} \
-	%{?with_dillo:--enable-dillo-viewer-plugin } \
-	%{!?with_dillo:--disable-dillo-viewer-plugin } \
-	%{?with_clamav:--enable-clamav-plugin } \
-	%{!?with_clamav:--disable-clamav-plugin } \
-	%{?with_mathml:--enable-mathml-viewer-plugin } \
-	%{!?with_mathml:--disable-mathml-viewer-plugin } \
-	%{?with_trayicon:--enable-trayicon-plugin } \
-	%{!?with_trayicon:--disable-trayicon-plugin } \
-	%{?with_spamassassin:--enable-spamassassin-plugin } \
-	%{?with_gnomeprint:--enable-gnomeprint } \
+	--%{?with_clamav:en}%{!?with_clamav:dis}able-clamav-plugin \
+	--%{?with_compface:en}%{!?with_compface:dis}able-compface \
+	--%{?with_dillo:en}%{!?with_dillo:dis}able-dillo-viewer-plugin \
+	--%{?with_gnomeprint:en}%{!?with_gnomeprint:dis}able-gnomeprint \
+	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpmime-plugin \
+	--%{?with_ipv6:en}%{!?with_ipv6:dis}able-ipv6 \
+	--%{?with_ldap:en}%{!?with_ldap:dis}able-ldap \
+	--%{?with_mathml:en}%{!?with_mathml:dis}able-mathml-viewer-plugin \
+	--%{?with_spamassassin:en}%{!?with_spamassassin:dis}able-spamassassin-plugin \
+	--%{?with_ssl:en}%{!?with_ssl:dis}able-openssl \
+	--%{?with_trayicon:en}%{!?with_trayicon:dis}able-trayicon-plugin \
 	--enable-aspell \
 	--enable-gdk-pixbuf \
 	--enable-pthread \
