@@ -82,6 +82,9 @@ Summary:	Headers from Sylpheed-Claws
 Summary(pl):	Pliki nag³ówkowe programu Sylpheed-Claws
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+Requires:	gpgme-devel >= 1:0.4.5
+Requires:	libetpan-devel >= 0.45
+Requires:	openssl-devel >= 0.9.7d
 
 %description devel
 Sylpheed-Claws development package.
