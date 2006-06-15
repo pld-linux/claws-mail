@@ -165,6 +165,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/manual
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/plugins
 %{_datadir}/%{name}/manual/en
 %lang(fr) %{_datadir}/%{name}/manual/fr
 %lang(pl) %{_datadir}/%{name}/manual/pl
@@ -173,8 +175,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugins
 %defattr(644,root,root,755)
-%dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/plugins
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
 
 %files devel
