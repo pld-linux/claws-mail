@@ -1,3 +1,5 @@
+# TODO:
+# - pl description for new subpackages
 #
 # Conditional build:
 %bcond_without  clamav          # build without clamav plugin
@@ -6,26 +8,23 @@
 %bcond_without  gnomeprint      # build without gnomeprint support
 %bcond_without	gpg		# build without GPG support
 %bcond_without  ipv6            # build without IPv6 support
+%bcond_without	jpilot		# build without JPilot support
 %bcond_without  ldap            # build without LDAP support
-%bcond_with     mathml          # build with mathml plugin
 %bcond_without	spamassassin	# build without spamassassin plugin
 %bcond_without  ssl             # build without SSL support
 %bcond_without	trayicon	# build without trayicon plugin
 #
-%define		_iconver	20040929
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
 Version:	2.3.0
-Release:	1
+Release:	1.5
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
 # Source0-md5:	a59b1f1736e89918c648794c94120a8e
 Source1:	%{name}.desktop
-Source2:	http://dl.sourceforge.net/sylpheed-claws/sylpheed-iconset-%{_iconver}.tar.gz
-# Source2-md5:	d72cf03bf3d13cf9e2785eaca3807707
-URL:		http://sylpheed-claws.sourceforge.net/
+URL:		http://www.sylpheed-claws.net/
 BuildRequires:	aspell-devel >= 2:0.50
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -35,20 +34,18 @@ BuildRequires:	bzip2-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
-%{?with_gnomeprint:BuildRequires:	libgnomeprintui-devel}
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
-BuildRequires:	gtk+2-devel >= 2.4.0
+BuildRequires:	gtk+2-devel >= 2:2.4.0
 BuildRequires:	imlib-devel >= 1.9
 BuildRequires:	libetpan-devel >= 0.45
+%{?with_gnomeprint:BuildRequires:	libgnomeprintui-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
-# TODO: package gtkmathview: http://helm.cs.unibo.it/mml-widget/ (0.4.3 for gtk1, 0.6.0 for gtk2)
-%{?with_mathml:BuildRequires:	gtkmathview >= 0.4.2}
-%{?with_mathml:BuildRequires:	gtkmathview < 0.5}
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
 %{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7d}
+%{?with_jpilot:BuildRequires:	pilot-link-devel}
 BuildRequires:	pkgconfig
-%{?with_faces:Requires:	faces}
+BuildRequires:	startup-notification-devel >= 0.5
 Obsoletes:	sylpheed
 Obsoletes:	sylpheed-gtk2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,20 +59,6 @@ is really cool and useable.
 Szybki klient poczty o mo¿liwo¶ciach takich jak oryginalny Sylpheed
 ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 ¶wietne i u¿yteczne.
-
-%package plugins
-Summary:	Special plugins for Sylpheed-Claws
-Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws
-Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}-%{release}
-%{?with_dillo:Requires:	dillo}
-
-%description plugins
-This is collection of some usefull plugins for Sylpheed-claws.
-
-%description plugins -l pl
-Jest to zbiór kilku dodatkowych pluginów powiêkszaj±cych mo¿liwo¶ci
-Sylpheeda.
 
 %package devel
 Summary:	Headers from Sylpheed-Claws
@@ -92,22 +75,112 @@ Sylpheed-Claws development package.
 %description devel -l pl
 Pliki nag³ówkowe programu Sylpheed-Claws.
 
-%package themes
-Summary:	Themes for Sylpheed-Claws
-Summary(pl):	Motywy dla programu Sylpheed-Claws
+%package plugins
+Summary:	Special plugins for Sylpheed-Claws (metapackage)
+Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws (metapakiet)
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+%{?with_clamav:Requires: %{name}-plugin-clamav = %{version}-%{release}}
+%{?with_dillo:Requires:	%{name}-plugin-dillo = %{version}-%{release}}
+%if %{with gpg}
+Requires:	%{name}-plugin-pgpinline = %{version}-%{release}
+Requires:	%{name}-plugin-pgpmime = %{version}-%{release}
+%endif
+%{?with_spamassassin:Requires: %{name}-plugin-spamassassin = %{version}-%{release}}
+%{?with_trayicon:Requires: %{name}-plugin-trayicon = %{version}-%{release}}
 
-%description themes
-Sylpheed-Claws themes package.
+%description plugins
+This is collection of some usefull plugins for Sylpheed-Claws
+(metapackage).
 
-%description themes -l pl
-Motywy dla programu Sylpheed-Claws.
+%description plugins -l pl
+Jest to zbiór kilku dodatkowych pluginów powiêkszaj±cych mo¿liwo¶ci
+Sylpheed-Claws (metapakiet).
+
+%package plugin-clamav
+Summary:	clamav plugin for Sylpheed-Claws
+Summary(pl):	Wtyczka clamav dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
+
+%description plugin-clamav
+This plugin enables the scanning of message attachments in mail
+received from a POP, IMAP, or LOCAL account using Clam AntiVirus. It
+can optionally delete the mail or save it to a designated folder.
+
+%package plugin-dillo
+Summary:	dillo plugin for Sylpheed-Claws
+Summary(pl):	Wtyczka dillo dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Requires:	dillo
+Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
+
+%description plugin-dillo
+This plugin enables the viewing of html messages using the Dillo web
+browser.
+
+%package plugin-pgpcore
+Summary:	PGP/Core plugin for Sylpheed-Claws
+Summary(pl):	Wtyczka PGP/Core dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
+
+%description plugin-pgpcore
+This plugin handles core PGP functions.
+
+%package plugin-pgpinline
+Summary:	PGP/Inline plugin for Sylpheed-Claws
+Summary(pl):	Wtyczka PGP/Inline dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
+Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
+
+%description plugin-pgpinline
+This plugin handles PGP/Inline signed and/or encrypted mails. It can
+decrypt mails, verify signatures or sign and encrypt your own mails.
+
+%package plugin-pgpmime
+Summary:	PGP/MIME plugin for Sylpheed-Claws
+Summary(pl):	Wtyczka PGP/MIME dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
+Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
+
+%description plugin-pgpmime
+This plugin handles PGP/MIME signed and/or encrypted mails. It can
+decrypt mails, verify signatures or sign and encrypt your own mails.
+
+%package plugin-spamassassin
+Summary:	spamassassin plugin for Sylpheed-Claws
+Summary(pl):	Wtyczka spamassassin dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
+
+%description plugin-spamassassin
+This plugin enables the scanning of incoming mail received from a POP,
+IMAP, or LOCAL account using SpamAssassin. It can optionally delete
+mail identified as spam or save it to a designated folder, and also
+can be used to train a local Spamassassin or a remote one.
+
+%package plugin-trayicon
+Summary:	trayicon plugin for Sylpheed-Claws
+Summary(pl):	Wtyczka trayicon dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
+
+%description plugin-trayicon
+This plugin places an icon in the system tray that indicates whether
+you have any new mail. A tooltip also shows the current new, unread
+and total number of messages, and a contextual menu allows the most
+common operations.
 
 %prep
-%setup -q -a2
-mv sylpheed-iconset-* themes
-mv -f themes/README README.themes
+%setup -q
 
 rm -f po/stamp-po
 
@@ -123,10 +196,12 @@ rm -f po/stamp-po
 	--%{?with_compface:en}%{!?with_compface:dis}able-compface \
 	--%{?with_dillo:en}%{!?with_dillo:dis}able-dillo-viewer-plugin \
 	--%{?with_gnomeprint:en}%{!?with_gnomeprint:dis}able-gnomeprint \
+	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpcore-plugin \
 	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpmime-plugin \
+	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpinline-plugin \
 	--%{?with_ipv6:en}%{!?with_ipv6:dis}able-ipv6 \
+	--%{?with_jpilot:en}%{!?with_jpilot:dis}able-jpilot \
 	--%{?with_ldap:en}%{!?with_ldap:dis}able-ldap \
-	--%{?with_mathml:en}%{!?with_mathml:dis}able-mathml-viewer-plugin \
 	--%{?with_spamassassin:en}%{!?with_spamassassin:dis}able-spamassassin-plugin \
 	--%{?with_ssl:en}%{!?with_ssl:dis}able-openssl \
 	--%{?with_trayicon:en}%{!?with_trayicon:dis}able-trayicon-plugin \
@@ -141,17 +216,15 @@ rm -f po/stamp-po
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_datadir}/%{name}/themes,%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-cp -a themes $RPM_BUILD_ROOT%{_datadir}/%{name}
-
 install %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.la
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
 
 %find_lang %{name}
 
@@ -165,6 +238,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/manual
+%dir %{_datadir}/%{name}/themes
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
 %{_datadir}/%{name}/manual/en
@@ -173,15 +247,48 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
 
-%files plugins
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
-
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/%{name}
 %{_pkgconfigdir}/*.pc
 
-%files themes
+%files plugins
 %defattr(644,root,root,755)
-%{_datadir}/%{name}/themes
+
+%if %{with clamav}
+%files plugin-clamav
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/clamav_plugin.so
+%endif
+
+%if %{with dillo}
+%files plugin-dillo
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/dillo_viewer.so
+%endif
+
+%if %{with gpg}
+%files plugin-pgpcore
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/pgpcore.so
+
+%files plugin-pgpinline
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/pgpinline.so
+
+%files plugin-pgpmime
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/pgpmime.so
+%endif
+
+%if %{with spamassassin}
+%files plugin-spamassassin
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/spamassassin.so
+%endif
+
+%if %{with trayicon}
+%files plugin-trayicon
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/trayicon.so
+%endif
