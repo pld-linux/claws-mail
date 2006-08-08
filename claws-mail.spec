@@ -1,5 +1,3 @@
-# TODO:
-# - pl description for new subpackages
 #
 # Conditional build:
 %bcond_without  clamav          # build without clamav plugin
@@ -17,12 +15,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
-Version:	2.3.1
-Release:	0.1
+Version:	2.4.0
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	08e8fe1f3466d146b499d128f1445ba6
+# Source0-md5:	8e8e2b847d6466b1384e3a5a15b9f2e7
 Source1:	%{name}.desktop
 URL:		http://www.sylpheed-claws.net/
 BuildRequires:	aspell-devel >= 2:0.50
@@ -77,7 +75,7 @@ Pliki nag³ówkowe programu Sylpheed-Claws.
 
 %package plugins
 Summary:	Special plugins for Sylpheed-Claws (metapackage)
-Summary(pl):	Dodatkowe pluginy dla Sylpheed-Claws (metapakiet)
+Summary(pl):	Dodatkowe wtyczki dla Sylpheed-Claws (metapakiet)
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 %{?with_clamav:Requires: %{name}-plugin-clamav = %{version}-%{release}}
@@ -94,7 +92,7 @@ This is collection of some usefull plugins for Sylpheed-Claws
 (metapackage).
 
 %description plugins -l pl
-Jest to zbiór kilku dodatkowych pluginów powiêkszaj±cych mo¿liwo¶ci
+Jest to zbiór kilku dodatkowych wtyczek powiêkszaj±cych mo¿liwo¶ci
 Sylpheed-Claws (metapakiet).
 
 %package plugin-clamav
@@ -109,6 +107,12 @@ This plugin enables the scanning of message attachments in mail
 received from a POP, IMAP, or LOCAL account using Clam AntiVirus. It
 can optionally delete the mail or save it to a designated folder.
 
+%description plugin-clamav -l pl
+Ta wtyczka pozwala na lokalne skanowanie za³±czników z poczty 
+otrzymanej przez POP, IMAP lub znajduj±cej siê w lokalnych skrzynkach.
+Opcjonalnie mo¿e usuwaæ lub zapisywaæ zainfekowane listy w przeznaczonym
+do tego folderze.
+
 %package plugin-dillo
 Summary:	dillo plugin for Sylpheed-Claws
 Summary(pl):	Wtyczka dillo dla Sylpheed-Claws
@@ -121,6 +125,10 @@ Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 This plugin enables the viewing of html messages using the Dillo web
 browser.
 
+%description plugin-dillo -l pl
+Wtyczka pozwalaj±ca na przegl±danie listów pisanych w HTML przy pomocy
+przegl±darki Dillo.
+
 %package plugin-pgpcore
 Summary:	PGP/Core plugin for Sylpheed-Claws
 Summary(pl):	Wtyczka PGP/Core dla Sylpheed-Claws
@@ -130,6 +138,9 @@ Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-pgpcore
 This plugin handles core PGP functions.
+
+%description plugin-pgpcore -l pl
+Wtyczka obs³uguj±ca podstawowe funkcje PGP.
 
 %package plugin-pgpinline
 Summary:	PGP/Inline plugin for Sylpheed-Claws
@@ -142,6 +153,11 @@ Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 This plugin handles PGP/Inline signed and/or encrypted mails. It can
 decrypt mails, verify signatures or sign and encrypt your own mails.
 
+%description plugin-pgpinline -l pl
+Wtyczka obs³uguj±ca listy podpisane lub szyfrowane PGP/Inline. Potrafi
+rozszyfrowywaæ, sprawdzaæ podpisy a tak¿e szyfrowaæ i podpisywaæ 
+w³asne listy.
+
 %package plugin-pgpmime
 Summary:	PGP/MIME plugin for Sylpheed-Claws
 Summary(pl):	Wtyczka PGP/MIME dla Sylpheed-Claws
@@ -152,6 +168,11 @@ Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 %description plugin-pgpmime
 This plugin handles PGP/MIME signed and/or encrypted mails. It can
 decrypt mails, verify signatures or sign and encrypt your own mails.
+
+%description plugin-pgpmime -l pl
+Wtyczka obs³uguj±ca listy podpisane lub szyfrowane PGP/MIME. Potrafi
+rozszyfrowywaæ, sprawdzaæ podpisy a tak¿e szyfrowaæ i podpisywaæ
+w³asne listy.
 
 %package plugin-spamassassin
 Summary:	spamassassin plugin for Sylpheed-Claws
@@ -166,6 +187,13 @@ IMAP, or LOCAL account using SpamAssassin. It can optionally delete
 mail identified as spam or save it to a designated folder, and also
 can be used to train a local Spamassassin or a remote one.
 
+%description plugin-spamassassin -l pl
+Wtyczka pozwalaj±ca na skanowanie SpamAssassinem poczty przychodz±cej 
+jak i ju¿ znajduj±cej siê w lokalnych skrzynkach. Opcjonalnie mo¿e
+usuwaæ listy oznaczone jako spam lub zapisywaæ je w dedykowanym 
+folderze. Mo¿e te¿ by¿ u¿ywana do "uczenia" lokalnego lub zdalnego
+demona SpamAssassin.
+
 %package plugin-trayicon
 Summary:	trayicon plugin for Sylpheed-Claws
 Summary(pl):	Wtyczka trayicon dla Sylpheed-Claws
@@ -178,6 +206,12 @@ This plugin places an icon in the system tray that indicates whether
 you have any new mail. A tooltip also shows the current new, unread
 and total number of messages, and a contextual menu allows the most
 common operations.
+
+%description plugin-trayicon -l pl
+Wtyczka umieszczaj±ca w tacce systemowej ikonê informuj±c± o nadej¶ciu
+nowej poczty. Ikona wy¶wietla dane na temat wiadomo¶ci (ilo¶æ nowych,
+nieprzeczytanych i wszystkich) a jej menu pozwala wykonywaæ 
+najpopularniejsze operacje.
 
 %prep
 %setup -q
@@ -246,6 +280,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %{_datadir}/%{name}/manual/pl
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
+%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 
 %files devel
 %defattr(644,root,root,755)
