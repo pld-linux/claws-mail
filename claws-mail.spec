@@ -1,15 +1,15 @@
 #
 # Conditional build:
-%bcond_without  clamav          # build without clamav plugin
-%bcond_without  compface        # build without compface support
-%bcond_without  dillo           # build without dillo plugin (html browser)
-%bcond_without  gnomeprint      # build without gnomeprint support
+%bcond_without	clamav		# build without clamav plugin
+%bcond_without	compface	# build without compface support
+%bcond_without	dillo		# build without dillo plugin (html browser)
+%bcond_without	gnomeprint	# build without gnomeprint support
 %bcond_without	gpg		# build without GPG support
-%bcond_without  ipv6            # build without IPv6 support
+%bcond_without	ipv6		# build without IPv6 support
 %bcond_without	jpilot		# build without JPilot support
-%bcond_without  ldap            # build without LDAP support
+%bcond_without	ldap		# build without LDAP support
 %bcond_without	spamassassin	# build without spamassassin plugin
-%bcond_without  ssl             # build without SSL support
+%bcond_without	ssl		# build without SSL support
 %bcond_without	trayicon	# build without trayicon plugin
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
