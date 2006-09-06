@@ -253,7 +253,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/%{name}/themes,%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	DATADIRNAME=share
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
