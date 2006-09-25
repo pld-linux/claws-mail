@@ -15,12 +15,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
-Version:	2.4.0
+Version:	2.5.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	8e8e2b847d6466b1384e3a5a15b9f2e7
+# Source0-md5:	1a7e6ae8db860e15c7d9c2081fb82496
 Source1:	%{name}.desktop
 URL:		http://www.sylpheed-claws.net/
 BuildRequires:	aspell-devel >= 2:0.50
@@ -33,9 +33,9 @@ BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
-BuildRequires:	gtk+2-devel >= 2:2.4.0
+BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	imlib-devel >= 1.9
-BuildRequires:	libetpan-devel >= 0.45
+BuildRequires:	libetpan-devel >= 0.46
 %{?with_gnomeprint:BuildRequires:	libgnomeprintui-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
@@ -43,7 +43,9 @@ BuildRequires:	libtool
 %{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7d}
 %{?with_jpilot:BuildRequires:	pilot-link-devel}
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	startup-notification-devel >= 0.5
+Requires(post,postun):	hicolor-icon-theme
 Obsoletes:	sylpheed
 Obsoletes:	sylpheed-gtk2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -64,7 +66,7 @@ Summary(pl):	Pliki nag³ówkowe programu Sylpheed-Claws
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
-Requires:	libetpan-devel >= 0.45
+Requires:	libetpan-devel >= 0.46
 Requires:	openssl-devel >= 0.9.7d
 
 %description devel
@@ -78,6 +80,7 @@ Summary:	Special plugins for Sylpheed-Claws (metapackage)
 Summary(pl):	Dodatkowe wtyczki dla Sylpheed-Claws (metapakiet)
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
 %{?with_clamav:Requires: %{name}-plugin-clamav = %{version}-%{release}}
 %{?with_dillo:Requires:	%{name}-plugin-dillo = %{version}-%{release}}
 %if %{with gpg}
@@ -94,6 +97,24 @@ This is collection of some usefull plugins for Sylpheed-Claws
 %description plugins -l pl
 Jest to zbiór kilku dodatkowych wtyczek powiêkszaj±cych mo¿liwo¶ci
 Sylpheed-Claws (metapakiet).
+
+%package plugin-bogofilter
+Summary:	Bogofilter plugin for Sylpheed-Claws
+Summary(pl):	Wtyczka bogofilter dla Sylpheed-Claws
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Requires:	bogofilter
+
+%description plugin-bogofilter
+This plugin enables the scanning of incoming mail received from a POP,
+IMAP or LOCAL account using Bogofilter. It can optionally delete mail
+identified as spam or save it to a designated folder.
+
+%description plugin-bogofilter -l pl
+Wtyczka pozwalaj±ca na skanowanie bogofilterem poczty przychodz±cej
+jak i ju¿ znajduj±cej siê w lokalnych skrzynkach. Opcjonalnie mo¿e
+usuwaæ listy oznaczone jako spam lub zapisywaæ je w dedykowanym
+folderze.
 
 %package plugin-clamav
 Summary:	clamav plugin for Sylpheed-Claws
@@ -240,6 +261,7 @@ rm -f po/stamp-po
 	--%{?with_ssl:en}%{!?with_ssl:dis}able-openssl \
 	--%{?with_trayicon:en}%{!?with_trayicon:dis}able-trayicon-plugin \
 	--enable-aspell \
+	--enable-bogofilter \
 	--enable-gdk-pixbuf \
 	--enable-pthread \
 	--disable-static \
@@ -253,18 +275,24 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/%{name}/themes,%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	DATADIRNAME=share
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
+rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/manual/{en,es,fr,pl}/*.{pdf,ps,html}
 
 %find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%update_icon_cache hicolor
+
+%postun
+%update_icon_cache hicolor
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -277,6 +305,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
 %{_datadir}/%{name}/manual/en
+%lang(es) %{_datadir}/%{name}/manual/es
 %lang(fr) %{_datadir}/%{name}/manual/fr
 %lang(pl) %{_datadir}/%{name}/manual/pl
 %{_desktopdir}/%{name}.desktop
@@ -290,6 +319,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugins
 %defattr(644,root,root,755)
+
+%files plugin-bogofilter
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/bogofilter.so
 
 %if %{with clamav}
 %files plugin-clamav
