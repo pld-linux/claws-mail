@@ -2,15 +2,12 @@
 # Conditional build:
 %bcond_without	clamav		# build without clamav plugin
 %bcond_without	compface	# build without compface support
-%bcond_without	dillo		# build without dillo plugin (html browser)
 %bcond_without	gnomeprint	# build without gnomeprint support
 %bcond_without	gpg		# build without GPG support
 %bcond_without	ipv6		# build without IPv6 support
 %bcond_without	jpilot		# build without JPilot support
 %bcond_without	ldap		# build without LDAP support
-%bcond_without	spamassassin	# build without spamassassin plugin
 %bcond_without	ssl		# build without SSL support
-%bcond_without	trayicon	# build without trayicon plugin
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
@@ -82,13 +79,13 @@ Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
 %{?with_clamav:Requires: %{name}-plugin-clamav = %{version}-%{release}}
-%{?with_dillo:Requires:	%{name}-plugin-dillo = %{version}-%{release}}
+Requires:	%{name}-plugin-dillo = %{version}-%{release}
 %if %{with gpg}
 Requires:	%{name}-plugin-pgpinline = %{version}-%{release}
 Requires:	%{name}-plugin-pgpmime = %{version}-%{release}
 %endif
-%{?with_spamassassin:Requires: %{name}-plugin-spamassassin = %{version}-%{release}}
-%{?with_trayicon:Requires: %{name}-plugin-trayicon = %{version}-%{release}}
+Requires:	%{name}-plugin-spamassassin = %{version}-%{release}
+Requires:	%{name}-plugin-trayicon = %{version}-%{release}
 
 %description plugins
 This is collection of some usefull plugins for Sylpheed-Claws
@@ -129,10 +126,10 @@ received from a POP, IMAP, or LOCAL account using Clam AntiVirus. It
 can optionally delete the mail or save it to a designated folder.
 
 %description plugin-clamav -l pl
-Ta wtyczka pozwala na lokalne skanowanie za³±czników z poczty 
+Ta wtyczka pozwala na lokalne skanowanie za³±czników z poczty
 otrzymanej przez POP, IMAP lub znajduj±cej siê w lokalnych skrzynkach.
-Opcjonalnie mo¿e usuwaæ lub zapisywaæ zainfekowane listy w przeznaczonym
-do tego folderze.
+Opcjonalnie mo¿e usuwaæ lub zapisywaæ zainfekowane listy w
+przeznaczonym do tego folderze.
 
 %package plugin-dillo
 Summary:	dillo plugin for Sylpheed-Claws
@@ -176,7 +173,7 @@ decrypt mails, verify signatures or sign and encrypt your own mails.
 
 %description plugin-pgpinline -l pl
 Wtyczka obs³uguj±ca listy podpisane lub szyfrowane PGP/Inline. Potrafi
-rozszyfrowywaæ, sprawdzaæ podpisy a tak¿e szyfrowaæ i podpisywaæ 
+rozszyfrowywaæ, sprawdzaæ podpisy a tak¿e szyfrowaæ i podpisywaæ
 w³asne listy.
 
 %package plugin-pgpmime
@@ -209,9 +206,9 @@ mail identified as spam or save it to a designated folder, and also
 can be used to train a local Spamassassin or a remote one.
 
 %description plugin-spamassassin -l pl
-Wtyczka pozwalaj±ca na skanowanie SpamAssassinem poczty przychodz±cej 
+Wtyczka pozwalaj±ca na skanowanie SpamAssassinem poczty przychodz±cej
 jak i ju¿ znajduj±cej siê w lokalnych skrzynkach. Opcjonalnie mo¿e
-usuwaæ listy oznaczone jako spam lub zapisywaæ je w dedykowanym 
+usuwaæ listy oznaczone jako spam lub zapisywaæ je w dedykowanym
 folderze. Mo¿e te¿ by¿ u¿ywana do "uczenia" lokalnego lub zdalnego
 demona SpamAssassin.
 
@@ -231,7 +228,7 @@ common operations.
 %description plugin-trayicon -l pl
 Wtyczka umieszczaj±ca w tacce systemowej ikonê informuj±c± o nadej¶ciu
 nowej poczty. Ikona wy¶wietla dane na temat wiadomo¶ci (ilo¶æ nowych,
-nieprzeczytanych i wszystkich) a jej menu pozwala wykonywaæ 
+nieprzeczytanych i wszystkich) a jej menu pozwala wykonywaæ
 najpopularniejsze operacje.
 
 %prep
@@ -249,7 +246,6 @@ rm -f po/stamp-po
 %configure \
 	--%{?with_clamav:en}%{!?with_clamav:dis}able-clamav-plugin \
 	--%{?with_compface:en}%{!?with_compface:dis}able-compface \
-	--%{?with_dillo:en}%{!?with_dillo:dis}able-dillo-viewer-plugin \
 	--%{?with_gnomeprint:en}%{!?with_gnomeprint:dis}able-gnomeprint \
 	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpcore-plugin \
 	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpmime-plugin \
@@ -257,15 +253,16 @@ rm -f po/stamp-po
 	--%{?with_ipv6:en}%{!?with_ipv6:dis}able-ipv6 \
 	--%{?with_jpilot:en}%{!?with_jpilot:dis}able-jpilot \
 	--%{?with_ldap:en}%{!?with_ldap:dis}able-ldap \
-	--%{?with_spamassassin:en}%{!?with_spamassassin:dis}able-spamassassin-plugin \
 	--%{?with_ssl:en}%{!?with_ssl:dis}able-openssl \
-	--%{?with_trayicon:en}%{!?with_trayicon:dis}able-trayicon-plugin \
 	--enable-aspell \
 	--enable-bogofilter \
+	--enable-dillo-viewer-plugin \
 	--enable-gdk-pixbuf \
-	--enable-pthread \
-	--disable-static \
 	--enable-libetpan \
+	--enable-pthread \
+	--enable-spamassassin-plugin \
+	--enable-trayicon-plugin \
+	--disable-static \
 	--with-config-dir=.sylpheed
 
 %{__make}
@@ -330,11 +327,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/clamav_plugin.so
 %endif
 
-%if %{with dillo}
 %files plugin-dillo
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/dillo_viewer.so
-%endif
 
 %if %{with gpg}
 %files plugin-pgpcore
@@ -350,14 +345,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/pgpmime.so
 %endif
 
-%if %{with spamassassin}
 %files plugin-spamassassin
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/spamassassin.so
-%endif
 
-%if %{with trayicon}
 %files plugin-trayicon
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/trayicon.so
-%endif
