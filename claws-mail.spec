@@ -12,16 +12,16 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		sylpheed-claws
-Version:	2.5.6
+Version:	2.6.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	f342f7be46a3d2771f6aaad44838e513
+# Source0-md5:	c16d658bd7d48bbecc2574e70b95c560
 Source1:	%{name}.desktop
 URL:		http://www.sylpheed-claws.net/
 BuildRequires:	aspell-devel >= 2:0.50
-BuildRequires:	autoconf >= 2.50
+BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
 %{?with_clamav:BuildRequires:	clamav-devel}
@@ -32,7 +32,7 @@ BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	imlib-devel >= 1.9
-BuildRequires:	libetpan-devel >= 0.46
+BuildRequires:	libetpan-devel >= 0.48
 %{?with_gnomeprint:BuildRequires:	libgnomeprintui-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
@@ -42,6 +42,7 @@ BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	startup-notification-devel >= 0.5
+Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Obsoletes:	sylpheed
 Obsoletes:	sylpheed-gtk2
@@ -63,7 +64,7 @@ Summary(pl):	Pliki nag³ówkowe programu Sylpheed-Claws
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
-Requires:	libetpan-devel >= 0.46
+Requires:	libetpan-devel >= 0.48
 Requires:	openssl-devel >= 0.9.7d
 
 %description devel
