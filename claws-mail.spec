@@ -11,15 +11,15 @@
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
-Name:		sylpheed-claws
-Version:	2.6.0
+Name:		claws-mail
+Version:	2.6.1
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	c16d658bd7d48bbecc2574e70b95c560
+# Source0-md5:	98099550a68a08eca5354659f3ea465c
 Source1:	%{name}.desktop
-URL:		http://www.sylpheed-claws.net/
+URL:		http://www.claws-mail.net/
 BuildRequires:	aspell-devel >= 2:0.50
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -45,6 +45,7 @@ BuildRequires:	startup-notification-devel >= 0.5
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Obsoletes:	sylpheed
+Obsoletes:	sylpheed-claws
 Obsoletes:	sylpheed-gtk2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,8 +60,8 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
 ¶wietne i u¿yteczne.
 
 %package devel
-Summary:	Headers from Sylpheed-Claws
-Summary(pl):	Pliki nag³ówkowe programu Sylpheed-Claws
+Summary:	Headers from Claws-Mail
+Summary(pl):	Pliki nag³ówkowe programu Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
@@ -68,14 +69,14 @@ Requires:	libetpan-devel >= 0.48
 Requires:	openssl-devel >= 0.9.7d
 
 %description devel
-Sylpheed-Claws development package.
+Claws-Mail development package.
 
 %description devel -l pl
-Pliki nag³ówkowe programu Sylpheed-Claws.
+Pliki nag³ówkowe programu Claws-Mail.
 
 %package plugins
-Summary:	Special plugins for Sylpheed-Claws (metapackage)
-Summary(pl):	Dodatkowe wtyczki dla Sylpheed-Claws (metapakiet)
+Summary:	Special plugins for Claws-Mail (metapackage)
+Summary(pl):	Dodatkowe wtyczki dla Claws-Mail (metapakiet)
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
@@ -87,21 +88,23 @@ Requires:	%{name}-plugin-pgpmime = %{version}-%{release}
 %endif
 Requires:	%{name}-plugin-spamassassin = %{version}-%{release}
 Requires:	%{name}-plugin-trayicon = %{version}-%{release}
+Conflicts:	sylpheed-claws-plugins
 
 %description plugins
-This is collection of some usefull plugins for Sylpheed-Claws
+This is collection of some usefull plugins for Claws-Mail
 (metapackage).
 
 %description plugins -l pl
 Jest to zbiór kilku dodatkowych wtyczek powiêkszaj±cych mo¿liwo¶ci
-Sylpheed-Claws (metapakiet).
+Claws-Mail (metapakiet).
 
 %package plugin-bogofilter
-Summary:	Bogofilter plugin for Sylpheed-Claws
-Summary(pl):	Wtyczka bogofilter dla Sylpheed-Claws
+Summary:	Bogofilter plugin for Claws-Mail
+Summary(pl):	Wtyczka bogofilter dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	bogofilter
+Conflicts:	sylpheed-claws-plugin-bogofilter
 
 %description plugin-bogofilter
 This plugin enables the scanning of incoming mail received from a POP,
@@ -115,8 +118,8 @@ usuwaæ listy oznaczone jako spam lub zapisywaæ je w dedykowanym
 folderze.
 
 %package plugin-clamav
-Summary:	clamav plugin for Sylpheed-Claws
-Summary(pl):	Wtyczka clamav dla Sylpheed-Claws
+Summary:	clamav plugin for Claws-Mail
+Summary(pl):	Wtyczka clamav dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
@@ -133,8 +136,8 @@ Opcjonalnie mo¿e usuwaæ lub zapisywaæ zainfekowane listy w
 przeznaczonym do tego folderze.
 
 %package plugin-dillo
-Summary:	dillo plugin for Sylpheed-Claws
-Summary(pl):	Wtyczka dillo dla Sylpheed-Claws
+Summary:	dillo plugin for Claws-Mail
+Summary(pl):	Wtyczka dillo dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dillo
@@ -149,8 +152,8 @@ Wtyczka pozwalaj±ca na przegl±danie listów pisanych w HTML przy pomocy
 przegl±darki Dillo.
 
 %package plugin-pgpcore
-Summary:	PGP/Core plugin for Sylpheed-Claws
-Summary(pl):	Wtyczka PGP/Core dla Sylpheed-Claws
+Summary:	PGP/Core plugin for Claws-Mail
+Summary(pl):	Wtyczka PGP/Core dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
@@ -162,8 +165,8 @@ This plugin handles core PGP functions.
 Wtyczka obs³uguj±ca podstawowe funkcje PGP.
 
 %package plugin-pgpinline
-Summary:	PGP/Inline plugin for Sylpheed-Claws
-Summary(pl):	Wtyczka PGP/Inline dla Sylpheed-Claws
+Summary:	PGP/Inline plugin for Claws-Mail
+Summary(pl):	Wtyczka PGP/Inline dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
@@ -178,8 +181,8 @@ rozszyfrowywaæ, sprawdzaæ podpisy a tak¿e szyfrowaæ i podpisywaæ
 w³asne listy.
 
 %package plugin-pgpmime
-Summary:	PGP/MIME plugin for Sylpheed-Claws
-Summary(pl):	Wtyczka PGP/MIME dla Sylpheed-Claws
+Summary:	PGP/MIME plugin for Claws-Mail
+Summary(pl):	Wtyczka PGP/MIME dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
@@ -194,8 +197,8 @@ rozszyfrowywaæ, sprawdzaæ podpisy a tak¿e szyfrowaæ i podpisywaæ
 w³asne listy.
 
 %package plugin-spamassassin
-Summary:	spamassassin plugin for Sylpheed-Claws
-Summary(pl):	Wtyczka spamassassin dla Sylpheed-Claws
+Summary:	spamassassin plugin for Claws-Mail
+Summary(pl):	Wtyczka spamassassin dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
@@ -214,8 +217,8 @@ folderze. Mo¿e te¿ by¿ u¿ywana do "uczenia" lokalnego lub zdalnego
 demona SpamAssassin.
 
 %package plugin-trayicon
-Summary:	trayicon plugin for Sylpheed-Claws
-Summary(pl):	Wtyczka trayicon dla Sylpheed-Claws
+Summary:	trayicon plugin for Claws-Mail
+Summary(pl):	Wtyczka trayicon dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
@@ -263,8 +266,7 @@ rm -f po/stamp-po
 	--enable-pthread \
 	--enable-spamassassin-plugin \
 	--enable-trayicon-plugin \
-	--disable-static \
-	--with-config-dir=.sylpheed
+	--disable-static
 
 %{__make}
 
