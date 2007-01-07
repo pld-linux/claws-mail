@@ -13,7 +13,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		claws-mail
 Version:	2.6.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
@@ -91,7 +91,7 @@ Requires:	%{name}-plugin-pgpmime = %{version}-%{release}
 %endif
 Requires:	%{name}-plugin-spamassassin = %{version}-%{release}
 Requires:	%{name}-plugin-trayicon = %{version}-%{release}
-Provides:	sylpheed-claws-plugins
+Provides:	sylpheed-claws-plugins = %{version}
 Obsoletes:	sylpheed-claws-plugins
 
 %description plugins
