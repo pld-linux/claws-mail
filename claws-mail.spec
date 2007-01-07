@@ -13,7 +13,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		claws-mail
 Version:	2.6.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
@@ -44,6 +44,7 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	startup-notification-devel >= 0.5
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
+Provides:	sylpheed-claws
 Obsoletes:	sylpheed
 Obsoletes:	sylpheed-claws
 Obsoletes:	sylpheed-gtk2
@@ -67,6 +68,8 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
 Requires:	libetpan-devel >= 0.48
 Requires:	openssl-devel >= 0.9.7d
+Provides:	sylpheed-claws-devel
+Obsoletes:	sylpheed-claws-devel
 
 %description devel
 Claws-Mail development package.
@@ -80,7 +83,7 @@ Summary(pl):	Dodatkowe wtyczki dla Claws-Mail (metapakiet)
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
-%{?with_clamav:Requires: %{name}-plugin-clamav = %{version}-%{release}}
+%{?with_clamav:Requires:	%{name}-plugin-clamav = %{version}-%{release}}
 Requires:	%{name}-plugin-dillo = %{version}-%{release}
 %if %{with gpg}
 Requires:	%{name}-plugin-pgpinline = %{version}-%{release}
@@ -88,7 +91,8 @@ Requires:	%{name}-plugin-pgpmime = %{version}-%{release}
 %endif
 Requires:	%{name}-plugin-spamassassin = %{version}-%{release}
 Requires:	%{name}-plugin-trayicon = %{version}-%{release}
-Conflicts:	sylpheed-claws-plugins
+Provides:	sylpheed-claws-plugins
+Obsoletes:	sylpheed-claws-plugins
 
 %description plugins
 This is collection of some usefull plugins for Claws-Mail
@@ -104,7 +108,8 @@ Summary(pl):	Wtyczka bogofilter dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	bogofilter
-Conflicts:	sylpheed-claws-plugin-bogofilter
+Provides:	sylpheed-claws-plugin-bogofilter
+Obsoletes:	sylpheed-claws-plugin-bogofilter
 
 %description plugin-bogofilter
 This plugin enables the scanning of incoming mail received from a POP,
@@ -122,6 +127,8 @@ Summary:	clamav plugin for Claws-Mail
 Summary(pl):	Wtyczka clamav dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+Provides:	sylpheed-claws-plugin-clamav
+Obsoletes:	sylpheed-claws-plugin-clamav
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-clamav
@@ -141,6 +148,8 @@ Summary(pl):	Wtyczka dillo dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dillo
+Provides:	sylpheed-claws-plugin-dillo
+Obsoletes:	sylpheed-claws-plugin-dillo
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-dillo
@@ -156,6 +165,8 @@ Summary:	PGP/Core plugin for Claws-Mail
 Summary(pl):	Wtyczka PGP/Core dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+Provides:	sylpheed-claws-plugin-pgpcore
+Obsoletes:	sylpheed-claws-plugin-pgpcore
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-pgpcore
@@ -169,6 +180,8 @@ Summary:	PGP/Inline plugin for Claws-Mail
 Summary(pl):	Wtyczka PGP/Inline dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
+Provides:	sylpheed-claws-plugin-pgpinline
+Obsoletes:	sylpheed-claws-plugin-pgpinline
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-pgpinline
@@ -185,6 +198,8 @@ Summary:	PGP/MIME plugin for Claws-Mail
 Summary(pl):	Wtyczka PGP/MIME dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
+Provides:	sylpheed-claws-plugin-pgpmime
+Obsoletes:	sylpheed-claws-plugin-pgpmime
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-pgpmime
@@ -201,6 +216,8 @@ Summary:	spamassassin plugin for Claws-Mail
 Summary(pl):	Wtyczka spamassassin dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+Provides:	sylpheed-claws-plugin-spamassassin
+Obsoletes:	sylpheed-claws-plugin-spamassassin
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-spamassassin
@@ -221,6 +238,8 @@ Summary:	trayicon plugin for Claws-Mail
 Summary(pl):	Wtyczka trayicon dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+Provides:	sylpheed-claws-plugin-trayicon
+Obsoletes:	sylpheed-claws-plugin-trayicon
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-trayicon
