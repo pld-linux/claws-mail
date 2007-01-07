@@ -1,11 +1,11 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Sylpheed-Claws
+Name=Claws-Mail
 Comment=GTK+ based e-mail client
 Comment[pl]=Oparty na GTK2 program pocztowy
-Exec=sylpheed-claws
-Icon=sylpheed-claws.png
+Exec=claws-mail
+Icon=claws-mail.png
 Terminal=false
 Type=Application
-Categories=Network;Email;
+Categories=GTK;Network;Email;
 # vi: encoding=utf-8
