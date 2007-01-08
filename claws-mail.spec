@@ -12,12 +12,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		claws-mail
-Version:	2.6.1
-Release:	3
+Version:	2.7.0
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	98099550a68a08eca5354659f3ea465c
+# Source0-md5:	3f99b79fce9d7e15ec6874582231b41e
 Source1:	%{name}.desktop
 URL:		http://www.claws-mail.net/
 BuildRequires:	aspell-devel >= 2:0.50
@@ -300,7 +300,8 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
-rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/manual/{en,es,fr,pl}/*.{pdf,ps,html}
+rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}/RELEASE_NOTES
+rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}/manual/{en,es,fr,pl}/*.{pdf,ps,html}
 
 %find_lang %{name}
 
@@ -315,18 +316,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README* TODO
+%doc AUTHORS ChangeLog NEWS README* RELEASE_NOTES TODO
 %{_mandir}/man1/%{name}.1*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/manual
+%dir %{_docdir}/%{name}
+%dir %{_docdir}/%{name}/manual
 %dir %{_datadir}/%{name}/themes
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
-%{_datadir}/%{name}/manual/en
-%lang(es) %{_datadir}/%{name}/manual/es
-%lang(fr) %{_datadir}/%{name}/manual/fr
-%lang(pl) %{_datadir}/%{name}/manual/pl
+%{_docdir}/%{name}/manual/en
+%lang(es) %{_docdir}/%{name}/manual/es
+%lang(fr) %{_docdir}/%{name}/manual/fr
+%lang(pl) %{_docdir}/%{name}/manual/pl
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
