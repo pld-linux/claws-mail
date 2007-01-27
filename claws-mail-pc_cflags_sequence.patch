@@ -1,9 +1,0 @@
-diff -urN claws-mail-2.7.0/claws-mail.pc.in claws-mail-2.7.0.new/claws-mail.pc.in
---- claws-mail-2.7.0/claws-mail.pc.in	2007-01-08 10:57:31.000000000 +0100
-+++ claws-mail-2.7.0.new/claws-mail.pc.in	2007-01-10 22:09:04.000000000 +0100
-@@ -11,4 +11,4 @@
- Description: Claws Mail
- Version: @MAJOR_VERSION@.@MINOR_VERSION@.@MICRO_VERSION@.@EXTRA_VERSION@
- 
--Cflags: @ASPELL_CFLAGS@ @GPGME_CFLAGS@ @OPENSSL_CFLAGS@ -I${pkgincludedir} -I${pkgincludedir}/common -I${pkgincludedir}/gtk
-+Cflags: @ASPELL_CFLAGS@ @GPGME_CFLAGS@ -I${pkgincludedir} -I${pkgincludedir}/common -I${pkgincludedir}/gtk @OPENSSL_CFLAGS@
