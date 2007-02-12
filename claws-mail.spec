@@ -10,7 +10,7 @@
 %bcond_without	ssl		# build without SSL support
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
-Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
+Summary(pl.UTF-8):   Rozwojowa wersja Sylpheed z duÅ¼Ä… iloÅ›ciÄ… zmian oraz ulepszeÅ„
 Name:		claws-mail
 Version:	2.7.2
 Release:	1
@@ -54,14 +54,14 @@ This program is an X based fast e-mail client which has features same
 as orginal Sylpheed but with new/improved features. Some of new stuff
 is really cool and useable.
 
-%description -l pl
-Szybki klient poczty o mo¿liwo¶ciach takich jak oryginalny Sylpheed
-ale z nowymi/poprawionymi funkcjami. Niektóre dodatki s± naprawdê
-¶wietne i u¿yteczne.
+%description -l pl.UTF-8
+Szybki klient poczty o moÅ¼liwoÅ›ciach takich jak oryginalny Sylpheed
+ale z nowymi/poprawionymi funkcjami. NiektÃ³re dodatki sÄ… naprawdÄ™
+Å›wietne i uÅ¼yteczne.
 
 %package devel
 Summary:	Headers from Claws-Mail
-Summary(pl):	Pliki nag³ówkowe programu Claws-Mail
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe programu Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
@@ -73,12 +73,12 @@ Obsoletes:	sylpheed-claws-devel
 %description devel
 Claws-Mail development package.
 
-%description devel -l pl
-Pliki nag³ówkowe programu Claws-Mail.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe programu Claws-Mail.
 
 %package plugins
 Summary:	Special plugins for Claws-Mail (metapackage)
-Summary(pl):	Dodatkowe wtyczki dla Claws-Mail (metapakiet)
+Summary(pl.UTF-8):   Dodatkowe wtyczki dla Claws-Mail (metapakiet)
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
@@ -97,13 +97,13 @@ Obsoletes:	sylpheed-claws-plugins
 This is collection of some usefull plugins for Claws-Mail
 (metapackage).
 
-%description plugins -l pl
-Jest to zbiór kilku dodatkowych wtyczek powiêkszaj±cych mo¿liwo¶ci
+%description plugins -l pl.UTF-8
+Jest to zbiÃ³r kilku dodatkowych wtyczek powiÄ™kszajÄ…cych moÅ¼liwoÅ›ci
 Claws-Mail (metapakiet).
 
 %package plugin-bogofilter
 Summary:	Bogofilter plugin for Claws-Mail
-Summary(pl):	Wtyczka bogofilter dla Claws-Mail
+Summary(pl.UTF-8):   Wtyczka bogofilter dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	bogofilter
@@ -115,15 +115,15 @@ This plugin enables the scanning of incoming mail received from a POP,
 IMAP or LOCAL account using Bogofilter. It can optionally delete mail
 identified as spam or save it to a designated folder.
 
-%description plugin-bogofilter -l pl
-Wtyczka pozwalaj±ca na skanowanie bogofilterem poczty przychodz±cej
-jak i ju¿ znajduj±cej siê w lokalnych skrzynkach. Opcjonalnie mo¿e
-usuwaæ listy oznaczone jako spam lub zapisywaæ je w dedykowanym
+%description plugin-bogofilter -l pl.UTF-8
+Wtyczka pozwalajÄ…ca na skanowanie bogofilterem poczty przychodzÄ…cej
+jak i juÅ¼ znajdujÄ…cej siÄ™ w lokalnych skrzynkach. Opcjonalnie moÅ¼e
+usuwaÄ‡ listy oznaczone jako spam lub zapisywaÄ‡ je w dedykowanym
 folderze.
 
 %package plugin-clamav
 Summary:	clamav plugin for Claws-Mail
-Summary(pl):	Wtyczka clamav dla Claws-Mail
+Summary(pl.UTF-8):   Wtyczka clamav dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-clamav
@@ -135,15 +135,15 @@ This plugin enables the scanning of message attachments in mail
 received from a POP, IMAP, or LOCAL account using Clam AntiVirus. It
 can optionally delete the mail or save it to a designated folder.
 
-%description plugin-clamav -l pl
-Ta wtyczka pozwala na lokalne skanowanie za³±czników z poczty
-otrzymanej przez POP, IMAP lub znajduj±cej siê w lokalnych skrzynkach.
-Opcjonalnie mo¿e usuwaæ lub zapisywaæ zainfekowane listy w
+%description plugin-clamav -l pl.UTF-8
+Ta wtyczka pozwala na lokalne skanowanie zaÅ‚Ä…cznikÃ³w z poczty
+otrzymanej przez POP, IMAP lub znajdujÄ…cej siÄ™ w lokalnych skrzynkach.
+Opcjonalnie moÅ¼e usuwaÄ‡ lub zapisywaÄ‡ zainfekowane listy w
 przeznaczonym do tego folderze.
 
 %package plugin-dillo
 Summary:	dillo plugin for Claws-Mail
-Summary(pl):	Wtyczka dillo dla Claws-Mail
+Summary(pl.UTF-8):   Wtyczka dillo dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dillo
@@ -155,13 +155,13 @@ Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 This plugin enables the viewing of html messages using the Dillo web
 browser.
 
-%description plugin-dillo -l pl
-Wtyczka pozwalaj±ca na przegl±danie listów pisanych w HTML przy pomocy
-przegl±darki Dillo.
+%description plugin-dillo -l pl.UTF-8
+Wtyczka pozwalajÄ…ca na przeglÄ…danie listÃ³w pisanych w HTML przy pomocy
+przeglÄ…darki Dillo.
 
 %package plugin-pgpcore
 Summary:	PGP/Core plugin for Claws-Mail
-Summary(pl):	Wtyczka PGP/Core dla Claws-Mail
+Summary(pl.UTF-8):   Wtyczka PGP/Core dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpcore
@@ -171,12 +171,12 @@ Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 %description plugin-pgpcore
 This plugin handles core PGP functions.
 
-%description plugin-pgpcore -l pl
-Wtyczka obs³uguj±ca podstawowe funkcje PGP.
+%description plugin-pgpcore -l pl.UTF-8
+Wtyczka obsÅ‚ugujÄ…ca podstawowe funkcje PGP.
 
 %package plugin-pgpinline
 Summary:	PGP/Inline plugin for Claws-Mail
-Summary(pl):	Wtyczka PGP/Inline dla Claws-Mail
+Summary(pl.UTF-8):   Wtyczka PGP/Inline dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpinline
@@ -187,14 +187,14 @@ Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 This plugin handles PGP/Inline signed and/or encrypted mails. It can
 decrypt mails, verify signatures or sign and encrypt your own mails.
 
-%description plugin-pgpinline -l pl
-Wtyczka obs³uguj±ca listy podpisane lub szyfrowane PGP/Inline. Potrafi
-rozszyfrowywaæ, sprawdzaæ podpisy a tak¿e szyfrowaæ i podpisywaæ
-w³asne listy.
+%description plugin-pgpinline -l pl.UTF-8
+Wtyczka obsÅ‚ugujÄ…ca listy podpisane lub szyfrowane PGP/Inline. Potrafi
+rozszyfrowywaÄ‡, sprawdzaÄ‡ podpisy a takÅ¼e szyfrowaÄ‡ i podpisywaÄ‡
+wÅ‚asne listy.
 
 %package plugin-pgpmime
 Summary:	PGP/MIME plugin for Claws-Mail
-Summary(pl):	Wtyczka PGP/MIME dla Claws-Mail
+Summary(pl.UTF-8):   Wtyczka PGP/MIME dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpmime
@@ -205,14 +205,14 @@ Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 This plugin handles PGP/MIME signed and/or encrypted mails. It can
 decrypt mails, verify signatures or sign and encrypt your own mails.
 
-%description plugin-pgpmime -l pl
-Wtyczka obs³uguj±ca listy podpisane lub szyfrowane PGP/MIME. Potrafi
-rozszyfrowywaæ, sprawdzaæ podpisy a tak¿e szyfrowaæ i podpisywaæ
-w³asne listy.
+%description plugin-pgpmime -l pl.UTF-8
+Wtyczka obsÅ‚ugujÄ…ca listy podpisane lub szyfrowane PGP/MIME. Potrafi
+rozszyfrowywaÄ‡, sprawdzaÄ‡ podpisy a takÅ¼e szyfrowaÄ‡ i podpisywaÄ‡
+wÅ‚asne listy.
 
 %package plugin-spamassassin
 Summary:	spamassassin plugin for Claws-Mail
-Summary(pl):	Wtyczka spamassassin dla Claws-Mail
+Summary(pl.UTF-8):   Wtyczka spamassassin dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-spamassassin
@@ -225,16 +225,16 @@ IMAP, or LOCAL account using SpamAssassin. It can optionally delete
 mail identified as spam or save it to a designated folder, and also
 can be used to train a local Spamassassin or a remote one.
 
-%description plugin-spamassassin -l pl
-Wtyczka pozwalaj±ca na skanowanie SpamAssassinem poczty przychodz±cej
-jak i ju¿ znajduj±cej siê w lokalnych skrzynkach. Opcjonalnie mo¿e
-usuwaæ listy oznaczone jako spam lub zapisywaæ je w dedykowanym
-folderze. Mo¿e te¿ by¿ u¿ywana do "uczenia" lokalnego lub zdalnego
+%description plugin-spamassassin -l pl.UTF-8
+Wtyczka pozwalajÄ…ca na skanowanie SpamAssassinem poczty przychodzÄ…cej
+jak i juÅ¼ znajdujÄ…cej siÄ™ w lokalnych skrzynkach. Opcjonalnie moÅ¼e
+usuwaÄ‡ listy oznaczone jako spam lub zapisywaÄ‡ je w dedykowanym
+folderze. MoÅ¼e teÅ¼ byÅ¼ uÅ¼ywana do "uczenia" lokalnego lub zdalnego
 demona SpamAssassin.
 
 %package plugin-trayicon
 Summary:	trayicon plugin for Claws-Mail
-Summary(pl):	Wtyczka trayicon dla Claws-Mail
+Summary(pl.UTF-8):   Wtyczka trayicon dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-trayicon
@@ -247,10 +247,10 @@ you have any new mail. A tooltip also shows the current new, unread
 and total number of messages, and a contextual menu allows the most
 common operations.
 
-%description plugin-trayicon -l pl
-Wtyczka umieszczaj±ca w tacce systemowej ikonê informuj±c± o nadej¶ciu
-nowej poczty. Ikona wy¶wietla dane na temat wiadomo¶ci (ilo¶æ nowych,
-nieprzeczytanych i wszystkich) a jej menu pozwala wykonywaæ
+%description plugin-trayicon -l pl.UTF-8
+Wtyczka umieszczajÄ…ca w tacce systemowej ikonÄ™ informujÄ…cÄ… o nadejÅ›ciu
+nowej poczty. Ikona wyÅ›wietla dane na temat wiadomoÅ›ci (iloÅ›Ä‡ nowych,
+nieprzeczytanych i wszystkich) a jej menu pozwala wykonywaÄ‡
 najpopularniejsze operacje.
 
 %prep
