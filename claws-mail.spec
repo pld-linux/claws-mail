@@ -10,7 +10,7 @@
 %bcond_without	ssl		# build without SSL support
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
-Summary(pl.UTF-8):   Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
+Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
 Version:	2.7.2
 Release:	1
@@ -61,7 +61,7 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki są naprawdę
 
 %package devel
 Summary:	Headers from Claws-Mail
-Summary(pl.UTF-8):   Pliki nagłówkowe programu Claws-Mail
+Summary(pl.UTF-8):	Pliki nagłówkowe programu Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
@@ -78,7 +78,7 @@ Pliki nagłówkowe programu Claws-Mail.
 
 %package plugins
 Summary:	Special plugins for Claws-Mail (metapackage)
-Summary(pl.UTF-8):   Dodatkowe wtyczki dla Claws-Mail (metapakiet)
+Summary(pl.UTF-8):	Dodatkowe wtyczki dla Claws-Mail (metapakiet)
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
@@ -103,7 +103,7 @@ Claws-Mail (metapakiet).
 
 %package plugin-bogofilter
 Summary:	Bogofilter plugin for Claws-Mail
-Summary(pl.UTF-8):   Wtyczka bogofilter dla Claws-Mail
+Summary(pl.UTF-8):	Wtyczka bogofilter dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	bogofilter
@@ -123,7 +123,7 @@ folderze.
 
 %package plugin-clamav
 Summary:	clamav plugin for Claws-Mail
-Summary(pl.UTF-8):   Wtyczka clamav dla Claws-Mail
+Summary(pl.UTF-8):	Wtyczka clamav dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-clamav
@@ -143,7 +143,7 @@ przeznaczonym do tego folderze.
 
 %package plugin-dillo
 Summary:	dillo plugin for Claws-Mail
-Summary(pl.UTF-8):   Wtyczka dillo dla Claws-Mail
+Summary(pl.UTF-8):	Wtyczka dillo dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	dillo
@@ -161,7 +161,7 @@ przeglądarki Dillo.
 
 %package plugin-pgpcore
 Summary:	PGP/Core plugin for Claws-Mail
-Summary(pl.UTF-8):   Wtyczka PGP/Core dla Claws-Mail
+Summary(pl.UTF-8):	Wtyczka PGP/Core dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpcore
@@ -176,7 +176,7 @@ Wtyczka obsługująca podstawowe funkcje PGP.
 
 %package plugin-pgpinline
 Summary:	PGP/Inline plugin for Claws-Mail
-Summary(pl.UTF-8):   Wtyczka PGP/Inline dla Claws-Mail
+Summary(pl.UTF-8):	Wtyczka PGP/Inline dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpinline
@@ -194,7 +194,7 @@ własne listy.
 
 %package plugin-pgpmime
 Summary:	PGP/MIME plugin for Claws-Mail
-Summary(pl.UTF-8):   Wtyczka PGP/MIME dla Claws-Mail
+Summary(pl.UTF-8):	Wtyczka PGP/MIME dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpmime
@@ -212,7 +212,7 @@ własne listy.
 
 %package plugin-spamassassin
 Summary:	spamassassin plugin for Claws-Mail
-Summary(pl.UTF-8):   Wtyczka spamassassin dla Claws-Mail
+Summary(pl.UTF-8):	Wtyczka spamassassin dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-spamassassin
@@ -234,7 +234,7 @@ demona SpamAssassin.
 
 %package plugin-trayicon
 Summary:	trayicon plugin for Claws-Mail
-Summary(pl.UTF-8):   Wtyczka trayicon dla Claws-Mail
+Summary(pl.UTF-8):	Wtyczka trayicon dla Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-trayicon
