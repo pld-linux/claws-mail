@@ -12,12 +12,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	2.8.1
+Version:	2.9.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	b68983f2edac97cc094c527536d49a09
+# Source0-md5:	0a5a22e456640070ca09f6d65c0f680c
 Source1:	%{name}.desktop
 Patch0:		%{name}-pc_cflags_sequence.patch
 URL:		http://www.claws-mail.net/
@@ -45,6 +45,8 @@ BuildRequires:	startup-notification-devel >= 0.5
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Provides:	sylpheed-claws
+Obsoletes:	claws-mail-plugin-etpan-privacy
+Obsoletes:	claws-mail-plugin-maildir
 Obsoletes:	sylpheed
 Obsoletes:	sylpheed-claws
 Obsoletes:	sylpheed-gtk2
