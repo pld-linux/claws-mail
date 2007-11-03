@@ -36,7 +36,7 @@ BuildRequires:	libetpan-devel >= 0.49
 %{?with_gnomeprint:BuildRequires:	libgnomeprintui-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
-%{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
+%{?with_ldap:BuildRequires:	openldap-devel >= 2.4.6}
 %{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7d}
 %{?with_jpilot:BuildRequires:	pilot-link-devel}
 BuildRequires:	pkgconfig
