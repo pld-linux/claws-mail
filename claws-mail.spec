@@ -12,27 +12,27 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl):	Rozwojowa wersja Sylpheed z du¿± ilo¶ci± zmian oraz ulepszeñ
 Name:		claws-mail
-Version:	2.7.0
-Release:	1
+Version:	2.9.1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	3f99b79fce9d7e15ec6874582231b41e
+# Source0-md5:	c0e2718d4bcd932709a6e1bcc910c47a
 Source1:	%{name}.desktop
+Patch0:		%{name}-pc_cflags_sequence.patch
 URL:		http://www.claws-mail.net/
+BuildRequires:	aspell >= 2:0.50
 BuildRequires:	aspell-devel >= 2:0.50
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
 %{?with_clamav:BuildRequires:	clamav-devel}
 %{?with_compface:BuildRequires:	compface-devel}
-BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+2-devel >= 2:2.6.0
-BuildRequires:	imlib-devel >= 1.9
-BuildRequires:	libetpan-devel >= 0.48
+BuildRequires:	libetpan-devel >= 0.49
 %{?with_gnomeprint:BuildRequires:	libgnomeprintui-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
@@ -45,6 +45,8 @@ BuildRequires:	startup-notification-devel >= 0.5
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Provides:	sylpheed-claws
+Obsoletes:	claws-mail-plugin-etpan-privacy
+Obsoletes:	claws-mail-plugin-maildir
 Obsoletes:	sylpheed
 Obsoletes:	sylpheed-claws
 Obsoletes:	sylpheed-gtk2
@@ -66,7 +68,7 @@ Summary(pl):	Pliki nag³ówkowe programu Claws-Mail
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
-Requires:	libetpan-devel >= 0.48
+Requires:	libetpan-devel >= 0.49
 Requires:	openssl-devel >= 0.9.7d
 Provides:	sylpheed-claws-devel
 Obsoletes:	sylpheed-claws-devel
@@ -256,6 +258,7 @@ najpopularniejsze operacje.
 
 %prep
 %setup -q
+%patch0 -p1
 
 rm -f po/stamp-po
 
