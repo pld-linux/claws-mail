@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Claws-Mail
 Comment=GTK+ based e-mail client
 Comment[pl]=Oparty na GTK2 program pocztowy
 Exec=claws-mail
-Icon=claws-mail.png
+Icon=claws-mail
 Terminal=false
 Type=Application
 Categories=GTK;Network;Email;
