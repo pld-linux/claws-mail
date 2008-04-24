@@ -1,3 +1,5 @@
+# TODO
+# - clamav 0.93 api fix
 #
 # Conditional build:
 %bcond_without	clamav		# build without clamav plugin
