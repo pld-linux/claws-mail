@@ -1,8 +1,5 @@
-# TODO
-# - clamav 0.93 api fix
 #
 # Conditional build:
-%bcond_without	clamav		# build without clamav plugin
 %bcond_without	compface	# build without compface support
 %bcond_without	gnomeprint	# build without gnomeprint support
 %bcond_without	gpg		# build without GPG support
@@ -15,7 +12,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
 Version:	3.4.0
-Release:	0.1
+Release:	1
 License:	GPL v3
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
@@ -27,7 +24,6 @@ BuildRequires:	aspell-devel >= 2:0.50
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
-%{?with_clamav:BuildRequires:	clamav-devel}
 %{?with_compface:BuildRequires:	compface-devel}
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
@@ -46,9 +42,11 @@ BuildRequires:	startup-notification-devel >= 0.5
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Provides:	sylpheed-claws
+Obsoletes:	claws-mail-plugin-clamav
 Obsoletes:	claws-mail-plugin-etpan-privacy
 Obsoletes:	claws-mail-plugin-maildir
 Obsoletes:	sylpheed-claws
+Obsoletes:	sylpheed-claws-plugin-clamav
 Obsoletes:	sylpheed-gtk2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -85,7 +83,6 @@ Summary(pl.UTF-8):	Dodatkowe wtyczki dla Claws-Mail (metapakiet)
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
-%{?with_clamav:Requires:	%{name}-plugin-clamav = %{version}-%{release}}
 Requires:	%{name}-plugin-dillo = %{version}-%{release}
 %if %{with gpg}
 Requires:	%{name}-plugin-pgpinline = %{version}-%{release}
@@ -123,26 +120,6 @@ Wtyczka pozwalająca na skanowanie bogofilterem poczty przychodzącej
 jak i już znajdującej się w lokalnych skrzynkach. Opcjonalnie może
 usuwać listy oznaczone jako spam lub zapisywać je w dedykowanym
 folderze.
-
-%package plugin-clamav
-Summary:	clamav plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka clamav dla Claws-Mail
-Group:		X11/Applications/Networking
-Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-clamav
-Obsoletes:	sylpheed-claws-plugin-clamav
-Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
-
-%description plugin-clamav
-This plugin enables the scanning of message attachments in mail
-received from a POP, IMAP, or LOCAL account using Clam AntiVirus. It
-can optionally delete the mail or save it to a designated folder.
-
-%description plugin-clamav -l pl.UTF-8
-Ta wtyczka pozwala na lokalne skanowanie załączników z poczty
-otrzymanej przez POP, IMAP lub znajdującej się w lokalnych skrzynkach.
-Opcjonalnie może usuwać lub zapisywać zainfekowane listy w
-przeznaczonym do tego folderze.
 
 %package plugin-dillo
 Summary:	dillo plugin for Claws-Mail
@@ -269,7 +246,6 @@ rm -f po/stamp-po
 %{__autoheader}
 %{__automake}
 %configure \
-	--%{?with_clamav:en}%{!?with_clamav:dis}able-clamav-plugin \
 	--%{?with_compface:en}%{!?with_compface:dis}able-compface \
 	--%{?with_gnomeprint:en}%{!?with_gnomeprint:dis}able-gnomeprint \
 	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpcore-plugin \
@@ -346,12 +322,6 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-bogofilter
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/bogofilter.so
-
-%if %{with clamav}
-%files plugin-clamav
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/clamav_plugin.so
-%endif
 
 %files plugin-dillo
 %defattr(644,root,root,755)
