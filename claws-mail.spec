@@ -21,7 +21,7 @@ Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
 # Source0-md5:	acbfd919f7b633d51e96a0419ac07802
 Source1:	%{name}.desktop
-URL:		http://www.claws-mail.net/
+URL:		http://www.claws-mail.org/
 BuildRequires:	aspell >= 2:0.50
 BuildRequires:	aspell-devel >= 2:0.50
 BuildRequires:	autoconf >= 2.60
