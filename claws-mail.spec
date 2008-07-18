@@ -1,7 +1,6 @@
 #
 # Conditional build:
 %bcond_without	compface	# build without compface support
-%bcond_without	gnomeprint	# build without gnomeprint support
 %bcond_without	gpg		# build without GPG support
 %bcond_without	ipv6		# build without IPv6 support
 %bcond_without	jpilot		# build without JPilot support
@@ -11,12 +10,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.4.0
-Release:	2
+Version:	3.5.0
+Release:	1
 License:	GPL v3
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	ec5ee743baa198c7fd707b0461b6c68a
+# Source0-md5:	597a9a0b9d113325de6fd01500c0af98
 Source1:	%{name}.desktop
 URL:		http://www.claws-mail.org/
 BuildRequires:	aspell >= 2:0.50
@@ -28,9 +27,8 @@ BuildRequires:	bzip2-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
-BuildRequires:	gtk+2-devel >= 2:2.6.0
+BuildRequires:	gtk+2-devel >= 2:2.10.0
 BuildRequires:	libetpan-devel >= 0.49
-%{?with_gnomeprint:BuildRequires:	libgnomeprintui-devel}
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
@@ -41,6 +39,7 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	startup-notification-devel >= 0.5
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
+Requires:	gtk+2 >= 2:2.10.0
 Provides:	sylpheed-claws
 Obsoletes:	claws-mail-plugin-clamav
 Obsoletes:	claws-mail-plugin-etpan-privacy
@@ -63,7 +62,7 @@ ale z nowymi/poprawionymi funkcjami. Niektóre dodatki są naprawdę
 %package devel
 Summary:	Headers from Claws-Mail
 Summary(pl.UTF-8):	Pliki nagłówkowe programu Claws-Mail
-Group:		X11/Applications/Networking
+Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
 Requires:	libetpan-devel >= 0.49
@@ -80,7 +79,7 @@ Pliki nagłówkowe programu Claws-Mail.
 %package plugins
 Summary:	Special plugins for Claws-Mail (metapackage)
 Summary(pl.UTF-8):	Dodatkowe wtyczki dla Claws-Mail (metapakiet)
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
 Requires:	%{name}-plugin-dillo = %{version}-%{release}
@@ -104,7 +103,7 @@ Claws-Mail (metapakiet).
 %package plugin-bogofilter
 Summary:	Bogofilter plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka bogofilter dla Claws-Mail
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	bogofilter
 Provides:	sylpheed-claws-plugin-bogofilter
@@ -124,7 +123,7 @@ folderze.
 %package plugin-dillo
 Summary:	dillo plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka dillo dla Claws-Mail
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	dillo
 Provides:	sylpheed-claws-plugin-dillo
@@ -142,7 +141,7 @@ przeglądarki Dillo.
 %package plugin-pgpcore
 Summary:	PGP/Core plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka PGP/Core dla Claws-Mail
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpcore
 Obsoletes:	sylpheed-claws-plugin-pgpcore
@@ -157,7 +156,7 @@ Wtyczka obsługująca podstawowe funkcje PGP.
 %package plugin-pgpinline
 Summary:	PGP/Inline plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka PGP/Inline dla Claws-Mail
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpinline
 Obsoletes:	sylpheed-claws-plugin-pgpinline
@@ -175,7 +174,7 @@ własne listy.
 %package plugin-pgpmime
 Summary:	PGP/MIME plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka PGP/MIME dla Claws-Mail
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-pgpmime
 Obsoletes:	sylpheed-claws-plugin-pgpmime
@@ -193,7 +192,7 @@ własne listy.
 %package plugin-spamassassin
 Summary:	spamassassin plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka spamassassin dla Claws-Mail
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-spamassassin
 Obsoletes:	sylpheed-claws-plugin-spamassassin
@@ -215,7 +214,7 @@ demona SpamAssassin.
 %package plugin-trayicon
 Summary:	trayicon plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka trayicon dla Claws-Mail
-Group:		X11/Applications/Networking
+Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-trayicon
 Obsoletes:	sylpheed-claws-plugin-trayicon
@@ -247,7 +246,6 @@ rm -f po/stamp-po
 %{__automake}
 %configure \
 	--%{?with_compface:en}%{!?with_compface:dis}able-compface \
-	--%{?with_gnomeprint:en}%{!?with_gnomeprint:dis}able-gnomeprint \
 	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpcore-plugin \
 	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpmime-plugin \
 	--%{?with_gpg:en}%{!?with_gpg:dis}able-pgpinline-plugin \
@@ -256,9 +254,8 @@ rm -f po/stamp-po
 	--%{?with_ldap:en}%{!?with_ldap:dis}able-ldap \
 	--%{?with_ssl:en}%{!?with_ssl:dis}able-openssl \
 	--enable-aspell \
-	--enable-bogofilter \
+	--enable-bogofilter-plugin \
 	--enable-dillo-viewer-plugin \
-	--enable-gdk-pixbuf \
 	--enable-libetpan \
 	--enable-pthread \
 	--enable-spamassassin-plugin \
