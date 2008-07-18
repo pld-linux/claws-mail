@@ -28,7 +28,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+2-devel >= 2:2.10.0
-BuildRequires:	libetpan-devel >= 0.49
+BuildRequires:	libetpan-devel >= 0.54
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
@@ -65,7 +65,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe programu Claws-Mail
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
-Requires:	libetpan-devel >= 0.49
+Requires:	libetpan-devel >= 0.54
 Requires:	openssl-devel >= 0.9.7d
 Provides:	sylpheed-claws-devel
 Obsoletes:	sylpheed-claws-devel
