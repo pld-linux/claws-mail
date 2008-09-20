@@ -11,12 +11,13 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
 Version:	3.5.0
-Release:	2
+Release:	3
 License:	GPL v3
 Group:		X11/Applications/Mail
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
 # Source0-md5:	597a9a0b9d113325de6fd01500c0af98
 Source1:	%{name}.desktop
+Patch0:		%{name}-gtk_headers_fix.patch
 URL:		http://www.claws-mail.org/
 BuildRequires:	aspell >= 2:0.50
 BuildRequires:	aspell-devel >= 2:0.50
@@ -27,7 +28,7 @@ BuildRequires:	bzip2-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
-BuildRequires:	gtk+2-devel >= 2:2.10.0
+BuildRequires:	gtk+2-devel >= 2:2.12.8
 BuildRequires:	libetpan-devel >= 0.54
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
@@ -39,7 +40,7 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	startup-notification-devel >= 0.5
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
-Requires:	gtk+2 >= 2:2.10.0
+Requires:	gtk+2 >= 2:2.12.8
 Provides:	sylpheed-claws
 Obsoletes:	claws-mail-plugin-clamav
 Obsoletes:	claws-mail-plugin-etpan-privacy
@@ -235,6 +236,7 @@ najpopularniejsze operacje.
 
 %prep
 %setup -q
+%patch0 -p1
 
 rm -f po/stamp-po
 
