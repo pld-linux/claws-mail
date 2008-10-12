@@ -10,17 +10,14 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.5.0
-Release:	3
+Version:	3.6.1
+Release:	1
 License:	GPL v3
 Group:		X11/Applications/Mail
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	597a9a0b9d113325de6fd01500c0af98
+# Source0-md5:	761b8ae2d574588460a0fb1ea4931ccb
 Source1:	%{name}.desktop
-Patch0:		%{name}-gtk_headers_fix.patch
 URL:		http://www.claws-mail.org/
-BuildRequires:	aspell >= 2:0.50
-BuildRequires:	aspell-devel >= 2:0.50
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
@@ -29,7 +26,8 @@ BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+2-devel >= 2:2.12.8
-BuildRequires:	libetpan-devel >= 0.54
+BuildRequires:	libetpan-devel >= 0.57
+BuildRequires:	liblockfile-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
@@ -89,6 +87,7 @@ Requires:	%{name}-plugin-dillo = %{version}-%{release}
 Requires:	%{name}-plugin-pgpinline = %{version}-%{release}
 Requires:	%{name}-plugin-pgpmime = %{version}-%{release}
 %endif
+Requires:	%{name}-plugin-smime = %{version}-%{release}
 Requires:	%{name}-plugin-spamassassin = %{version}-%{release}
 Requires:	%{name}-plugin-trayicon = %{version}-%{release}
 Provides:	sylpheed-claws-plugins = %{version}
@@ -191,6 +190,24 @@ Wtyczka obsługująca listy podpisane lub szyfrowane PGP/MIME. Potrafi
 rozszyfrowywać, sprawdzać podpisy a także szyfrować i podpisywać
 własne listy.
 
+%package plugin-smime
+Summary:	S/MIME plugin for Claws-Mail
+Summary(pl.UTF-8):	Wtyczka S/MIME dla Claws-Mail
+Group:		X11/Applications/Mail
+Requires:	%{name} = %{version}-%{release}
+Provides:	sylpheed-claws-plugin-smime
+Obsoletes:	sylpheed-claws-plugin-smime
+Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
+
+%description plugin-smime
+This plugin handles S/MIME signed and/or encrypted mails. You can
+decrypt mails, verify signatures or sign and encrypt your own mails.
+
+%description plugin-smime -l pl.UTF-8
+Wtyczka obsługująca listy podpisane lub szyfrowane S/MIME. Potrafi
+rozszyfrowywać, sprawdzać podpisy a także szyfrować i podpisywać
+własne listy.
+
 %package plugin-spamassassin
 Summary:	spamassassin plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka spamassassin dla Claws-Mail
@@ -236,7 +253,6 @@ najpopularniejsze operacje.
 
 %prep
 %setup -q
-%patch0 -p1
 
 rm -f po/stamp-po
 
@@ -256,7 +272,6 @@ rm -f po/stamp-po
 	--%{?with_jpilot:en}%{!?with_jpilot:dis}able-jpilot \
 	--%{?with_ldap:en}%{!?with_ldap:dis}able-ldap \
 	--%{?with_ssl:en}%{!?with_ssl:dis}able-openssl \
-	--enable-aspell \
 	--enable-bogofilter-plugin \
 	--enable-dillo-viewer-plugin \
 	--enable-libetpan \
@@ -340,6 +355,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/pgpmime.so
 %endif
+
+%files plugin-smime
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/smime.so
 
 %files plugin-spamassassin
 %defattr(644,root,root,755)
