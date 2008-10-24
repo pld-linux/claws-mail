@@ -5,13 +5,13 @@
 %bcond_without	ipv6		# build without IPv6 support
 %bcond_without	jpilot		# build without JPilot support
 %bcond_without	ldap		# build without LDAP support
-%bcond_without	ssl		# build without SSL support
+%bcond_without	tls		# build without gnuTLS support
 #
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
 Version:	3.6.1
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		X11/Applications/Mail
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
@@ -31,7 +31,7 @@ BuildRequires:	liblockfile-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
-%{?with_ssl:BuildRequires:	openssl-devel >= 0.9.7d}
+%{?with_tls:BuildRequires:	gnutls-devel >= 2.6.0}
 %{?with_jpilot:BuildRequires:	pilot-link-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
@@ -66,7 +66,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme-devel >= 1:0.4.5
 Requires:	libetpan-devel >= 0.54
-Requires:	openssl-devel >= 0.9.7d
+Requires:	gnutls-devel >= 2.6.0
 Provides:	sylpheed-claws-devel
 Obsoletes:	sylpheed-claws-devel
 
@@ -271,7 +271,7 @@ rm -f po/stamp-po
 	--%{?with_ipv6:en}%{!?with_ipv6:dis}able-ipv6 \
 	--%{?with_jpilot:en}%{!?with_jpilot:dis}able-jpilot \
 	--%{?with_ldap:en}%{!?with_ldap:dis}able-ldap \
-	--%{?with_ssl:en}%{!?with_ssl:dis}able-openssl \
+	--%{?with_tls:en}%{!?with_tls:dis}able-gnutls \
 	--enable-bogofilter-plugin \
 	--enable-dillo-viewer-plugin \
 	--enable-libetpan \
