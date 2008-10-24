@@ -24,6 +24,7 @@ BuildRequires:	bzip2-devel
 %{?with_compface:BuildRequires:	compface-devel}
 BuildRequires:	gettext-devel
 BuildRequires:	gmp-devel
+%{?with_tls:BuildRequires:	gnutls-devel >= 2.6.0}
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
 BuildRequires:	gtk+2-devel >= 2:2.12.8
 BuildRequires:	libetpan-devel >= 0.57
@@ -31,7 +32,6 @@ BuildRequires:	liblockfile-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
-%{?with_tls:BuildRequires:	gnutls-devel >= 2.6.0}
 %{?with_jpilot:BuildRequires:	pilot-link-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
@@ -64,9 +64,9 @@ Summary:	Headers from Claws-Mail
 Summary(pl.UTF-8):	Pliki nagłówkowe programu Claws-Mail
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	gnutls-devel >= 2.6.0
 Requires:	gpgme-devel >= 1:0.4.5
 Requires:	libetpan-devel >= 0.54
-Requires:	gnutls-devel >= 2.6.0
 Provides:	sylpheed-claws-devel
 Obsoletes:	sylpheed-claws-devel
 
