@@ -10,12 +10,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.6.1
-Release:	2
+Version:	3.7.0
+Release:	1
 License:	GPL v3
 Group:		X11/Applications/Mail
 Source0:	http://dl.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	761b8ae2d574588460a0fb1ea4931ccb
+# Source0-md5:	fce9f5233645af3e4607caf79471d6a8
 Source1:	%{name}.desktop
 URL:		http://www.claws-mail.org/
 BuildRequires:	autoconf >= 2.60
@@ -195,9 +195,9 @@ Summary:	S/MIME plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka S/MIME dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
+Requires:	claws-mail-plugin-pgpcore
 Provides:	sylpheed-claws-plugin-smime
 Obsoletes:	sylpheed-claws-plugin-smime
-Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-smime
 This plugin handles S/MIME signed and/or encrypted mails. You can
