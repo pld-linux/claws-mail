@@ -195,7 +195,7 @@ Summary:	S/MIME plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka S/MIME dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
-Requires:	claws-mail-plugin-pgpcore
+Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
 Provides:	sylpheed-claws-plugin-smime
 Obsoletes:	sylpheed-claws-plugin-smime
 
