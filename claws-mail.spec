@@ -11,12 +11,13 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
 Version:	3.7.9
-Release:	2
+Release:	3
 License:	GPL v3
 Group:		X11/Applications/Mail
 Source0:	http://downloads.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
 # Source0-md5:	2f9d2dcabf84e312cfeb56efa799b5b3
 Source1:	%{name}.desktop
+Patch0:		%{name}-gdk-display.patch
 URL:		http://www.claws-mail.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -253,6 +254,7 @@ najpopularniejsze operacje.
 
 %prep
 %setup -q
+%patch0 -p1
 
 rm -f po/stamp-po
 
@@ -320,14 +322,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/%{name}
 %dir %{_docdir}/%{name}
-%dir %{_docdir}/%{name}/manual
 %dir %{_datadir}/%{name}/themes
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
-%{_docdir}/%{name}/manual/en
-%lang(es) %{_docdir}/%{name}/manual/es
-%lang(fr) %{_docdir}/%{name}/manual/fr
-%lang(pl) %{_docdir}/%{name}/manual/pl
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png

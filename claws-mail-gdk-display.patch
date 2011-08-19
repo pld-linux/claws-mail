@@ -1,0 +1,11 @@
+--- claws-mail-3.7.9/src/main.c.org	2011-08-20 00:06:37.000000000 +0200
++++ claws-mail-3.7.9/src/main.c	2011-08-20 00:07:58.000000000 +0200
+@@ -331,7 +331,7 @@
+ 		gtk_widget_show(hack);
+ 	}
+ 
+-	xdisplay = gdk_display_get_default();
++	xdisplay = GDK_DISPLAY_XDISPLAY(gdk_display_get_default());
+ 	sn_display = sn_display_new(xdisplay,
+ 				sn_error_trap_push,
+ 				sn_error_trap_pop);
