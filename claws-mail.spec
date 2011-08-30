@@ -10,14 +10,13 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.7.9
-Release:	3
-License:	GPL v3
+Version:	3.7.10
+Release:	1
+License:	GPL v3+
 Group:		X11/Applications/Mail
 Source0:	http://downloads.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	2f9d2dcabf84e312cfeb56efa799b5b3
+# Source0-md5:	fcf58dcff52f0908ff3bc368d820408b
 Source1:	%{name}.desktop
-Patch0:		%{name}-gdk-display.patch
 URL:		http://www.claws-mail.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -36,6 +35,7 @@ BuildRequires:	libtool
 %{?with_jpilot:BuildRequires:	pilot-link-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
@@ -254,9 +254,8 @@ najpopularniejsze operacje.
 
 %prep
 %setup -q
-%patch0 -p1
 
-rm -f po/stamp-po
+%{__rm} po/stamp-po
 
 # pt_PT -> pt hack
 mv -f po/{pt_PT,pt}.po
@@ -300,9 +299,9 @@ install -d $RPM_BUILD_ROOT{%{_datadir}/%{name}/themes,%{_desktopdir},%{_pixmapsd
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
-rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}/RELEASE_NOTES
-rm -f $RPM_BUILD_ROOT%{_docdir}/%{name}/manual/{de,en,es,fr,pl}/*.{pdf,ps,html,txt}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/RELEASE_NOTES
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/manual/{de,en,es,fr,pl}/*.{pdf,ps,html,txt}
 
 %find_lang %{name}
 
