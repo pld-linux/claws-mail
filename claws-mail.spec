@@ -32,7 +32,10 @@ BuildRequires:	liblockfile-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libtool
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
-%{?with_jpilot:BuildRequires:	pilot-link-devel}
+%if %{with jpilot}
+BuildRequires:	bluez-libs-devel
+BuildRequires:	pilot-link-devel
+%endif
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sed >= 4.0
