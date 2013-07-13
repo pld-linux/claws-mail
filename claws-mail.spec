@@ -7,12 +7,12 @@
 %bcond_without	ldap		# build without LDAP support
 %bcond_without	tls		# build without gnuTLS support
 %bcond_with	geolocation
-#
+
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
 Version:	3.9.2
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		X11/Applications/Mail
 Source0:	http://downloads.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
@@ -60,10 +60,15 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	gtk+2 >= 2:2.24.0
 Provides:	sylpheed-claws
+Obsoletes:	claws-mail-plugin-cachesaver <= 3.7.6-5
 Obsoletes:	claws-mail-plugin-clamav
+Obsoletes:	claws-mail-plugin-dillo <= 3.9.0
 Obsoletes:	claws-mail-plugin-etpan-privacy
+Obsoletes:	claws-mail-plugin-gtkhtml2_viewer <= 3.9.0
 Obsoletes:	claws-mail-plugin-maildir
 Obsoletes:	claws-mail-plugin-pdf_viewer
+Obsoletes:	claws-mail-plugin-synce <= 3.7.6-5
+Obsoletes:	claws-mail-plugin-trayicon <= 3.9.0
 Obsoletes:	sylpheed-claws
 Obsoletes:	sylpheed-claws-plugin-clamav
 Obsoletes:	sylpheed-gtk2
@@ -129,11 +134,6 @@ Requires:	%{name}-plugin-vcalendar = %{version}-%{release}
 Provides:	sylpheed-claws-extra-plugins
 Provides:	sylpheed-claws-plugins = %{version}
 Obsoletes:	claws-mail-extra-plugins <= 3.9.0
-Obsoletes:	claws-mail-plugin-cachesaver <= 3.7.6-5
-Obsoletes:	claws-mail-plugin-dillo <= 3.9.0
-Obsoletes:	claws-mail-plugin-gtkhtml2_viewer <= 3.9.0
-Obsoletes:	claws-mail-plugin-synce <= 3.7.6-5
-Obsoletes:	claws-mail-plugin-trayicon <= 3.9.0
 Obsoletes:	sylpheed-claws-extra-plugins
 Obsoletes:	sylpheed-claws-plugin-others
 Obsoletes:	sylpheed-claws-plugins
