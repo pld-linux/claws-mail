@@ -11,13 +11,14 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.9.3
+Version:	3.10.0
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
-Source0:	http://downloads.sourceforge.net/sylpheed-claws/%{name}-%{version}.tar.bz2
-# Source0-md5:	0158b5e6b6d6866f9a75fd288a4edf04
+Source0:	https://downloads.sourceforge.net/project/claws-mail/Claws%20Mail/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	13a7f93143d6287752eef2987ff49b79
 Source1:	%{name}.desktop
+Patch0:		%{name}-libindicate.patch
 URL:		http://www.claws-mail.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -37,6 +38,7 @@ BuildRequires:	libarchive-devel
 BuildRequires:	libcanberra-gtk-devel
 BuildRequires:	libetpan-devel >= 0.57
 BuildRequires:	libgdata-devel >= 0.6.4
+BuildRequires:	libindicate-devel >= 0.12.0
 BuildRequires:	liblockfile-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libnotify-devel >= 0.4.3
@@ -106,6 +108,7 @@ Summary(pl.UTF-8):	Dodatkowe wtyczki dla Claws-Mail (metapakiet)
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
+Requires:	%{name}-plugin-libravatar = %{version}-%{release}
 %if %{with gpg}
 Requires:	%{name}-plugin-pgpinline = %{version}-%{release}
 Requires:	%{name}-plugin-pgpmime = %{version}-%{release}
@@ -504,6 +507,18 @@ This plugin provides Python integration features.
 %description plugin-python -l pl.UTF-8
 Wtyczka do pythona.
 
+%package plugin-libravatar
+Summary:	Avatar fetching plugin
+Summary(pl.UTF-8):	Wtyczka pobierająca avatary
+Group:		X11/Applications/Mail
+Requires:	%{name} = %{version}-%{release}
+
+%description plugin-libravatar
+Avatar fetching plugin.
+
+%description plugin-libravatar -l pl.UTF-8
+Wtyczka pobierająca avatary.
+
 %package plugin-rssyl
 Summary:	RSSyl plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka RSSyl dla Claws-Mail
@@ -561,6 +576,7 @@ webCal.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__rm} po/stamp-po
 
@@ -653,6 +669,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/plugins
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
+%{_datadir}/appdata/claws-mail.appdata.xml
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
 %{_iconsdir}/hicolor/64x64/apps/%{name}.png
 %{_iconsdir}/hicolor/128x128/apps/%{name}.png
@@ -664,6 +681,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugins
 %defattr(644,root,root,755)
+
+%files plugin-libravatar
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/plugins/libravatar.so
 
 %files plugin-bogofilter
 %defattr(644,root,root,755)
