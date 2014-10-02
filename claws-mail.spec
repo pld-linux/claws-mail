@@ -11,12 +11,12 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.10.0
-Release:	2
+Version:	3.10.1
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
 Source0:	https://downloads.sourceforge.net/project/claws-mail/Claws%20Mail/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	13a7f93143d6287752eef2987ff49b79
+# Source0-md5:	ab2b5a98c3c4e4341dfe563a4a8384e8
 Source1:	%{name}.desktop
 Patch0:		%{name}-libindicate.patch
 URL:		http://www.claws-mail.org/
