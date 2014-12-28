@@ -28,7 +28,7 @@ BuildRequires:	clutter-gtk-devel >= 0.10.0
 BuildRequires:	libchamplain-devel >= 0.8.0
 %endif
 %{?with_compface:BuildRequires:	compface-devel}
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gmp-devel
 %{?with_tls:BuildRequires:	gnutls-devel >= 2.6.0}
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:0.4.5}
