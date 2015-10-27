@@ -11,14 +11,13 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.11.1
-Release:	3
+Version:	3.13.0
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
-Source0:	https://downloads.sourceforge.net/project/claws-mail/Claws%20Mail/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	4cbf9b53c4cf691e093bd98efc0dbb63
+Source0:	http://www.claws-mail.org/download.php?file=releases/%{name}-%{version}.tar.xz
+# Source0-md5:	09f29aab91adea3e50131df56408958b
 Source1:	%{name}.desktop
-Patch0:		%{name}-libindicate.patch
 URL:		http://www.claws-mail.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
@@ -62,13 +61,25 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	gtk+2 >= 2:2.24.0
 Provides:	sylpheed-claws
+Obsoletes:	claws-mail-plugin-acpi_notifier
+Obsoletes:	claws-mail-plugin-address_keeper
+Obsoletes:	claws-mail-plugin-att_remover
+Obsoletes:	claws-mail-plugin-attachwarner
+Obsoletes:	claws-mail-plugin-bogofilter
+Obsoletes:	claws-mail-plugin-bsfilter
 Obsoletes:	claws-mail-plugin-cachesaver <= 3.7.6-5
 Obsoletes:	claws-mail-plugin-clamav
+Obsoletes:	claws-mail-plugin-clamd
 Obsoletes:	claws-mail-plugin-dillo <= 3.9.0
 Obsoletes:	claws-mail-plugin-etpan-privacy
+Obsoletes:	claws-mail-plugin-fetchinfo
 Obsoletes:	claws-mail-plugin-gtkhtml2_viewer <= 3.9.0
 Obsoletes:	claws-mail-plugin-maildir
+Obsoletes:	claws-mail-plugin-mailmbox
+Obsoletes:	claws-mail-plugin-newmail
+Obsoletes:	claws-mail-plugin-spamassassin
 Obsoletes:	claws-mail-plugin-synce <= 3.7.6-5
+Obsoletes:	claws-mail-plugin-tnef_parse
 Obsoletes:	claws-mail-plugin-trayicon <= 3.9.0
 Obsoletes:	sylpheed-claws
 Obsoletes:	sylpheed-claws-plugin-clamav
@@ -107,31 +118,19 @@ Summary:	Special plugins for Claws-Mail (metapackage)
 Summary(pl.UTF-8):	Dodatkowe wtyczki dla Claws-Mail (metapakiet)
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
-Requires:	%{name}-plugin-bogofilter = %{version}-%{release}
 Requires:	%{name}-plugin-libravatar = %{version}-%{release}
 %if %{with gpg}
 Requires:	%{name}-plugin-pgpinline = %{version}-%{release}
 Requires:	%{name}-plugin-pgpmime = %{version}-%{release}
 %endif
-Requires:	%{name}-plugin-acpi_notifier = %{version}-%{release}
-Requires:	%{name}-plugin-address_keeper = %{version}-%{release}
 Requires:	%{name}-plugin-archive = %{version}-%{release}
-Requires:	%{name}-plugin-att_remover = %{version}-%{release}
-Requires:	%{name}-plugin-attachwarner = %{version}-%{release}
-Requires:	%{name}-plugin-bsfilter = %{version}-%{release}
-Requires:	%{name}-plugin-clamd = %{version}-%{release}
 Requires:	%{name}-plugin-fancy = %{version}-%{release}
-Requires:	%{name}-plugin-fetchinfo = %{version}-%{release}
 Requires:	%{name}-plugin-gdata = %{version}-%{release}
-Requires:	%{name}-plugin-mailmbox = %{version}-%{release}
-Requires:	%{name}-plugin-newmail = %{version}-%{release}
 Requires:	%{name}-plugin-notification = %{version}-%{release}
 Requires:	%{name}-plugin-perl = %{version}-%{release}
 Requires:	%{name}-plugin-rssyl = %{version}-%{release}
 Requires:	%{name}-plugin-smime = %{version}-%{release}
-Requires:	%{name}-plugin-spamassassin = %{version}-%{release}
 Requires:	%{name}-plugin-spamreport = %{version}-%{release}
-Requires:	%{name}-plugin-tnef_parse = %{version}-%{release}
 Requires:	%{name}-plugin-vcalendar = %{version}-%{release}
 Provides:	sylpheed-claws-extra-plugins
 Provides:	sylpheed-claws-plugins = %{version}
@@ -147,26 +146,6 @@ This is collection of some usefull plugins for Claws-Mail
 %description plugins -l pl.UTF-8
 Jest to zbiór kilku dodatkowych wtyczek powiększających możliwości
 Claws-Mail (metapakiet).
-
-%package plugin-bogofilter
-Summary:	Bogofilter plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka bogofilter dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Requires:	bogofilter
-Provides:	sylpheed-claws-plugin-bogofilter
-Obsoletes:	sylpheed-claws-plugin-bogofilter
-
-%description plugin-bogofilter
-This plugin enables the scanning of incoming mail received from a POP,
-IMAP or LOCAL account using Bogofilter. It can optionally delete mail
-identified as spam or save it to a designated folder.
-
-%description plugin-bogofilter -l pl.UTF-8
-Wtyczka pozwalająca na skanowanie bogofilterem poczty przychodzącej
-jak i już znajdującej się w lokalnych skrzynkach. Opcjonalnie może
-usuwać listy oznaczone jako spam lub zapisywać je w dedykowanym
-folderze.
 
 %package plugin-pgpcore
 Summary:	PGP/Core plugin for Claws-Mail
@@ -237,57 +216,6 @@ Wtyczka obsługująca listy podpisane lub szyfrowane S/MIME. Potrafi
 rozszyfrowywać, sprawdzać podpisy a także szyfrować i podpisywać
 własne listy.
 
-%package plugin-spamassassin
-Summary:	spamassassin plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka spamassassin dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-spamassassin
-Obsoletes:	sylpheed-claws-plugin-spamassassin
-Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
-
-%description plugin-spamassassin
-This plugin enables the scanning of incoming mail received from a POP,
-IMAP, or LOCAL account using SpamAssassin. It can optionally delete
-mail identified as spam or save it to a designated folder, and also
-can be used to train a local Spamassassin or a remote one.
-
-%description plugin-spamassassin -l pl.UTF-8
-Wtyczka pozwalająca na skanowanie SpamAssassinem poczty przychodzącej
-jak i już znajdującej się w lokalnych skrzynkach. Opcjonalnie może
-usuwać listy oznaczone jako spam lub zapisywać je w dedykowanym
-folderze. Może też byż używana do "uczenia" lokalnego lub zdalnego
-demona SpamAssassin.
-
-%package plugin-acpi_notifier
-Summary:	acpi_notifier plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka acpi_notifier dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-acpi_notifier
-Obsoletes:	sylpheed-claws-plugin-acpi_notifier
-
-%description plugin-acpi_notifier
-This plugin enables mail notification via LEDs on some laptops.
-
-%description plugin-acpi_notifier -l pl.UTF-8
-Ta wtyczka umożliwia w niektórych laptopach powiadamianie o nowej
-poczcie poprzez diody LED.
-
-%package plugin-address_keeper
-Summary:	address_keeper plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka address_keeper dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-address_keeper
-Obsoletes:	sylpheed-claws-plugin-address_keeper
-
-%description plugin-address_keeper
-Keeps all recipient addresses in an addressbook folder.
-
-%description plugin-address_keeper -l pl.UTF-8
-Trzyma wszystkie adresy w dedykowanym folderze.
-
 %package plugin-archive
 Summary:	archive plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka archive dla Claws-Mail
@@ -302,64 +230,6 @@ calendar accounts.
 Ta wtyczka pozwala archiwizować konta IMAP, LOCAL i POP jak również
 kalendarze.
 
-%package plugin-att_remover
-Summary:	att_remover plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka att_remover dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-att_remover
-Obsoletes:	sylpheed-claws-plugin-att_remover
-
-%description plugin-att_remover
-This plugin lets you remove attachments from emails.
-
-%description plugin-att_remover -l pl.UTF-8
-Ta wtyczka pozwala usuwać załączniki z poczty.
-
-%package plugin-attachwarner
-Summary:	attachwarner plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka attachwarner dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-
-%description plugin-attachwarner
-This plugin warns when the user composes a message mentioning an
-attachment in the message body, but without attaching any files to the
-message.
-
-%description plugin-attachwarner -l pl.UTF-8
-Ta wtyczka ostrzega, kiedy użytkownik piszący wiadomość wspomina w
-treści o załączniku, ale nie załącza żadnego pliku do wiadomości.
-
-%package plugin-clamd
-Summary:	clamd plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka clamd dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Requires:	clamav
-
-%description plugin-clamd
-Scan all messages that are received from an IMAP, LOCAL or POP account
-using clamd (Clam AV).
-
-%description plugin-clamd -l pl.UTF-8
-Sprawdza wszystkie wiadomości odebrane poprzez IMAP, LOCAL lub POP
-przy użyciu clamd (Clam AV).
-
-%package plugin-bsfilter
-Summary:	bsfilter plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka bsfilter dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-
-%description plugin-bsfilter
-Check all messages that are received from an IMAP, LOCAL or POP
-account for spam using Bsfilter.
-
-%description plugin-bsfilter -l pl.UTF-8
-Ta wtyczka sprawdza wszystkie wiadomości odebrane przez IMAP, lokalnie
-bądź POP pod kątem występowania spamu przy użyciu bsfilter.
-
 %package plugin-fancy
 Summary:	fancy plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka fancy dla Claws-Mail
@@ -372,24 +242,6 @@ Renders HTML e-mail using the WebKit library.
 %description plugin-fancy -l pl.UTF-8
 Ta wtyczka przetwarza wiadomości w formacie HTML przy użyciu
 biblioteki WebKit.
-
-%package plugin-fetchinfo
-Summary:	fetchinfo plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka fetchinfo dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-fetchinfo
-Obsoletes:	sylpheed-claws-plugin-fetchinfo
-
-%description plugin-fetchinfo
-This plugin inserts headers containing some download information:
-UIDL, Claws-Mail, account name, POP server, user ID and retrieval
-time.
-
-%description plugin-fetchinfo -l pl.UTF-8
-Ta wtyczka wstawia nagłówki zawierające informacje o ściąganiu: UIDL,
-Claws-Mail, nazwę konta, serwer POP, identyfikator użytkownika i czas
-pobrania.
 
 %package plugin-gdata
 Summary:	gdata plugin for Claws-Mail
@@ -414,37 +266,6 @@ This plugin provides GeoLocation functionality.
 
 %description plugin-geolocation -l pl.UTF-8
 Wtyczka dostarcza funkcje geolokacji.
-
-%package plugin-mailmbox
-Summary:	mailMBOX plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka mailMBOX dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-mailmbox
-Obsoletes:	sylpheed-claws-plugin-mailmbox
-
-%description plugin-mailmbox
-This plugin handles mailboxes in mbox format.
-
-%description plugin-mailmbox -l pl.UTF-8
-Ta wtyczka obsługuje skrzynki w formacie mbox.
-
-%package plugin-newmail
-Summary:	newmail plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka newmail dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-newmail
-Obsoletes:	sylpheed-claws-plugin-newmail
-
-%description plugin-newmail
-This plugin writes a msg header summary to a log file, (Default:
-~/Mail/NewLog), on arrival of new mail after sorting.
-
-%description plugin-newmail -l pl.UTF-8
-Ta wtyczka zapisuje podsumowanie nagłówków wiadomości do pliku loga
-(domyślnie ~/Mail/NewLog) w czasie dostarczania nowej poczty, po
-sortowaniu.
 
 %package plugin-notification
 Summary:	notification plugin for Claws-Mail
@@ -545,18 +366,6 @@ Requires:	%{name} = %{version}-%{release}
 This plugin allows you to upload spams to various spam reporting
 places, like http://www.signal-spam.fr/ .
 
-%package plugin-tnef_parse
-Summary:	TNEF Parse plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka TNEF Parse dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-
-%description plugin-tnef_parse
-This plugin enables reading application/ms-tnef attachments.
-
-%description plugin-tnef_parse -l pl.UTF-8
-Ta wtyczka pozwala czytać załączniki typu application/ms-tnef.
-
 %package plugin-vcalendar
 Summary:	vCalendar plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka vCalendar dla Claws-Mail
@@ -576,15 +385,8 @@ webCal.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %{__rm} po/stamp-po
-
-# id_ID -> id and pt_PT -> pt hacks
-mv -f po/{id_ID,id}.po
-mv -f po/{pt_PT,pt}.po
-%{__sed} -i -e 's,pt_PT,pt,g;s,id_ID,id,g' src/codeconv.c
-%{__sed} -i -e 's,pt_PT,pt,g;s,id_ID,id,g' configure.ac
 
 %build
 %{__libtoolize}
@@ -639,8 +441,8 @@ install -d $RPM_BUILD_ROOT{%{_datadir}/%{name}/themes,%{_desktopdir},%{_pixmapsd
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/RELEASE_NOTES
@@ -667,6 +469,20 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/themes
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
+# no (big) external deps
+%attr(755,root,root) %{_libdir}/%{name}/plugins/acpi_notifier.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/address_keeper.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/attachwarner.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/att_remover.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/bogofilter.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/bsfilter.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/clamd.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/fetchinfo.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/mailmbox.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/managesieve.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/newmail.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/spamassassin.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/tnef_parse.so
 %{_desktopdir}/%{name}.desktop
 %{_pixmapsdir}/%{name}.png
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
@@ -684,10 +500,6 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-libravatar
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/libravatar.so
-
-%files plugin-bogofilter
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/bogofilter.so
 
 %if %{with gpg}
 %files plugin-pgpcore
@@ -707,45 +519,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/smime.so
 
-%files plugin-spamassassin
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/spamassassin.so
-
-%files plugin-acpi_notifier
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/acpi_notifier.so
-
-%files plugin-address_keeper
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/address_keeper.so
-
 %files plugin-archive
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/archive.so
 
-%files plugin-att_remover
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/att_remover.so
-
-%files plugin-attachwarner
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/attachwarner.so
-
-%files plugin-bsfilter
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/bsfilter.so
-
-%files plugin-clamd
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/clamd.so
-
 %files plugin-fancy
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/fancy.so
-
-%files plugin-fetchinfo
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/fetchinfo.so
 
 %files plugin-gdata
 %defattr(644,root,root,755)
@@ -756,14 +536,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/geolocation.so
 %endif
-
-%files plugin-mailmbox
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/mailmbox.so
-
-%files plugin-newmail
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/newmail.so
 
 %files plugin-notification
 %defattr(644,root,root,755)
@@ -788,10 +560,6 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-spamreport
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/spamreport.so
-
-%files plugin-tnef_parse
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/tnef_parse.so
 
 %files plugin-vcalendar
 %defattr(644,root,root,755)
