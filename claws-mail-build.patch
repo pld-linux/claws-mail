@@ -1,0 +1,42 @@
+--- claws-mail-3.15.1/./src/compose.c~	2017-08-28 19:49:41.000000000 +0200
++++ claws-mail-3.15.1/./src/compose.c	2017-10-26 09:20:35.883514684 +0200
+@@ -8794,7 +8794,7 @@ static void compose_template_apply_field
+ 	tr = g_strdup(C_("'%s' stands for a header name",
+ 				  "Template '%s' format error."));
+ 	text = g_strdup_printf(tr, prefs_common_translated_header_name(header));
+-	alertpanel_error(text);
++	alertpanel_error("%s", text);
+ 
+ 	g_free(text);
+ 	g_free(tr);
+--- claws-mail-3.15.1/./src/mimeview.c~	2017-08-28 19:48:24.000000000 +0200
++++ claws-mail-3.15.1/./src/mimeview.c	2017-10-26 09:23:22.174780948 +0200
+@@ -1879,7 +1879,7 @@ static void mimeview_save_all_info(gint
+ 					"%d files saved successfully.",
+ 					total),
+ 				total);
+-		alertpanel_notice(msg);
++		alertpanel_notice("%s", msg);
+ 		g_free(msg);
+ 	} else {
+ 		gchar *msg1 = g_strdup_printf(
+@@ -1892,7 +1892,7 @@ static void mimeview_save_all_info(gint
+ 					"%s, %d files failed.",
+ 					errors),
+ 				msg1, errors);
+-		alertpanel_warning(msg2);
++		alertpanel_warning("%s", msg2);
+ 		g_free(msg2);
+ 		g_free(msg1);
+ 	}
+--- claws-mail-3.15.1/src/plugins/archive/archiver_gtk.c~	2017-08-28 19:48:24.000000000 +0200
++++ claws-mail-3.15.1/src/plugins/archive/archiver_gtk.c	2017-10-26 09:26:51.703909833 +0200
+@@ -576,7 +576,7 @@ static gboolean archiver_save_files(stru
+ 			if (aval != G_ALERTALTERNATE)
+ 				return FALSE;
+ 		} else {
+-			alertpanel_error(msg);
++			alertpanel_error("%s", msg);
+ 			g_free(msg);
+ 			return FALSE;
+ 		}

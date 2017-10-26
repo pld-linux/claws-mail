@@ -6,26 +6,22 @@
 %bcond_without	jpilot		# build without JPilot support
 %bcond_without	ldap		# build without LDAP support
 %bcond_without	tls		# build without gnuTLS support
-%bcond_with	geolocation
 
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.14.0
-Release:	7
+Version:	3.15.1
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
 Source0:	http://www.claws-mail.org/download.php?file=releases/%{name}-%{version}.tar.xz
-# Source0-md5:	2ec71e5402e09b449700112ed331d99d
+# Source0-md5:	d4efd5723742155207c31ff2682d7f8c
 Source1:	%{name}.desktop
+Patch0:		%{name}-build.patch
 URL:		http://www.claws-mail.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
-%if %{with geolocation}
-BuildRequires:	clutter-gtk-devel >= 0.10.0
-BuildRequires:	libchamplain-devel >= 0.8.0
-%endif
 %{?with_compface:BuildRequires:	compface-devel}
 BuildRequires:	gettext-tools
 BuildRequires:	gmp-devel
@@ -36,11 +32,13 @@ BuildRequires:	gtk-webkit-devel
 BuildRequires:	libarchive-devel
 BuildRequires:	libcanberra-gtk-devel
 BuildRequires:	libetpan-devel >= 0.57
-BuildRequires:	libgdata-devel >= 0.6.4
+BuildRequires:	libgdata-devel >= 0.17.2
+BuildRequires:	libical-devel >= 2.0.0
 BuildRequires:	libindicate-devel >= 0.12.0
 BuildRequires:	liblockfile-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libnotify-devel >= 0.4.3
+BuildRequires:	librsvg-devel >= 2.40.5
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
 BuildRequires:	libytnef-devel
@@ -255,18 +253,6 @@ gdata plugin for Claws-Mail.
 %description plugin-gdata -l pl.UTF-8
 Wtyczka gdata dla Claws-Mail.
 
-%package plugin-geolocation
-Summary:	geolocation plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka geolocation dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-
-%description plugin-geolocation
-This plugin provides GeoLocation functionality.
-
-%description plugin-geolocation -l pl.UTF-8
-Wtyczka dostarcza funkcje geolokacji.
-
 %package plugin-notification
 Summary:	notification plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka notification dla Claws-Mail
@@ -385,6 +371,7 @@ webCal.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__rm} po/stamp-po
 
@@ -412,7 +399,6 @@ webCal.
 	--enable-fancy-plugin \
 	--enable-fetchinfo-plugin \
 	--enable-gdata-plugin \
-	--%{?with_geolocation:en}%{!?with_geolocation:dis}able-geolocation-plugin \
 	--enable-mailmbox-plugin \
 	--enable-newmail-plugin \
 	--enable-notification-plugin \
@@ -532,12 +518,6 @@ rm -rf $RPM_BUILD_ROOT
 %files plugin-gdata
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/gdata.so
-
-%if %{with geolocation}
-%files plugin-geolocation
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/geolocation.so
-%endif
 
 %files plugin-notification
 %defattr(644,root,root,755)
