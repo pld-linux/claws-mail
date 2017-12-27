@@ -22,6 +22,7 @@ BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
 %{?with_compface:BuildRequires:	compface-devel}
+BuildRequires:	enchant-devel >= 1.4.0
 BuildRequires:	gettext-tools
 BuildRequires:	gmp-devel
 %{?with_tls:BuildRequires:	gnutls-devel >= 2.6.0}
