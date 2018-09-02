@@ -55,6 +55,7 @@ BuildRequires:	python-pygtk-devel
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
+BuildRequires:	texlive-latex-marvosym
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	gtk+2 >= 2:2.24.0
