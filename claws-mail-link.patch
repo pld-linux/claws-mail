@@ -1,0 +1,15 @@
+--- claws-mail-3.17.5/configure.ac.orig	2020-05-15 19:10:01.399227455 +0200
++++ claws-mail-3.17.5/configure.ac	2020-05-15 19:25:54.560730403 +0200
+@@ -794,9 +794,9 @@
+ 		AC_MSG_RESULT(yes)
+ 
+ 		dnl check for available libraries, and pull them in
+-		AC_CHECK_LIB(resolv, res_query, LDAP_LIBS="$LDAP_LIBS -lresolv")
+-		AC_CHECK_LIB(socket, bind, LDAP_LIBS="$LDAP_LIBS -lsocket")
+-		AC_CHECK_LIB(nsl, gethostbyaddr, LDAP_LIBS="$LDAP_LIBS -lnsl")
++		AC_CHECK_FUNC(res_query, [], [AC_CHECK_LIB(resolv, res_query, LDAP_LIBS="$LDAP_LIBS -lresolv")])
++		AC_CHECK_FUNC(bind, [], [AC_CHECK_LIB(socket, bind, LDAP_LIBS="$LDAP_LIBS -lsocket")])
++		AC_CHECK_FUNC(gethostbyaddr, [], [AC_CHECK_LIB(nsl, gethostbyaddr, LDAP_LIBS="$LDAP_LIBS -lnsl")])
+ 		AC_CHECK_LIB(lber, ber_get_tag, LDAP_LIBS="$LDAP_LIBS -llber",,
+ 				 $LDAP_LIBS)
+ 
