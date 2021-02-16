@@ -11,18 +11,19 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.17.5
+Version:	3.17.8
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
 #Source0Download: https://www.claws-mail.org/releases.php
 Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	c736b9fe0b51d7ef6fb35734e257346d
+# Source0-md5:	9a29794503e17921b14a5265425181db
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
 URL:		https://www.claws-mail.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
+BuildRequires:	bison
 BuildRequires:	cairo-devel
 %{?with_compface:BuildRequires:	compface-devel}
 BuildRequires:	curl-devel
@@ -32,6 +33,7 @@ BuildRequires:	docbook-utils
 # or enchant2-devel >= 2.0.0, but currently 1.4 is preferred
 BuildRequires:	enchant-devel >= 1.4.0
 BuildRequires:	expat-devel
+BuildRequires:	flex
 BuildRequires:	fontconfig-devel
 BuildRequires:	gdk-pixbuf2-devel >= 2.26
 BuildRequires:	gettext-tools >= 0.18
@@ -53,6 +55,7 @@ BuildRequires:	libsoup-gnome-devel >= 2.26
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
 #TODO: libunity-devel
+BuildRequires:	NetworkManager-devel
 BuildRequires:	libytnef-devel
 BuildRequires:	nettle-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
@@ -75,8 +78,8 @@ BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
-Requires:	enchant >= 1.4.0
 Requires:	dbus-glib >= 0.60
+Requires:	enchant >= 1.4.0
 Requires:	gdk-pixbuf2 >= 2.26
 Requires:	glib2 >= 1:2.36
 %{?with_tls:Requires:	gnutls >= 3.0}
@@ -133,7 +136,7 @@ Requires:	glib2-devel >= 1:2.36
 Requires:	gtk+2-devel >= 2:2.24.0
 Requires:	libetpan-devel >= 1.9.4
 %{?with_ldap:Requires:	openldap-devel >= 2.3.0}
-%{?with_jpilot:Requires:	pilot-link-devel}
+%{?with_jpilot:Requires: pilot-link-devel}
 Provides:	sylpheed-claws-devel
 Obsoletes:	sylpheed-claws-devel
 
@@ -473,6 +476,7 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/el_GR
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/RELEASE_NOTES
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/manual/{en,es,fr}/*.{pdf,ps,html,txt}
 
@@ -553,6 +557,7 @@ rm -rf $RPM_BUILD_ROOT
 
 # R: cairo curl fontconfig gumbo-parser
 %files plugin-litehtml_viewer
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/litehtml_viewer.so
 
 # R: libcanberra-gtk libnotify [libunity]
