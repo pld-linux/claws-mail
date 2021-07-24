@@ -8,16 +8,16 @@
 %bcond_without	tls		# build without gnuTLS support
 %bcond_with	valgrind	# Valgrind support for debugging
 
-Summary:	A bleeding edge branch of Sylpheed, a GTK2 based, lightweight, and fast e-mail client
+Summary:	A bleeding edge branch of Sylpheed, a GTK3 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	3.18.0
+Version:	4.0.0
 Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
 #Source0Download: https://www.claws-mail.org/releases.php
 Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	00be9ced9c22a987f50d5a3e03dfe1ff
+# Source0-md5:	96144e56900bb94dc69c04fed548bd79
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
 URL:		https://www.claws-mail.org/
@@ -40,11 +40,11 @@ BuildRequires:	gettext-tools >= 0.18
 BuildRequires:	glib2-devel >= 1:2.36
 %{?with_tls:BuildRequires:	gnutls-devel >= 3.0}
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:1.1.1}
-BuildRequires:	gtk+2-devel >= 2:2.24.0
-BuildRequires:	gtk-webkit-devel >= 1.10.0
+BuildRequires:	gtk+3-devel >= 3.20
+BuildRequires:	gtk-webkit4-devel >= 2.18.0
 BuildRequires:	gumbo-parser-devel >= 0.10
 BuildRequires:	libarchive-devel
-BuildRequires:	libcanberra-gtk-devel >= 0.6
+BuildRequires:	libcanberra-gtk3-devel >= 0.6
 BuildRequires:	libetpan-devel >= 1.9.4
 BuildRequires:	libgdata-devel >= 0.17.2
 BuildRequires:	libical-devel >= 2.0.0
@@ -83,7 +83,7 @@ Requires:	enchant >= 1.4.0
 Requires:	gdk-pixbuf2 >= 2.26
 Requires:	glib2 >= 1:2.36
 %{?with_tls:Requires:	gnutls >= 3.0}
-Requires:	gtk+2 >= 2:2.24.0
+Requires:	gtk+3 >= 3.20
 Requires:	libetpan >= 1.9.4
 Requires:	librsvg >= 1:2.40.5
 %{?with_ldap:Requires:	openldap-libs >= 2.3.0}
@@ -204,7 +204,7 @@ Summary:	fancy plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka fancy dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk-webkit >= 1.10.0
+Requires:	gtk-webkit4 >= 2.18.0
 Requires:	libsoup-gnome >= 2.26
 
 %description plugin-fancy
@@ -481,7 +481,6 @@ cp -p %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/manual/{en,es,fr}/*.{pdf,ps,html,txt}
 
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{id_ID,id}
-%{__mv} $RPM_BUILD_ROOT%{_localedir}/{pt_PT,pt}
 
 %find_lang %{name}
 
@@ -540,7 +539,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/archive.so
 
-# R: curl gtk-webkit libsoup libsoup-gnome
+# R: curl gtk-webkit4 libsoup libsoup-gnome
 %files plugin-fancy
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/fancy.so
