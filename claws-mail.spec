@@ -21,10 +21,11 @@ Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
 URL:		https://www.claws-mail.org/
+BuildRequires:	NetworkManager-devel
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	cairo-devel
+BuildRequires:	cairo-devel >= 1.12.0
 %{?with_compface:BuildRequires:	compface-devel}
 BuildRequires:	curl-devel
 BuildRequires:	dbus-devel >= 0.60
@@ -32,7 +33,7 @@ BuildRequires:	dbus-glib-devel >= 0.60
 BuildRequires:	docbook-utils
 # or enchant2-devel >= 2.0.0, but currently 1.4 is preferred
 BuildRequires:	enchant-devel >= 1.4.0
-BuildRequires:	expat-devel
+BuildRequires:	expat-devel >= 1.95
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel
 BuildRequires:	gdk-pixbuf2-devel >= 2.26
@@ -55,7 +56,6 @@ BuildRequires:	libsoup-gnome-devel >= 2.26
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
 #TODO: libunity-devel
-BuildRequires:	NetworkManager-devel
 BuildRequires:	libytnef-devel
 BuildRequires:	nettle-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
@@ -63,8 +63,8 @@ BuildRequires:	perl-devel >= 1:5.8.0
 %{?with_jpilot:BuildRequires:	pilot-link-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	poppler-glib-devel >= 0.12.0
-BuildRequires:	python-devel >= 1:2.5
-BuildRequires:	python-pygtk-devel >= 2:2.10.3
+BuildRequires:	python3-devel >= 1:3.2
+BuildRequires:	python3-pygobject3-devel >= 3.0
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
@@ -78,6 +78,7 @@ BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
+Requires:	cairo >= 1.12.0
 Requires:	dbus-glib >= 0.60
 Requires:	enchant >= 1.4.0
 Requires:	gdk-pixbuf2 >= 2.26
@@ -363,6 +364,7 @@ Summary:	python plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka python dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
+Requires:	python3-pygobject3 >= 3.0
 
 %description plugin-python
 This plugin provides Python integration features.
@@ -476,10 +478,10 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/el_GR
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/RELEASE_NOTES
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/manual/{en,es,fr}/*.{pdf,ps,html,txt}
 
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/{el_GR,el}
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{id_ID,id}
 
 %find_lang %{name}
@@ -591,7 +593,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/pgpmime.so
 %endif
 
-# R: python-libs
+# R: python3-libs
 %files plugin-python
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/python.so
