@@ -20,6 +20,7 @@ Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
 # Source0-md5:	be5e391e1d3f7be6032d1e9d0dbf63e3
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
+Patch1:		perl-5.36.patch
 URL:		https://www.claws-mail.org/
 BuildRequires:	NetworkManager-devel
 BuildRequires:	autoconf >= 2.60
@@ -441,6 +442,7 @@ webCal.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %{__rm} po/stamp-po
 
