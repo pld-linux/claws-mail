@@ -5,25 +5,25 @@
 %bcond_without	ipv6		# build without IPv6 support
 %bcond_without	jpilot		# build without JPilot support
 %bcond_without	ldap		# build without LDAP support
+%bcond_without	oauth2		# build without OAuth2 support
 %bcond_without	tls		# build without gnuTLS support
 %bcond_with	valgrind	# Valgrind support for debugging
 
 Summary:	A bleeding edge branch of Sylpheed, a GTK3 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	4.1.0
-Release:	2
+Version:	4.1.1
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
 #Source0Download: https://www.claws-mail.org/releases.php
 Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	be5e391e1d3f7be6032d1e9d0dbf63e3
+# Source0-md5:	bde1fdfcc082aa629d8704cba56a8cf6
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
-Patch1:		perl-5.36.patch
 URL:		https://www.claws-mail.org/
 BuildRequires:	NetworkManager-devel
-BuildRequires:	autoconf >= 2.60
+BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	cairo-devel >= 1.12.0
@@ -39,7 +39,8 @@ BuildRequires:	flex
 BuildRequires:	fontconfig-devel
 BuildRequires:	gdk-pixbuf2-devel >= 2.26
 BuildRequires:	gettext-tools >= 0.18
-BuildRequires:	glib2-devel >= 1:2.36
+BuildRequires:	glib2-devel >= 1:2.50
+%{?with_oauth2:BuildRequires:	gnutls-devel >= 3.0}
 %{?with_tls:BuildRequires:	gnutls-devel >= 3.0}
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:1.1.1}
 BuildRequires:	gtk+3-devel >= 3.20
@@ -132,7 +133,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe programu Claws-Mail
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	enchant-devel >= 1.4.0
-Requires:	glib2-devel >= 1:2.36
+Requires:	glib2-devel >= 1:2.50
 %{?with_tls:Requires:	gnutls-devel >= 3.0}
 %{?with_gpg:Requires:	gpgme-devel >= 1:1.1.1}
 Requires:	gtk+2-devel >= 2:2.24.0
@@ -442,7 +443,6 @@ webCal.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %{__rm} po/stamp-po
 
@@ -465,6 +465,7 @@ webCal.
 	--enable-pgpmime-plugin%{!?with_gpg:=no} \
 	--enable-smime-plugin%{!?with_gpg:=no} \
 	--enable-valgrind%{!?with_valgrind:=no} \
+	%{!?with_oauth2:--disable-oauth2} \
 	--disable-static
 
 %{__make}
@@ -480,6 +481,7 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/web_extensions/*.la
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/RELEASE_NOTES
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/manual/{en,es,fr}/*.{pdf,ps,html,txt}
 
@@ -524,6 +526,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/spamassassin.so
 # R: libytnef
 %attr(755,root,root) %{_libdir}/%{name}/plugins/tnef_parse.so
+%dir %{_libdir}/%{name}/plugins/web_extensions
+%attr(755,root,root) %{_libdir}/%{name}/plugins/web_extensions/fancywebextension.so
 %{_desktopdir}/claws-mail.desktop
 %{_pixmapsdir}/claws-mail.png
 %{_iconsdir}/hicolor/48x48/apps/claws-mail.png
