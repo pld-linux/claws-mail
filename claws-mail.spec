@@ -12,13 +12,13 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK3 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	4.1.1
-Release:	2
+Version:	4.2.0
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
 #Source0Download: https://www.claws-mail.org/releases.php
 Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	bde1fdfcc082aa629d8704cba56a8cf6
+# Source0-md5:	bc69492bab6f42f31952cfa27598537b
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
 Patch1:		gcc13.patch
@@ -41,21 +41,18 @@ BuildRequires:	fontconfig-devel
 BuildRequires:	gdk-pixbuf2-devel >= 2.26
 BuildRequires:	gettext-tools >= 0.18
 BuildRequires:	glib2-devel >= 1:2.50
-%{?with_oauth2:BuildRequires:	gnutls-devel >= 3.0}
+%{?with_tls:BuildRequires:	gnutls-devel >= 3.0}
 %{?with_tls:BuildRequires:	gnutls-devel >= 3.0}
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:1.1.1}
 BuildRequires:	gtk+3-devel >= 3.20
-BuildRequires:	gtk-webkit4-devel >= 2.18.0
-BuildRequires:	gumbo-parser-devel >= 0.10
+BuildRequires:	gtk-webkit4.1-devel
+BuildRequires:	gumbo-parser-devel >= 0.12
 BuildRequires:	libarchive-devel
 BuildRequires:	libcanberra-gtk3-devel >= 0.6
 BuildRequires:	libetpan-devel >= 1.9.4
-BuildRequires:	libgdata-devel >= 0.17.2
 BuildRequires:	libical-devel >= 2.0.0
 BuildRequires:	libnotify-devel >= 0.4.3
 BuildRequires:	librsvg-devel >= 1:2.40.5
-BuildRequires:	libsoup-devel >= 2.4
-BuildRequires:	libsoup-gnome-devel >= 2.26
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
 #TODO: libunity-devel
@@ -105,6 +102,7 @@ Obsoletes:	claws-mail-plugin-clamd
 Obsoletes:	claws-mail-plugin-dillo <= 3.9.0
 Obsoletes:	claws-mail-plugin-etpan-privacy
 Obsoletes:	claws-mail-plugin-fetchinfo
+Obsoletes:	claws-mail-plugin-gdata <= 4.2.0
 Obsoletes:	claws-mail-plugin-gtkhtml2_viewer <= 3.9.0
 Obsoletes:	claws-mail-plugin-maildir
 Obsoletes:	claws-mail-plugin-mailmbox
@@ -157,7 +155,7 @@ Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-archive = %{version}-%{release}
 Requires:	%{name}-plugin-fancy = %{version}-%{release}
-Requires:	%{name}-plugin-gdata = %{version}-%{release}
+#Requires:	%{name}-plugin-gdata = %{version}-%{release}
 Requires:	%{name}-plugin-libravatar = %{version}-%{release}
 Requires:	%{name}-plugin-litehtml_viewer = %{version}-%{release}
 Requires:	%{name}-plugin-notification = %{version}-%{release}
@@ -218,19 +216,6 @@ Renders HTML e-mail using the WebKit library.
 Ta wtyczka przetwarza wiadomości w formacie HTML przy użyciu
 biblioteki WebKit.
 
-%package plugin-gdata
-Summary:	gdata plugin for Claws-Mail
-Summary(pl.UTF-8):	Wtyczka gdata dla Claws-Mail
-Group:		X11/Applications/Mail
-Requires:	%{name} = %{version}-%{release}
-Requires:	libgdata >= 0.17.2
-
-%description plugin-gdata
-gdata plugin for Claws-Mail.
-
-%description plugin-gdata -l pl.UTF-8
-Wtyczka gdata dla Claws-Mail.
-
 %package plugin-libravatar
 Summary:	Avatar fetching plugin
 Summary(pl.UTF-8):	Wtyczka pobierająca avatary
@@ -248,7 +233,7 @@ Summary:	Light HTML viewer plugin for Claws Mail
 Summary(pl.UTF-8):	Wtyczka z lekką przeglądarką HTML dla Claws Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
-Requires:	gumbo-parser >= 0.10
+Requires:	gumbo-parser >= 0.12
 
 %description plugin-litehtml_viewer
 Viewer plugin for HTML emails, using the litehtml library
@@ -444,7 +429,7 @@ webCal.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+#%patch1 -p1
 
 %{__rm} po/stamp-po
 
@@ -483,12 +468,13 @@ cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{name}.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/*.{deps,la}
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/plugins/web_extensions/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/web_extensions/*.la
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/RELEASE_NOTES
 %{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}/manual/{en,es,fr}/*.{pdf,ps,html,txt}
 
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{el_GR,el}
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{id_ID,id}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/{pt_PT,pt}
 
 %find_lang %{name}
 
@@ -528,8 +514,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/plugins/spamassassin.so
 # R: libytnef
 %attr(755,root,root) %{_libdir}/%{name}/plugins/tnef_parse.so
-%dir %{_libdir}/%{name}/plugins/web_extensions
-%attr(755,root,root) %{_libdir}/%{name}/plugins/web_extensions/fancywebextension.so
+%dir %{_libdir}/%{name}/web_extensions
+%attr(755,root,root) %{_libdir}/%{name}/web_extensions/fancywebextension.so
 %{_desktopdir}/claws-mail.desktop
 %{_pixmapsdir}/claws-mail.png
 %{_iconsdir}/hicolor/48x48/apps/claws-mail.png
@@ -550,15 +536,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/archive.so
 
-# R: curl gtk-webkit4 libsoup libsoup-gnome
+# R: curl gtk-webkit4.1
 %files plugin-fancy
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/plugins/fancy.so
-
-# R: libgdata
-%files plugin-gdata
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/gdata.so
 
 # R: curl-libs
 %files plugin-libravatar
