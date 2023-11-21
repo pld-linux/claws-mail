@@ -21,7 +21,6 @@ Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
 # Source0-md5:	bc69492bab6f42f31952cfa27598537b
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
-Patch1:		gcc13.patch
 URL:		https://www.claws-mail.org/
 BuildRequires:	NetworkManager-devel
 BuildRequires:	autoconf >= 2.69
@@ -429,7 +428,6 @@ webCal.
 %prep
 %setup -q
 %patch0 -p1
-#%patch1 -p1
 
 %{__rm} po/stamp-po
 
