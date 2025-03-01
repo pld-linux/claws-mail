@@ -12,13 +12,13 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK3 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	4.3.0
-Release:	2
+Version:	4.3.1
+Release:	0.1
 License:	GPL v3+
 Group:		X11/Applications/Mail
 #Source0Download: https://www.claws-mail.org/releases.php
 Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	b5c2952e146d125a7317c129b1dcbc38
+# Source0-md5:	a3e05229f523ab2156f001815c575428
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
 URL:		https://www.claws-mail.org/
@@ -427,7 +427,7 @@ webCal.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P 0 -p1
 
 %{__rm} po/stamp-po
 
@@ -547,7 +547,7 @@ rm -rf $RPM_BUILD_ROOT
 # R: cairo curl fontconfig gumbo-parser
 %files plugin-litehtml_viewer
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/litehtml_viewer.so
+#%attr(755,root,root) %{_libdir}/%{name}/plugins/litehtml_viewer.so
 
 # R: libcanberra-gtk libnotify [libunity]
 %files plugin-notification
