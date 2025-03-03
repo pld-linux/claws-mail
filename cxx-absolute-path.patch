@@ -1,0 +1,19 @@
+--- claws-mail-4.3.1/configure.ac.orig	2025-03-04 00:34:07.129700383 +0100
++++ claws-mail-4.3.1/configure.ac	2025-03-04 00:41:20.961533979 +0100
+@@ -118,6 +118,16 @@
+ if test -n "$REAL_CXX"; then
+ 	HAVE_CXX=yes
+ fi
++AC_PROG_CXX
++HAVE_CXX=no
++if test "$CXX" != "${CXX#*/}"; then
++	HAVE_CXX=yes
++else
++	AC_PATH_PROG(REAL_CXX, $CXX)
++	if test -n "$REAL_CXX"; then
++		HAVE_CXX=yes
++	fi
++fi
+ 
+ AC_SYS_LARGEFILE
+ 

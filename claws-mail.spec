@@ -21,6 +21,7 @@ Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
 # Source0-md5:	a3e05229f523ab2156f001815c575428
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
+Patch1:		cxx-absolute-path.patch
 URL:		https://www.claws-mail.org/
 BuildRequires:	NetworkManager-devel
 BuildRequires:	autoconf >= 2.69
@@ -428,6 +429,7 @@ webCal.
 %prep
 %setup -q
 %patch -P 0 -p1
+%patch -P 1 -p1
 
 %{__rm} po/stamp-po
 
@@ -547,7 +549,7 @@ rm -rf $RPM_BUILD_ROOT
 # R: cairo curl fontconfig gumbo-parser
 %files plugin-litehtml_viewer
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/%{name}/plugins/litehtml_viewer.so
+%attr(755,root,root) %{_libdir}/%{name}/plugins/litehtml_viewer.so
 
 # R: libcanberra-gtk libnotify [libunity]
 %files plugin-notification
