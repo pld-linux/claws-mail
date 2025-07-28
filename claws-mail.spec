@@ -433,6 +433,9 @@ webCal.
 
 %{__rm} po/stamp-po
 
+test ! -e po/LINGUAS
+ls po/*.po | %{__sed} 's!po/\(.*\)\.po!\1!' | tr '\n' ' ' > po/LINGUAS
+
 %build
 %{__libtoolize}
 %{__gettextize}
