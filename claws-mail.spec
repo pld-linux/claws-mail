@@ -13,7 +13,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK3 based, lightweight, and fast
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
 Version:	4.3.1
-Release:	6
+Release:	7
 License:	GPL v3+
 Group:		X11/Applications/Mail
 #Source0Download: https://www.claws-mail.org/releases.php
@@ -462,7 +462,7 @@ ls po/*.po | %{__sed} 's!po/\(.*\)\.po!\1!' | tr '\n' ' ' > po/LINGUAS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/%{name}/themes,%{_desktopdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_datadir}/%{name}/themes,%{_datadir}/%{name}/themes/svg-themes,%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -496,6 +496,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/claws-mail
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/themes
+%dir %{_datadir}/%{name}/themes/svg-themes
 %dir %{_docdir}/%{name}
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
