@@ -12,13 +12,13 @@
 Summary:	A bleeding edge branch of Sylpheed, a GTK3 based, lightweight, and fast e-mail client
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
-Version:	4.3.1
-Release:	7
+Version:	4.4.0
+Release:	1
 License:	GPL v3+
 Group:		X11/Applications/Mail
 #Source0Download: https://www.claws-mail.org/releases.php
 Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	a3e05229f523ab2156f001815c575428
+# Source0-md5:	0c970e44445a978f358d471f646940d9
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
 Patch1:		cxx-absolute-path.patch
@@ -31,7 +31,6 @@ BuildRequires:	cairo-devel >= 1.12.0
 %{?with_compface:BuildRequires:	compface-devel}
 BuildRequires:	curl-devel
 BuildRequires:	dbus-devel >= 0.60
-BuildRequires:	dbus-glib-devel >= 0.60
 BuildRequires:	docbook-utils
 # or enchant2-devel >= 2.0.0, but currently 1.4 is preferred
 BuildRequires:	enchant-devel >= 1.4.0
@@ -41,13 +40,12 @@ BuildRequires:	fontconfig-devel
 BuildRequires:	gdk-pixbuf2-devel >= 2.26
 BuildRequires:	gettext-tools >= 0.18
 BuildRequires:	glib2-devel >= 1:2.50
-%{?with_tls:BuildRequires:	gnutls-devel >= 3.0}
-%{?with_tls:BuildRequires:	gnutls-devel >= 3.0}
+%{?with_tls:BuildRequires:	gnutls-devel >= 3.4.0}
 %{?with_gpg:BuildRequires:	gpgme-devel >= 1:1.1.1}
 BuildRequires:	gtk+3-devel >= 3.20
 BuildRequires:	gtk-webkit4.1-devel
 BuildRequires:	gumbo-parser-devel >= 0.12
-BuildRequires:	libarchive-devel
+BuildRequires:	libarchive-devel >= 3.4.0
 BuildRequires:	libcanberra-gtk3-devel >= 0.6
 BuildRequires:	libetpan-devel >= 1.9.4
 BuildRequires:	libical-devel >= 2.0.0
@@ -79,11 +77,10 @@ BuildRequires:	zlib-devel
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	cairo >= 1.12.0
-Requires:	dbus-glib >= 0.60
 Requires:	enchant >= 1.4.0
 Requires:	gdk-pixbuf2 >= 2.26
-Requires:	glib2 >= 1:2.36
-%{?with_tls:Requires:	gnutls >= 3.0}
+Requires:	glib2 >= 1:2.50
+%{?with_tls:Requires:	gnutls >= 3.4.0}
 Requires:	gtk+3 >= 3.20
 Requires:	libetpan >= 1.9.4
 Requires:	librsvg >= 1:2.40.5
@@ -133,7 +130,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	enchant-devel >= 1.4.0
 Requires:	glib2-devel >= 1:2.50
-%{?with_tls:Requires:	gnutls-devel >= 3.0}
+%{?with_tls:Requires:	gnutls-devel >= 3.4.0}
 %{?with_gpg:Requires:	gpgme-devel >= 1:1.1.1}
 Requires:	gtk+2-devel >= 2:2.24.0
 Requires:	libetpan-devel >= 1.9.4
@@ -428,13 +425,13 @@ webCal.
 
 %prep
 %setup -q
-%patch -P 0 -p1
-%patch -P 1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %{__rm} po/stamp-po
 
-test ! -e po/LINGUAS
-ls po/*.po | %{__sed} 's!po/\(.*\)\.po!\1!' | tr '\n' ' ' > po/LINGUAS
+#test ! -e po/LINGUAS
+#ls po/*.po | %{__sed} 's!po/\(.*\)\.po!\1!' | tr '\n' ' ' > po/LINGUAS
 
 %build
 %{__libtoolize}
@@ -501,25 +498,25 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
 # no (big) external deps
-%attr(755,root,root) %{_libdir}/%{name}/plugins/acpi_notifier.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/address_keeper.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/att_remover.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/attachwarner.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/bogofilter.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/bsfilter.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/clamd.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/dillo.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/fetchinfo.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/keyword_warner.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/mailmbox.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/managesieve.so
-%attr(755,root,root) %{_libdir}/%{name}/plugins/newmail.so
+%{_libdir}/%{name}/plugins/acpi_notifier.so
+%{_libdir}/%{name}/plugins/address_keeper.so
+%{_libdir}/%{name}/plugins/att_remover.so
+%{_libdir}/%{name}/plugins/attachwarner.so
+%{_libdir}/%{name}/plugins/bogofilter.so
+%{_libdir}/%{name}/plugins/bsfilter.so
+%{_libdir}/%{name}/plugins/clamd.so
+%{_libdir}/%{name}/plugins/dillo.so
+%{_libdir}/%{name}/plugins/fetchinfo.so
+%{_libdir}/%{name}/plugins/keyword_warner.so
+%{_libdir}/%{name}/plugins/mailmbox.so
+%{_libdir}/%{name}/plugins/managesieve.so
+%{_libdir}/%{name}/plugins/newmail.so
 # R: zlib
-%attr(755,root,root) %{_libdir}/%{name}/plugins/spamassassin.so
+%{_libdir}/%{name}/plugins/spamassassin.so
 # R: libytnef
-%attr(755,root,root) %{_libdir}/%{name}/plugins/tnef_parse.so
+%{_libdir}/%{name}/plugins/tnef_parse.so
 %dir %{_libdir}/%{name}/web_extensions
-%attr(755,root,root) %{_libdir}/%{name}/web_extensions/fancywebextension.so
+%{_libdir}/%{name}/web_extensions/fancywebextension.so
 %{_desktopdir}/claws-mail.desktop
 %{_pixmapsdir}/claws-mail.png
 %{_iconsdir}/hicolor/48x48/apps/claws-mail.png
@@ -538,78 +535,78 @@ rm -rf $RPM_BUILD_ROOT
 # R: libarchive
 %files plugin-archive
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/archive.so
+%{_libdir}/%{name}/plugins/archive.so
 
 # R: curl gtk-webkit4.1
 %files plugin-fancy
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/fancy.so
+%{_libdir}/%{name}/plugins/fancy.so
 
 # R: curl-libs
 %files plugin-libravatar
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/libravatar.so
+%{_libdir}/%{name}/plugins/libravatar.so
 
 # R: cairo curl fontconfig gumbo-parser
 %files plugin-litehtml_viewer
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/litehtml_viewer.so
+%{_libdir}/%{name}/plugins/litehtml_viewer.so
 
 # R: libcanberra-gtk libnotify [libunity]
 %files plugin-notification
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/notification.so
+%{_libdir}/%{name}/plugins/notification.so
 
 # R: perl-base
 %files plugin-perl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/perl.so
+%{_libdir}/%{name}/plugins/perl.so
 
 # R: poppler-glib
 %files plugin-pdf_viewer
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/pdf_viewer.so
+%{_libdir}/%{name}/plugins/pdf_viewer.so
 
 %if %{with gpg}
 # R: gpgme
 %files plugin-pgpcore
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/pgpcore.so
+%{_libdir}/%{name}/plugins/pgpcore.so
 
 # R: gpgme
 %files plugin-pgpinline
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/pgpinline.so
+%{_libdir}/%{name}/plugins/pgpinline.so
 
 # R: gpgme
 %files plugin-pgpmime
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/pgpmime.so
+%{_libdir}/%{name}/plugins/pgpmime.so
 %endif
 
 # R: python3-libs
 %files plugin-python
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/python.so
+%{_libdir}/%{name}/plugins/python.so
 
 # R: curl expat
 %files plugin-rssyl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/rssyl.so
+%{_libdir}/%{name}/plugins/rssyl.so
 
 %if %{with gpg}
 # R: gpgme
 %files plugin-smime
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/smime.so
+%{_libdir}/%{name}/plugins/smime.so
 %endif
 
 # R: curl
 %files plugin-spamreport
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/spamreport.so
+%{_libdir}/%{name}/plugins/spamreport.so
 
 # R: curl libical perl-base
 %files plugin-vcalendar
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/plugins/vcalendar.so
+%{_libdir}/%{name}/plugins/vcalendar.so
