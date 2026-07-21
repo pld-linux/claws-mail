@@ -86,7 +86,6 @@ Requires:	libetpan >= 1.9.4
 Requires:	librsvg >= 1:2.40.5
 %{?with_ldap:Requires:	openldap-libs >= 2.3.0}
 Requires:	startup-notification >= 0.5
-Provides:	sylpheed-claws
 Obsoletes:	claws-mail-plugin-acpi_notifier < 3.13
 Obsoletes:	claws-mail-plugin-address_keeper < 3.13
 Obsoletes:	claws-mail-plugin-att_remover < 3.13
@@ -108,8 +107,8 @@ Obsoletes:	claws-mail-plugin-spamassassin < 3.13
 Obsoletes:	claws-mail-plugin-synce <= 3.7.6-5
 Obsoletes:	claws-mail-plugin-tnef_parse < 3.13
 Obsoletes:	claws-mail-plugin-trayicon <= 3.9.0
-Obsoletes:	sylpheed-claws
-Obsoletes:	sylpheed-claws-plugin-clamav
+Obsoletes:	sylpheed-claws < 2.6.1
+Obsoletes:	sylpheed-claws-plugin-clamav < 2.6.1
 Obsoletes:	sylpheed-gtk2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -136,8 +135,7 @@ Requires:	gtk+2-devel >= 2:2.24.0
 Requires:	libetpan-devel >= 1.9.4
 %{?with_ldap:Requires:	openldap-devel >= 2.3.0}
 %{?with_jpilot:Requires: pilot-link-devel}
-Provides:	sylpheed-claws-devel
-Obsoletes:	sylpheed-claws-devel
+Obsoletes:	sylpheed-claws-devel < 2.6.1
 
 %description devel
 Claws-Mail development package.
@@ -168,12 +166,10 @@ Requires:	%{name}-plugin-smime = %{version}-%{release}
 %endif
 Requires:	%{name}-plugin-spamreport = %{version}-%{release}
 Requires:	%{name}-plugin-vcalendar = %{version}-%{release}
-Provides:	sylpheed-claws-extra-plugins
-Provides:	sylpheed-claws-plugins = %{version}
 Obsoletes:	claws-mail-extra-plugins <= 3.9.0
-Obsoletes:	sylpheed-claws-extra-plugins
-Obsoletes:	sylpheed-claws-plugin-others
-Obsoletes:	sylpheed-claws-plugins
+Obsoletes:	sylpheed-claws-extra-plugins < 2.6
+Obsoletes:	sylpheed-claws-plugin-others < 2.6
+Obsoletes:	sylpheed-claws-plugins < 2.6.1
 
 %description plugins
 This is collection of some usefull plugins for Claws-Mail
@@ -246,8 +242,7 @@ Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	libcanberra-gtk >= 0.6
 Requires:	libnotify >= 0.4.3
-Provides:	sylpheed-claws-plugin-notification
-Obsoletes:	sylpheed-claws-plugin-notification
+Obsoletes:	sylpheed-claws-plugin-notification < 2.6.1
 
 %description plugin-notification
 This plugin provides various ways to notify the user of new and unread
@@ -262,8 +257,7 @@ Summary:	perl plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka perl dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-perl
-Obsoletes:	sylpheed-claws-plugin-perl
+Obsoletes:	sylpheed-claws-plugin-perl < 2.6.1
 
 %description plugin-perl
 This plugin is intended to extend the filtering possibilities of
@@ -297,8 +291,7 @@ Summary(pl.UTF-8):	Wtyczka PGP/Core dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	gpgme >= 1:1.1.1
-Provides:	sylpheed-claws-plugin-pgpcore
-Obsoletes:	sylpheed-claws-plugin-pgpcore
+Obsoletes:	sylpheed-claws-plugin-pgpcore < 2.6.1
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-pgpcore
@@ -312,8 +305,7 @@ Summary:	PGP/Inline plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka PGP/Inline dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-pgpinline
-Obsoletes:	sylpheed-claws-plugin-pgpinline
+Obsoletes:	sylpheed-claws-plugin-pgpinline < 2.6.1
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-pgpinline
@@ -330,8 +322,7 @@ Summary:	PGP/MIME plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka PGP/MIME dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-pgpmime
-Obsoletes:	sylpheed-claws-plugin-pgpmime
+Obsoletes:	sylpheed-claws-plugin-pgpmime < 2.6.1
 Conflicts:	sylpheed-claws-plugins <= 2.3.0-1
 
 %description plugin-pgpmime
@@ -361,8 +352,7 @@ Summary:	RSSyl plugin for Claws-Mail
 Summary(pl.UTF-8):	Wtyczka RSSyl dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-rssyl
-Obsoletes:	sylpheed-claws-plugin-rssyl
+Obsoletes:	sylpheed-claws-plugin-rssyl < 2.6.1
 
 %description plugin-rssyl
 This plugin allows you to read your favorite newsfeeds in Claws-Mail.
@@ -378,8 +368,7 @@ Summary(pl.UTF-8):	Wtyczka S/MIME dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-pgpcore = %{version}-%{release}
-Provides:	sylpheed-claws-plugin-smime
-Obsoletes:	sylpheed-claws-plugin-smime
+Obsoletes:	sylpheed-claws-plugin-smime < 2.6.1
 
 %description plugin-smime
 This plugin handles S/MIME signed and/or encrypted mails. You can
@@ -410,8 +399,7 @@ Summary(pl.UTF-8):	Wtyczka vCalendar dla Claws-Mail
 Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	libical >= 2.0.0
-Provides:	sylpheed-claws-plugin-vcalendar
-Obsoletes:	sylpheed-claws-plugin-vcalendar
+Obsoletes:	sylpheed-claws-plugin-vcalendar < 2.6.1
 
 %description plugin-vcalendar
 This plugin enables vCalendar message handling like that produced by
