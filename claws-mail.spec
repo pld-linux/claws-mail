@@ -13,7 +13,7 @@ Summary:	A bleeding edge branch of Sylpheed, a GTK3 based, lightweight, and fast
 Summary(pl.UTF-8):	Rozwojowa wersja Sylpheed z dużą ilością zmian oraz ulepszeń
 Name:		claws-mail
 Version:	4.4.0
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		X11/Applications/Mail
 #Source0Download: https://www.claws-mail.org/releases.php
@@ -22,6 +22,7 @@ Source0:	https://www.claws-mail.org/releases/%{name}-%{version}.tar.xz
 Source1:	%{name}.desktop
 Patch0:		%{name}-link.patch
 Patch1:		cxx-absolute-path.patch
+Patch2:		%{name}-libical4.patch
 URL:		https://www.claws-mail.org/
 BuildRequires:	NetworkManager-devel
 BuildRequires:	autoconf >= 2.69
@@ -414,6 +415,7 @@ webCal.
 %setup -q
 %patch -P0 -p1
 %patch -P1 -p1
+%patch -P2 -p1
 
 %{__rm} po/stamp-po
 
