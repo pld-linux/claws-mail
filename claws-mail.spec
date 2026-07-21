@@ -87,26 +87,26 @@ Requires:	librsvg >= 1:2.40.5
 %{?with_ldap:Requires:	openldap-libs >= 2.3.0}
 Requires:	startup-notification >= 0.5
 Provides:	sylpheed-claws
-Obsoletes:	claws-mail-plugin-acpi_notifier
-Obsoletes:	claws-mail-plugin-address_keeper
-Obsoletes:	claws-mail-plugin-att_remover
-Obsoletes:	claws-mail-plugin-attachwarner
-Obsoletes:	claws-mail-plugin-bogofilter
-Obsoletes:	claws-mail-plugin-bsfilter
+Obsoletes:	claws-mail-plugin-acpi_notifier < 3.13
+Obsoletes:	claws-mail-plugin-address_keeper < 3.13
+Obsoletes:	claws-mail-plugin-att_remover < 3.13
+Obsoletes:	claws-mail-plugin-attachwarner < 3.13
+Obsoletes:	claws-mail-plugin-bogofilter < 3.13
+Obsoletes:	claws-mail-plugin-bsfilter < 3.13
 Obsoletes:	claws-mail-plugin-cachesaver <= 3.7.6-5
-Obsoletes:	claws-mail-plugin-clamav
-Obsoletes:	claws-mail-plugin-clamd
+Obsoletes:	claws-mail-plugin-clamav < 3.4
+Obsoletes:	claws-mail-plugin-clamd < 3.13
 Obsoletes:	claws-mail-plugin-dillo <= 3.9.0
-Obsoletes:	claws-mail-plugin-etpan-privacy
-Obsoletes:	claws-mail-plugin-fetchinfo
+Obsoletes:	claws-mail-plugin-etpan-privacy < 2.9
+Obsoletes:	claws-mail-plugin-fetchinfo < 3.13
 Obsoletes:	claws-mail-plugin-gdata <= 4.2.0
 Obsoletes:	claws-mail-plugin-gtkhtml2_viewer <= 3.9.0
-Obsoletes:	claws-mail-plugin-maildir
-Obsoletes:	claws-mail-plugin-mailmbox
-Obsoletes:	claws-mail-plugin-newmail
-Obsoletes:	claws-mail-plugin-spamassassin
+Obsoletes:	claws-mail-plugin-maildir < 2.9
+Obsoletes:	claws-mail-plugin-mailmbox < 3.13
+Obsoletes:	claws-mail-plugin-newmail < 3.13
+Obsoletes:	claws-mail-plugin-spamassassin < 3.13
 Obsoletes:	claws-mail-plugin-synce <= 3.7.6-5
-Obsoletes:	claws-mail-plugin-tnef_parse
+Obsoletes:	claws-mail-plugin-tnef_parse < 3.13
 Obsoletes:	claws-mail-plugin-trayicon <= 3.9.0
 Obsoletes:	sylpheed-claws
 Obsoletes:	sylpheed-claws-plugin-clamav
@@ -152,7 +152,6 @@ Group:		X11/Applications/Mail
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{name}-plugin-archive = %{version}-%{release}
 Requires:	%{name}-plugin-fancy = %{version}-%{release}
-#Requires:	%{name}-plugin-gdata = %{version}-%{release}
 Requires:	%{name}-plugin-libravatar = %{version}-%{release}
 Requires:	%{name}-plugin-litehtml_viewer = %{version}-%{release}
 Requires:	%{name}-plugin-notification = %{version}-%{release}
